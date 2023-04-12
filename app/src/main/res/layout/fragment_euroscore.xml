@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EuroSCORE">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/age"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:hint="@string/age"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ageField"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/sexTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/Sex"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age"/>
+
+            <RadioGroup
+                android:id="@+id/sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sexTextView" >
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_weight="1"
+                    android:text="@string/Male" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_weight="1"
+                    android:text="@string/Female" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/diabetisTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/diabetis"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sex"/>
+
+            <RadioGroup
+                android:id="@+id/diabetis"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diabetisTextView">
+
+                <RadioButton
+                    android:id="@+id/positiveDiabetis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativeDiabetis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/pulmonaryDisfunctionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/pulmonaryDisfunction"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diabetis"/>
+
+            <RadioGroup
+                android:id="@+id/pulmonaryDisfunction"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulmonaryDisfunctionTextView">
+
+                <RadioButton
+                    android:id="@+id/positivePulmDisfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativePulmDisfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/poorMobilityTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/poorMobility"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulmonaryDisfunction"/>
+
+            <RadioGroup
+                android:id="@+id/poorMobility"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poorMobilityTextView">
+
+                <RadioButton
+                    android:id="@+id/positivePoorMobility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativePoorMobility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/renalDisfunctionCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:padding="20dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poorMobility">
+
+                <TextView
+                    android:id="@+id/renalDisfunctionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/renalDisfunction"
+                    android:layout_gravity="center_vertical"/>
+
+            <RadioGroup
+                android:id="@+id/renalDisfunction"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="right">
+
+                <RadioButton
+                    android:id="@+id/noRenalDisfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/noRenalDisfunction"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/mildRenalDisfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mildRenalDisfunction"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/severeRenalDisfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/severeRenalDisfunction"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/dialisysRenalDisfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialisysRenalDisfunction"
+                    android:layout_weight="2"/>
+            </RadioGroup>
+
+        </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/criticalPreopStateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/criticalPreopState"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/renalDisfunctionCardView"/>
+
+            <RadioGroup
+                android:id="@+id/criticalPreopState"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/criticalPreopStateTextView">
+
+                <RadioButton
+                    android:id="@+id/positiveCriticalPreopState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/positive" />
+
+                <RadioButton
+                    android:id="@+id/negativeCriticalPreopState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/negative" />
+
+            </RadioGroup>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/NYHACardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:padding="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/criticalPreopState">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NYHAclass"
+                    android:layout_gravity="center_vertical"/>
+
+            <RadioGroup
+                android:id="@+id/NYHAclass"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="right"
+                >
+
+                <RadioButton
+                    android:id="@+id/NYHA1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NYHA1"
+                    android:layout_weight="2"
+                    android:layout_gravity="right"/>
+                <RadioButton
+                    android:id="@+id/NYHA2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NYHA2"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/NYHA3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NYHA3"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/NYHA4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NYHA4"
+                    android:layout_weight="2"/>
+
+
+            </RadioGroup>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/anginaClass4TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/anginaClass4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/NYHACardView"/>
+
+            <RadioGroup
+                android:id="@+id/anginaClass4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anginaClass4TextView">
+
+                <RadioButton
+                    android:id="@+id/positiveAnginaClass4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativeAnginaClass4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/extracardiacArteriopathiaTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/extracardiacArtheriopatia"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anginaClass4"/>
+
+            <RadioGroup
+                android:id="@+id/extracardiacArteriopathia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extracardiacArteriopathiaTextView">
+
+                <RadioButton
+                    android:id="@+id/positiveExtracardiacArteriopathia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativeExtracardiacArteriopathia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/previousCardiacSurgeryTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/previousCardiacSurgery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/extracardiacArteriopathia"/>
+
+            <RadioGroup
+                android:id="@+id/previousCardiacSurgery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/previousCardiacSurgeryTextView">
+
+                <RadioButton
+                    android:id="@+id/positivePreviousCardiacSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativePreviousCardiacSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/activeEndocarditisTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/activeEndocarditis"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/previousCardiacSurgery"/>
+
+            <RadioGroup
+                android:id="@+id/activeEndocarditis"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activeEndocarditisTextView">
+
+                <RadioButton
+                    android:id="@+id/positiveActiveEndocarditis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativeActiveEndocarditis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ejectionFractionCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:padding="20.0dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activeEndocarditis"
+                >
+
+                <TextView
+                    android:id="@+id/ejectionFractionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ejectionFraction"
+                    android:layout_gravity="center_vertical"/>
+
+            <RadioGroup
+                android:id="@+id/ejectionFraction"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="right">
+
+                <RadioButton
+                    android:id="@+id/goodEjectionFraction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/goodEF"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/moderateEjectionFraction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moderateEF"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/poorEjectionFraction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/poorEF"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/veryPoorEjectionFraction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/veryPoorEF"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/recentMITextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/recentMI"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ejectionFractionCardView"/>
+
+            <RadioGroup
+                android:id="@+id/recentMI"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recentMITextView">
+
+                <RadioButton
+                    android:id="@+id/positiveRecentMI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativeRecentMI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+            </RadioGroup>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pulmonaryArteryPressureCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:padding="20.0dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recentMI"
+                >
+
+                <TextView
+                    android:id="@+id/pulmonaryArteryPressureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pulmonaryArteryPressure"
+                    android:layout_gravity="center_vertical"/>
+
+            <RadioGroup
+                android:id="@+id/pulmonaryArteryPressure"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="right">
+
+                <RadioButton
+                    android:id="@+id/lowPulmonaryArteryPressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/noPulmonaryHipertension"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/moderatePulmonaryArteryPressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moderatePulmonaryHipertension"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/highPulmonaryArteryPressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/severePulmonaryHipertension"
+                    android:layout_weight="2"/>
+            </RadioGroup>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/urgencyCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:padding="20.0dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pulmonaryArteryPressureCardView">
+
+                <TextView
+                    android:id="@+id/urgencyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/urgency"
+                    android:layout_gravity="center_vertical"/>
+
+            <RadioGroup
+                android:id="@+id/urgency"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="right">
+
+                <RadioButton
+                    android:id="@+id/elective"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/elective"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/urgent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/urgent"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/emergency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emergency"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/Salvage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/salvage"
+                    android:layout_weight="2"/>
+
+
+            </RadioGroup>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/procedureWeightCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:padding="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/urgencyCardView">
+
+                <TextView
+                    android:id="@+id/procedureWeightTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/procedureWeight"
+                    android:layout_gravity="center_vertical"/>
+
+            <RadioGroup
+                android:id="@+id/procedureWeight"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="right">
+
+                <RadioButton
+                    android:id="@+id/cabg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cabg"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/nonCabg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nonCabg"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/twoProcedures"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/twoProcedures"
+                    android:layout_weight="2"/>
+                <RadioButton
+                    android:id="@+id/threeProcedures"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/threeProcedures"
+                    android:layout_weight="2"/>
+            </RadioGroup>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/aortaSurgeryTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:text="@string/aortaSurgery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/procedureWeightCardView"/>
+
+            <RadioGroup
+                android:id="@+id/aortaSurgery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aortaSurgeryTextView">
+
+                <RadioButton
+                    android:id="@+id/positiveAortaSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/positive"
+                    android:layout_weight="2"/>
+
+                <RadioButton
+                    android:id="@+id/negativeAortaSurgery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/negative"
+                    android:layout_weight="2"/>
+
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

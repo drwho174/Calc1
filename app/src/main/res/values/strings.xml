@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Cardiac Anaesthesiologist Calculator</string>
+    <!--Main Names-->
+    <string name="name_EuroSCRButton">EuroSCORE + СКФ</string>
+    <string name="name_HbPerfButton">Расчет гемоглобина на перфузии</string>
+    <string name="name_OxyButton">Доставка кислорода</string>
+    <string name="name_BSAButton">ППТ + ИМТ + ОСП</string>
+    <!--BSA Names-->
+    <string name="name_Height">Рост</string>
+    <string name="name_Weight">Вес</string>
+    <string name="name_PerfusionIndex">Индекс перфузии</string>
+    <string name="name_BSA">Площадь поверхности тела</string>
+    <string name="name_IBM">Индекс массы тела</string>
+    <string name="name_PerfusionRate">Скорость перфузии</string>
+    <string name="HeightField">Введите рост</string>
+    <string name="WeightField">Введите вес</string>
+    <string-array name="perfusionRateSpinner">
+        <item>2.0</item>
+        <item>2.1</item>
+        <item>2.2</item>
+        <item>2.3</item>
+        <item>2.4</item>
+        <item>2.5</item>
+        <item>2.6</item>
+        <item>2.7</item>
+    </string-array>
+    <!--Hb_perf Names-->
+    <string name="HbInitial">Hb</string>
+    <string name="InfusionVol">Инфузия</string>
+    <string name="ExfusionVol">Эксфузия</string>
+    <string name="Diuresis">Диурез</string>
+    <string name="CPBExfusionVol">Забор-ИК</string>
+    <string name="PrimeVol">Прайм</string>
+    <string name="Sex">Пол</string>
+    <string name="Male">Мужчина</string>
+    <string name="Female">Женщина</string>
+    <string name="hbbp1">До ИК 1</string>
+    <string name="hbbp2">До ИК 2</string>
+    <string name="hbap1">На ИК 1</string>
+    <string name="hbap2">На ИК 2</string>
+    <string name="gpl">г/л</string>
+    <string name="title_activity_euroscore_and_ckd">Euroscore_and_CKD</string>
+    <string name="tab_text_1">CKD</string>
+    <string name="tab_text_2">EuroSCORE</string>
+    <!--CKD Names-->
+    <string name="age">Возраст</string>
+    <string name="creatinine">Креатинин</string>
+    <string name="positive">Да</string>
+    <string name="negative">Нет</string>
+    <!--Euroscore Names-->
+    <string name="noRenalDisfunction">&gt;85 мл/мин</string>
+    <string name="mildRenalDisfunction">51–85 мл/мин</string>
+    <string name="severeRenalDisfunction">" ⩽50 мл/мин"</string>
+    <string name="dialisysRenalDisfunction">Диализ</string>
+    <string name="NYHA1">NYHA1</string>
+    <string name="NYHA2">NYHA2</string>
+    <string name="NYHA3">NYHA3</string>
+    <string name="NYHA4">NYHA4</string>
+    <string name="goodEF">⩾51%</string>
+    <string name="moderateEF">31-50%</string>
+    <string name="poorEF">⩾21-30%</string>
+    <string name="veryPoorEF">⩽20%</string>
+    <string name="noPulmonaryHipertension">&lt;31 mmHg</string>
+    <string name="moderatePulmonaryHipertension">31-54 mmHg</string>
+    <string name="severePulmonaryHipertension">⩾55</string>
+    <string name="elective">Плановое</string>
+    <string name="urgent">Срочное</string>
+    <string name="emergency">Экстренное</string>
+    <string name="salvage">Жизнеспасающее</string>
+    <string name="cabg">Изолированное АКШ</string>
+    <string name="nonCabg">1 не-АКШ процедура</string>
+    <string name="twoProcedures">Две процедуры</string>
+    <string name="threeProcedures">Три и более процедуры</string>
+    <string name="diabetis">Инсулин-зависимый Сахарный Диабет</string>
+    <string name="pulmonaryDisfunction">Хронические заболевания легких</string>
+    <string name="poorMobility">Сниженная мобильность</string>
+    <string name="criticalPreopState">Критическое состояние</string>
+    <string name="anginaClass4">Стенокардия 4 ФК</string>
+    <string name="extracardiacArtheriopatia">Поражение некоронарных артерий</string>
+    <string name="previousCardiacSurgery">Повторность вмешательства</string>
+    <string name="activeEndocarditis">Активный эндокардит</string>
+    <string name="recentMI">Предшествующий инфаркт миокарда</string>
+    <string name="aortaSurgery">Вмешательство на грудной аорте</string>
+    <string name="renalDisfunction">Почечная дисфункция</string>
+    <string name="NYHAclass">Функциональный класс ХСН по NYHA</string>
+    <string name="ejectionFraction">Фракция выброса</string>
+    <string name="pulmonaryArteryPressure">Давление в легочной артерии</string>
+    <string name="urgency">Срочность вмешательства</string>
+    <string name="procedureWeight">Сложность вмешательства</string>
+
+
+
+</resources>
