@@ -48,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +88,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/diabetisTextView">
@@ -123,6 +125,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pulmonaryDisfunctionTextView">
@@ -160,6 +163,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/poorMobilityTextView">
@@ -192,19 +196,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/poorMobility">
 
-                <TextView
-                    android:id="@+id/renalDisfunctionTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/renalDisfunction"
-                    android:layout_gravity="center_vertical"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-            <RadioGroup
+                    <TextView
+                        android:id="@+id/renalDisfunctionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/renalDisfunction"
+                        android:textAlignment="center" />
+
+                <RadioGroup
                 android:id="@+id/renalDisfunction"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                    android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/noRenalDisfunction"
@@ -234,7 +246,7 @@
                     android:text="@string/dialisysRenalDisfunction"
                     android:layout_weight="2"/>
             </RadioGroup>
-
+                </LinearLayout>
         </androidx.cardview.widget.CardView>
 
             <TextView
@@ -253,6 +265,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -286,18 +299,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/criticalPreopState">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/NYHAclass"
-                    android:layout_gravity="center_vertical"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ems="5"
+                        android:text="@string/NYHAclass"
+                        android:textAlignment="center"
+                        android:layout_weight="1"/>
 
             <RadioGroup
                 android:id="@+id/NYHAclass"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="right"
+                android:layout_weight="1"
                 >
 
                 <RadioButton
@@ -328,6 +350,7 @@
 
 
             </RadioGroup>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -347,6 +370,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/anginaClass4TextView">
@@ -384,6 +408,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/extracardiacArteriopathiaTextView">
@@ -420,6 +445,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/previousCardiacSurgeryTextView">
@@ -457,6 +483,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activeEndocarditisTextView">
@@ -490,19 +517,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/activeEndocarditis"
                 >
 
-                <TextView
-                    android:id="@+id/ejectionFractionTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ejectionFraction"
-                    android:layout_gravity="center_vertical"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ejectionFractionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/ejectionFraction"
+                        android:textAlignment="center" />
 
             <RadioGroup
                 android:id="@+id/ejectionFraction"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/goodEjectionFraction"
@@ -531,6 +566,7 @@
                     android:layout_weight="2"/>
 
             </RadioGroup>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -550,6 +586,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recentMITextView">
@@ -582,19 +619,28 @@
                 app:layout_constraintTop_toBottomOf="@+id/recentMI"
                 >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/pulmonaryArteryPressureTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/pulmonaryArteryPressure"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:ems="5"
+                    android:textAlignment="center"/>
 
             <RadioGroup
                 android:id="@+id/pulmonaryArteryPressure"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/lowPulmonaryArteryPressure"
@@ -615,6 +661,7 @@
                     android:text="@string/severePulmonaryHipertension"
                     android:layout_weight="2"/>
             </RadioGroup>
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -630,19 +677,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pulmonaryArteryPressureCardView">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/urgencyTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/urgency"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:ems="5"
+                    android:textAlignment="center"/>
 
             <RadioGroup
                 android:id="@+id/urgency"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/elective"
@@ -671,6 +727,7 @@
 
 
             </RadioGroup>
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -686,19 +743,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/urgencyCardView">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/procedureWeightTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/procedureWeight"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:ems="5"
+                    android:textAlignment="center"/>
 
             <RadioGroup
                 android:id="@+id/procedureWeight"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/cabg"
@@ -727,6 +793,8 @@
                     android:layout_weight="2"/>
             </RadioGroup>
 
+                </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -746,9 +814,11 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aortaSurgeryTextView">
+                app:layout_constraintTop_toBottomOf="@+id/aortaSurgeryTextView"
+                android:paddingBottom="20dp">
 
                 <RadioButton
                     android:id="@+id/positiveAortaSurgery"

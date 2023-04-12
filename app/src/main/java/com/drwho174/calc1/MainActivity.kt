@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val buttonEuroSCRButton = findViewById<Button>(R.id.EuroSCRButton)
         buttonEuroSCRButton.setOnClickListener {
-val intent = Intent(this,Euroscore_and_CKD::class.java)
+val intent = Intent(this,EuroscoreAndCKD::class.java)
            startActivity(intent)
         }
         val buttonHbPerfButton = findViewById<Button>(R.id.HbPerfButton)
