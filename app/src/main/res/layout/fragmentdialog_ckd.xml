@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstrainLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:padding="16dp"
-    tools:context=".CKD">
-
-    <TextView
-        android:id="@+id/resultCKD"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+    android:orientation="vertical"
+    tools:context=".CKDDial">
 
     <RadioGroup
         android:id="@+id/sex"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,13 +40,14 @@
         android:id="@+id/age"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:layout_marginTop="32dp"
         android:hint="@string/age"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintTop_toBottomOf="@+id/sex">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ageField"
@@ -67,14 +59,14 @@
         android:id="@+id/creatinine"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:layout_marginTop="32dp"
         android:hint="@string/creatinine"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintTop_toBottomOf="@+id/sex">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/creatinineField"
@@ -82,4 +74,16 @@
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+<CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Диализ"
+    android:id="@+id/dialisysCheckBox"/>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_gravity="end"
+    android:id="@+id/resultCKDButton"
+    android:text="Результат"/>
+</LinearLayout>

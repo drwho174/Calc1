@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".EuroSCORE">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +33,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ageField"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -48,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +95,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +133,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -163,6 +172,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,15 +211,31 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+
+                    >
+                        <TextView
                         android:id="@+id/renalDisfunctionTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="3"
                         android:text="@string/renalDisfunction"
                         android:textAlignment="center" />
 
+                        <Button
+                            android:id="@+id/CKDDialog"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:text="@string/CKD"
+                            android:clickable="true"/>
+                    </LinearLayout>
                 <RadioGroup
                 android:id="@+id/renalDisfunction"
                 android:layout_width="wrap_content"
@@ -265,6 +291,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -370,6 +397,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -408,6 +436,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -445,6 +474,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -483,6 +513,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -586,6 +617,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -719,7 +751,7 @@
                     android:text="@string/emergency"
                     android:layout_weight="2"/>
                 <RadioButton
-                    android:id="@+id/Salvage"
+                    android:id="@+id/salvage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/salvage"
@@ -812,30 +844,98 @@
                 android:id="@+id/aortaSurgery"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:elevation="5dp"
                 android:background="@color/cardview_dark_background"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aortaSurgeryTextView"
-                android:paddingBottom="20dp">
+                app:layout_constraintTop_toBottomOf="@+id/aortaSurgeryTextView">
 
                 <RadioButton
                     android:id="@+id/positiveAortaSurgery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/positive"
-                    android:layout_weight="2"/>
+                    android:layout_weight="1"
+                    android:text="@string/positive" />
 
                 <RadioButton
                     android:id="@+id/negativeAortaSurgery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/negative"
-                    android:layout_weight="2"/>
+                    android:layout_weight="1"
+                    android:text="@string/negative" />
 
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="20dp">
+    <LinearLayout
+        android:id="@+id/bottom_sheet_euroscore_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/cardview_dark_background"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_hideable="true">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/name_EuroSCRButton"
+            android:textColor="@color/md_theme_dark_onSurface"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/euroscoreRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0.0%"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textColor="@color/md_theme_dark_onSurface"
+            android:textSize="20sp">
+        </TextView>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/CKD"
+            android:maxLines="1"
+            android:textColor="@color/md_theme_dark_onSurface"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/CKDRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100 ml/min/1.73m2"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:textColor="@color/md_theme_dark_onSurface"
+            android:textSize="20sp">
 
-</FrameLayout>
+        </TextView>
+    </LinearLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

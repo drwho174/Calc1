@@ -10,33 +10,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31">
-        <activity
-            android:name=".EuroscoreAndCKD"
-            android:exported="false"
-            android:label="@string/title_activity_euroscore_and_ckd"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".HbPerfusion"
-            android:configChanges="orientation|keyboardHidden"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BSA"
-            android:configChanges="orientation|keyboardHidden"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Oxy"
-            android:configChanges="orientation|keyboardHidden"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
+        tools:targetApi="31"
+        >
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

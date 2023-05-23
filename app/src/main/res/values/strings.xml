@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Cardiac Anaesthesiologist Calculator</string>
     <!--Main Names-->
-    <string name="name_EuroSCRButton">EuroSCORE + СКФ</string>
+    <string name="name_EuroSCRButton">EuroSCORE</string>
     <string name="name_HbPerfButton">Расчет гемоглобина на перфузии</string>
     <string name="name_OxyButton">Доставка кислорода</string>
     <string name="name_BSAButton">ППТ + ИМТ + ОСП</string>
@@ -40,7 +40,7 @@
     <string name="hbap2">На ИК 2</string>
     <string name="gpl">г/л</string>
     <string name="title_activity_euroscore_and_ckd">Euroscore_and_CKD</string>
-    <string name="tab_text_1">CKD</string>
+    <string name="CKD">CKD</string>
     <string name="tab_text_2">EuroSCORE</string>
     <!--CKD Names-->
     <string name="age">Возраст</string>
@@ -87,7 +87,8 @@
     <string name="pulmonaryArteryPressure">Давление в легочной артерии</string>
     <string name="urgency">Срочность вмешательства</string>
     <string name="procedureWeight">Сложность вмешательства</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
