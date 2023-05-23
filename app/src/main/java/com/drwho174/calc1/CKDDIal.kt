@@ -88,7 +88,5 @@ class CKDDial: DialogFragment(){
         }
     }
 
-    companion object {
-        val SupportFragmentManager: Any
-    }
+
 }

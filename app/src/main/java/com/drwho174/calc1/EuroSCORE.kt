@@ -15,8 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.R.*
-import com.drwho174.calc1.CKDDial.Companion.SupportFragmentManager
+import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.FragmentdialogCkdBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E
@@ -68,7 +69,8 @@ class EuroSCORE : Fragment() {
         val opCKD : Button = view.findViewById(R.id.CKDDialog)
         opCKD.setOnClickListener{
             val ckddialog = CKDDial()
-            CKDDial.show(SupportFragmentManager, "CKDDial")
+
+                ckddialog.show((activity as AppCompatActivity).supportFragmentManager, "CKDDial")
         }
 
 
