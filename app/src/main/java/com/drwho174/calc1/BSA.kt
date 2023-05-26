@@ -82,7 +82,6 @@ class BSA : Fragment() {
             }
         }
 
-//TODO Refactor nullCheck in textWatcher
         height.addTextChangedListener(mTextWatcher)
         weight.addTextChangedListener(mTextWatcher)
 

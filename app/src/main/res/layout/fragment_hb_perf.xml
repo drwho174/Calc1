@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".HbPerfusion">
 
+    <Toolbar
+        android:id="@+id/hb_perf_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorOnSecondary"
+        android:elevation="4dp"
+        android:subtitle="@string/name_HbPerfButton"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <TextView
         android:id="@+id/sexTextView"
         android:layout_width="wrap_content"

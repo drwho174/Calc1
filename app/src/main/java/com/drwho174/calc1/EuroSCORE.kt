@@ -49,7 +49,7 @@ class EuroSCORE : Fragment() {
         val CKDRate : TextView = view.findViewById(R.id.CKDRate)
 
         val euroScoreSheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_euroscore_result))
-        euroScoreSheet.state = BottomSheetBehavior.STATE_HIDDEN
+        euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
 //открывает диалог с калькулятором CKD
         val opCKD : Button = view.findViewById(R.id.CKDDialog)
@@ -225,7 +225,7 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
             override fun afterTextChanged(s: Editable?) {
                 if (age.text.isNotEmpty()){
                     euroscoreRate.text = String.format("%.2f%%" , predictedMortality()*100)
-                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
+//                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
                 }
             }
@@ -237,7 +237,7 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
                 if (age.text.isNotEmpty()){
                     euroscoreRate.text = String.format("%.2f%%" , predictedMortality()*100)
-                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
+//                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
                 }
             }
