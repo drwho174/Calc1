@@ -159,99 +159,7 @@ class HbPerfusion : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable) {
-                if (height.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (weight.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (hbinit.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (infvol.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (exfvol.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (diur.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (primevol.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
-                        weight.text.isNotEmpty() &&
-                        hbinit.text.isNotEmpty() &&
-                        infvol.text.isNotEmpty() &&
-                        exfvol.text.isNotEmpty() &&
-                        diur.text.isNotEmpty() &&
-                        primevol.text.isNotEmpty() &&
-                        cpbexf.text.isNotEmpty()) {
-
-                        hbbefcpbfirst()
-                        hbbefcpbsecond()
-                    }
-                } else if (cpbexf.text.hashCode() === s.hashCode()) {
-                    if (height.text.isNotEmpty() &&
+                if (height.text.isNotEmpty() &&
                         weight.text.isNotEmpty() &&
                         hbinit.text.isNotEmpty() &&
                         infvol.text.isNotEmpty() &&
@@ -264,6 +172,19 @@ class HbPerfusion : Fragment() {
                         hbbefcpbsecond()
                     }
                 }
+            }
+        sex.setOnCheckedChangeListener { group: RadioGroup?, checkedId: Int ->
+            if (height.text.isNotEmpty() &&
+                weight.text.isNotEmpty() &&
+                hbinit.text.isNotEmpty() &&
+                infvol.text.isNotEmpty() &&
+                exfvol.text.isNotEmpty() &&
+                diur.text.isNotEmpty() &&
+                primevol.text.isNotEmpty() &&
+                cpbexf.text.isNotEmpty()) {
+
+                hbbefcpbfirst()
+                hbbefcpbsecond()
             }
         }
 
