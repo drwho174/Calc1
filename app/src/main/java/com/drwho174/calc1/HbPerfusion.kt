@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlin.math.pow
 
@@ -17,10 +16,7 @@ class HbPerfusion : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hb_perf, container, false)
-
+    ): View? {return inflater.inflate(R.layout.fragment_hb_perf, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,14 +29,9 @@ class HbPerfusion : Fragment() {
         val diur: EditText = view.findViewById(R.id.diuresis)
         val primevol: EditText = view.findViewById(R.id.primeVol)
         val cpbexf: EditText = view.findViewById(R.id.cpbExfusionVol)
+        val sex: RadioGroup = view.findViewById(R.id.SexRadioGroup)
 
         fun cbvfirst(): Double {
-            val sex: RadioGroup = view.findViewById(R.id.SexRadioGroup)
-
-            val height: EditText = view.findViewById(R.id.heightField)
-            val weight: EditText = view.findViewById(R.id.weightFIeld)
-
-
             val height1 = height.text.toString()
             val weight1 = weight.text.toString()
 
@@ -51,18 +42,12 @@ class HbPerfusion : Fragment() {
                 R.id.maleRadioButton -> 0.417 * (heightD / 100).pow(3) + 0.045 * weightD - 0.03
                 R.id.femaleRadioButton -> 0.414 * (heightD / 100).pow(3) + 0.0328 * weightD - 0.03
 
-                else -> { 0.0
-                }
+                else -> 0.0
             }
             return circulatiobloodvol
-
         }
 
         fun cbvsecond(): Double {
-            val sex: RadioGroup = view.findViewById(R.id.SexRadioGroup)
-            val height: EditText = view.findViewById(R.id.heightField)
-            val weight: EditText = view.findViewById(R.id.weightFIeld)
-
             val height1 = height.text.toString()
             val weight1 = weight.text.toString()
 
@@ -81,9 +66,6 @@ class HbPerfusion : Fragment() {
         }
 
         fun hbexf(): Double {
-            val hbinit: EditText = view.findViewById(R.id.hbInitial)
-            val exfvol: EditText = view.findViewById(R.id.exfusionVol)
-
             val hbinit1 = hbinit.text.toString()
             val exfvol1 = exfvol.text.toString()
 
@@ -95,10 +77,6 @@ class HbPerfusion : Fragment() {
         }
 
         fun hbbefcpbfirst() {
-            val hbinit: EditText = view.findViewById(R.id.hbInitial)
-            val exfvol: EditText = view.findViewById(R.id.exfusionVol)
-            val diur: EditText = view.findViewById(R.id.diuresis)
-            val infvol: EditText = view.findViewById(R.id.infusionVol)
             val res1: TextView = view.findViewById(R.id.beforecpb1d)
             val res3: TextView = view.findViewById(R.id.aftercpb1d)
 
@@ -120,9 +98,6 @@ class HbPerfusion : Fragment() {
 
             res1.text = String.format("%.2f" , hbbefcpb)
 
-            val cpbexf: EditText = view.findViewById(R.id.cpbExfusionVol)
-            val primevol: EditText = view.findViewById(R.id.primeVol)
-
             val cpbexfvol = cpbexf.text.toString()
             val primevol1 = primevol.text.toString()
 
@@ -139,11 +114,6 @@ class HbPerfusion : Fragment() {
         }
 
         fun hbbefcpbsecond() {
-
-            val hbinit: EditText = view.findViewById(R.id.hbInitial)
-            val exfvol: EditText = view.findViewById(R.id.exfusionVol)
-            val diur: EditText = view.findViewById(R.id.diuresis)
-            val infvol: EditText = view.findViewById(R.id.infusionVol)
             val res2: TextView = view.findViewById(R.id.beforecpb2d)
             val res4: TextView = view.findViewById(R.id.aftercpb2d)
 
@@ -165,9 +135,6 @@ class HbPerfusion : Fragment() {
             val hbbefcpb = (hbgeneral - hbexf()) / balance
 
             res2.text = String.format("%.2f" , hbbefcpb)
-
-            val cpbexf: EditText = view.findViewById(R.id.cpbExfusionVol)
-            val primevol: EditText = view.findViewById(R.id.primeVol)
 
             val cpbexfvol = cpbexf.text.toString()
             val primevol1 = primevol.text.toString()

@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstrainLayout"
+    android:id="@+id/fragment_dialog_ckd"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".CKDDial">
+    tools:context=".CKDDial"
+    android:tag="@string/CKD">
 
     <RadioGroup
         android:id="@+id/sex"

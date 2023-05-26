@@ -18,6 +18,5 @@ interface Navigator {
 
     fun showHbPerfusion ()
 
-    fun showCKDDial ()
 
 }

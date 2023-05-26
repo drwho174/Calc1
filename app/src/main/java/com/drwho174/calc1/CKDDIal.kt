@@ -8,9 +8,9 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioGroup
-import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import com.drwho174.calc1.contract.Navigator
+import androidx.fragment.app.FragmentTransaction
 import kotlin.math.pow
 
 class CKDDial: DialogFragment(){
@@ -18,21 +18,16 @@ class CKDDial: DialogFragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragmentdialog_ckd, container, false)
+    ): View? { return inflater.inflate(R.layout.fragmentdialog_ckd, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val age : EditText = view.findViewById(R.id.ageField)
         val creatinine : EditText = view.findViewById(R.id.creatinineField)
-        val res : TextView = view.findViewById(R.id.CKDRate)
         val sex: RadioGroup = view.findViewById(R.id.sex)
         val calculate : Button = view.findViewById(R.id.resultCKDButton)
-        val renalDisfunction : RadioGroup = view.findViewById(R.id.renalDisfunction)
         val dialisysCheckBox : CheckBox = view.findViewById(R.id.dialisysCheckBox)
-
 
         fun sexCoefivient(): Double {
             val sexCoeficient = when(sex.checkedRadioButtonId){
@@ -68,25 +63,26 @@ class CKDDial: DialogFragment(){
                 }
             }
             return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(ageDouble)) * sexCoefivient()
-
         }
-
+//результат по нажатию на кнопку отправляется в parentFragmentManager
         calculate.setOnClickListener {
-
-            res.text = String().format(calcCKD(), "% ml/min/1.73m2")
-
-
-            if(calcCKD() > 85.0){
-                renalDisfunction.check(R.id.noRenalDisfunction)
-            }else if(calcCKD() in 51.0..85.0){
-                renalDisfunction.check(R.id.mildRenalDisfunction)
-            }else if(calcCKD() <= 50.0){
-                renalDisfunction.check(R.id.severeRenalDisfunction)
-            }else if (dialisysCheckBox.isChecked){
-                renalDisfunction.check(R.id.dialisysRenalDisfunction)
+            if(creatinine.text.isNotEmpty() &&
+                age.text.isNotEmpty()) {
+                val CKDres = calcCKD()
+                parentFragmentManager.setFragmentResult("CKDres", bundleOf("CKDbundle" to CKDres))
             }
+            if (dialisysCheckBox.isChecked){
+                val dialsisys = true
+                parentFragmentManager.setFragmentResult("dialisysBool", bundleOf("dialisysBundle" to dialsisys))
+           }
+//Закрывает Fragment
+            val fragtran: FragmentTransaction = parentFragmentManager.beginTransaction()
+            fragtran.remove(this)
+            fragtran.commit()
         }
     }
-
+    companion object {
+        const val TAG = "CKDDialog"
+    }
 
 }

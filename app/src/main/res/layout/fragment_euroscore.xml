@@ -928,7 +928,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="100 ml/min/1.73m2"
             android:textAlignment="center"
             android:maxLines="1"
             android:textColor="@color/md_theme_dark_onSurface"

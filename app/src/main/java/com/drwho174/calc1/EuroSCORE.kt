@@ -1,39 +1,27 @@
 package com.drwho174.calc1
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.fragment.app.DialogFragment
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.viewbinding.R.*
-import com.drwho174.calc1.contract.Navigator
-import com.drwho174.calc1.databinding.FragmentdialogCkdBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E
 import kotlin.math.pow
 
-
 class EuroSCORE : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_euroscore, container, false)
-
+    ): View? {return inflater.inflate(R.layout.fragment_euroscore, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,21 +46,38 @@ class EuroSCORE : Fragment() {
         val urgency: RadioGroup = view.findViewById(R.id.urgency)
         val procedureWeight: RadioGroup = view.findViewById(R.id.procedureWeight)
         val aortaSurgery: RadioGroup = view.findViewById(R.id.aortaSurgery)
+        val CKDRate : TextView = view.findViewById(R.id.CKDRate)
 
         val euroScoreSheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_euroscore_result))
         euroScoreSheet.state = BottomSheetBehavior.STATE_HIDDEN
-
-
-
 
 //открывает диалог с калькулятором CKD
         val opCKD : Button = view.findViewById(R.id.CKDDialog)
         opCKD.setOnClickListener{
             val ckddialog = CKDDial()
-
-                ckddialog.show((activity as AppCompatActivity).supportFragmentManager, "CKDDial")
+            ckddialog.show(childFragmentManager, CKDDial.TAG)
         }
 
+        //childFragmentManager'ы для прослушивания результатов из диалога CKD,
+        // записывают результат и выставляют выбор согласно результату
+        childFragmentManager.setFragmentResultListener("CKDres", this) { requestKey, bundle ->
+            val CKDres = bundle.getDouble("CKDbundle")
+            CKDRate.text = String.format("%.2f ml/min/1.73m2", CKDres)
+            if (CKDres > 85.0) {
+                renalDisfunction.check(R.id.noRenalDisfunction)
+            } else if (CKDres in 51.0..85.0) {
+                renalDisfunction.check(R.id.mildRenalDisfunction)
+            } else if (CKDres <= 50.0) {
+                renalDisfunction.check(R.id.severeRenalDisfunction)
+            }
+        }
+        childFragmentManager.setFragmentResultListener("dialisysBool",this){requestKey, bundle->
+               val dialisysBool = bundle.getBoolean("dialisysBundle")
+
+                if (dialisysBool){
+                    renalDisfunction.check(R.id.dialisysRenalDisfunction)
+                }
+            }
 
 // расчет суммы коэфициентов для факторов риска
         fun otherFactors(): Double {
@@ -200,15 +205,16 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
         }
 // расчет суммы коэфициентов факторов
         fun factorsSumm (): Double {
-            var summOfFactors = ageFactor() * otherFactors ()
+            val summOfFactors = ageFactor() * otherFactors ()
             return -5.324537 + summOfFactors
         }
         //расчет вероятности смерти
         fun predictedMortality(): Double {
-            var predmort = E.pow(factorsSumm()) / (1.0 + E.pow(factorsSumm()))
+            val predmort = E.pow(factorsSumm()) / (1.0 + E.pow(factorsSumm()))
             return predmort
         }
 
+        //TextWatcher и ChangeListener для расчетов "налету"
         val ageTextWatcher : TextWatcher = object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -226,7 +232,6 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
 
         }
         age.addTextChangedListener(ageTextWatcher)
-
 
         val customChangeListener : OnCheckedChangeListener = object : OnCheckedChangeListener{
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
@@ -256,10 +261,8 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
         urgency.setOnCheckedChangeListener(customChangeListener)
         procedureWeight.setOnCheckedChangeListener(customChangeListener)
         aortaSurgery.setOnCheckedChangeListener(customChangeListener)
-
-
-
-
     }
 
 }
+
+
