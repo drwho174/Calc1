@@ -10,25 +10,31 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.databinding.FragmentBsaBinding
 import com.google.android.material.slider.Slider
 import kotlin.math.pow
 
 
 class BSA : Fragment() {
 
+    private lateinit var binding: FragmentBsaBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {return inflater.inflate(R.layout.fragment_bsa, container, false)
+    ): View {
+        binding = FragmentBsaBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val height: EditText = view.findViewById(R.id.heightField)
-        val weight: EditText = view.findViewById(R.id.weightField)
-        val bsaindex: TextView = view.findViewById(R.id.bsaIndication)
-        val perfspeed: TextView = view.findViewById(R.id.PerfSpeed)
-        val bmi: TextView = view.findViewById(R.id.bmi)
-        val slider: Slider = view.findViewById(R.id.perfindexslider)
+        val height: EditText = binding.heightField
+        val weight: EditText = binding.weightField
+        val bsaindex: TextView = binding.bsaIndication
+        val perfspeed: TextView = binding.PerfSpeed
+        val bmi: TextView = binding.bmi
+        val perfindexslider: Slider = binding.perfindexslider
+        val perfprecentslider: Slider = binding.perfprecentslider
 
         //Body surface area calculator
         fun bsacalc(): Double {
@@ -56,13 +62,16 @@ class BSA : Fragment() {
 
         //Slider for perfusion index
         fun perfspeedslider(): Double {
-            val v = slider.value
+            val v = perfindexslider.value
             val bsa = bsaindex.text.toString()
 
             val bsad = (bsa.replace(",", ".")).toDouble()
-            val ps = v * bsad
-            return ps
+            return v * bsad
+        }
 
+        fun perfprecentslider(): Double {
+            val v = perfprecentslider.value
+            return perfspeedslider() * v / 100
         }
 
         val mTextWatcher = object : TextWatcher {
@@ -73,7 +82,7 @@ class BSA : Fragment() {
             }
 
             override fun afterTextChanged(et: Editable?) {
-                if(height.text.isNotEmpty() && weight.text.isNotEmpty()){
+                if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
 
                     bsaindex.text = String.format("%.3f", bsacalc())
                     bmi.text = String.format("%.2f", bmi())
@@ -85,12 +94,20 @@ class BSA : Fragment() {
         height.addTextChangedListener(mTextWatcher)
         weight.addTextChangedListener(mTextWatcher)
 
-        slider.addOnChangeListener { _, _, _ ->
-            perfspeed.text = String.format("%.2f", perfspeedslider())
+        perfindexslider.addOnChangeListener { _, _, _ ->
+            if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
+                perfspeed.text = String.format("%.2f", perfprecentslider())
+            }
         }
+        perfprecentslider.addOnChangeListener { _, _, _ ->
+            if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
+                perfspeed.text = String.format("%.2f", perfprecentslider())
+            }
+        }
+
+
     }
 }
-
 
 
 

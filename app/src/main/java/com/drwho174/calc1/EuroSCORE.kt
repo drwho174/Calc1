@@ -78,30 +78,42 @@ class EuroSCORE : Fragment() {
                     renalDisfunction.check(R.id.dialisysRenalDisfunction)
                 }
             }
+        //расчет коэфициента возраста
+        fun ageFactor (): Double {
+            val ageText = age.text.toString()
+            val ageDouble = ageText.toDouble()
+            val ageFactor : Double = if (ageDouble <= 60.0){
+                1.0
+            }else{
+                ageDouble - 60.0
+            }
 
+            return ageFactor
+        }
 // расчет суммы коэфициентов для факторов риска
         fun otherFactors(): Double {
+    val factorAge = 0.0285181 * ageFactor()
     val factorSex = when (sex.checkedRadioButtonId) {
                 R.id.female -> 0.2196434
                 else -> { 0.0
                 }
             }
-     val factorDiabetes = when (diabetes.checkedRadioButtonId) {
+    val factorDiabetes = when (diabetes.checkedRadioButtonId) {
                 R.id.positiveDiabetis -> 0.3542749
                 else -> { 0.0
                 }
             }
-     val factorPulmonaryDisfunction = when (pulmonaryDisfunction.checkedRadioButtonId) {
+    val factorPulmonaryDisfunction = when (pulmonaryDisfunction.checkedRadioButtonId) {
                 R.id.positivePulmDisfunction -> 0.1886564
                 else -> { 0.0
                 }
             }
-     val factorPoorMobility = when (poorMobility.checkedRadioButtonId) {
+    val factorPoorMobility = when (poorMobility.checkedRadioButtonId) {
                 R.id.positivePoorMobility -> 0.2407181
                 else -> { 0.0
                 }
             }
-     val factorRenalDisfunction = when (renalDisfunction.checkedRadioButtonId) {
+    val factorRenalDisfunction = when (renalDisfunction.checkedRadioButtonId) {
          R.id.noRenalDisfunction -> 0.0
          R.id.mildRenalDisfunction -> 0.303553
          R.id.severeRenalDisfunction -> 0.8592256
@@ -109,12 +121,12 @@ class EuroSCORE : Fragment() {
                 else -> { 0.0
                 }
             }
-     val factorCriticalPreopState = when (criticalPreopState.checkedRadioButtonId) {
+    val factorCriticalPreopState = when (criticalPreopState.checkedRadioButtonId) {
                 R.id.positiveCriticalPreopState -> 1.086517
                 else -> { 0.0
                 }
             }
-     val factorNYHA = when (NYHAclass.checkedRadioButtonId) {
+    val factorNYHA = when (NYHAclass.checkedRadioButtonId) {
                 R.id.NYHA1 -> 0.0
                 R.id.NYHA2 -> 0.1070545
                 R.id.NYHA3 -> 0.2958358
@@ -122,27 +134,27 @@ class EuroSCORE : Fragment() {
                 else -> { 0.0
                 }
             }
-     val factorAnginaClass4 = when (anginaClass4.checkedRadioButtonId) {
+    val factorAnginaClass4 = when (anginaClass4.checkedRadioButtonId) {
                 R.id.positiveAnginaClass4 -> 0.2226147
                 else -> { 0.0
                 }
             }
-     val factorExtracardiacArteriopathia = when (extracardiacArteriopathia.checkedRadioButtonId) {
+    val factorExtracardiacArteriopathia = when (extracardiacArteriopathia.checkedRadioButtonId) {
                 R.id.positiveExtracardiacArteriopathia -> 0.5360268
                 else -> { 0.0
                 }
             }
-     val factorPreviousCardiacSurgery = when (previousCardiacSurgery.checkedRadioButtonId) {
+    val factorPreviousCardiacSurgery = when (previousCardiacSurgery.checkedRadioButtonId) {
                 R.id.positivePreviousCardiacSurgery -> 1.118599
                 else -> { 0.0
                 }
             }
-     val factorActiveEndocarditis = when (activeEndocarditis.checkedRadioButtonId) {
+    val factorActiveEndocarditis = when (activeEndocarditis.checkedRadioButtonId) {
                 R.id.positiveActiveEndocarditis -> 0.6194522
                 else -> { 0.0
                 }
             }
-     val factorEjectionFraction = when (ejectionFraction.checkedRadioButtonId) {
+    val factorEjectionFraction = when (ejectionFraction.checkedRadioButtonId) {
                 R.id.goodEjectionFraction -> 0.0
                 R.id.moderateEjectionFraction -> 0.3150652
                 R.id.poorEjectionFraction -> 0.8084096
@@ -150,19 +162,19 @@ class EuroSCORE : Fragment() {
                 else -> { 0.0
                 }
             }
-     val factorRecentMI = when (recentMI.checkedRadioButtonId) {
+    val factorRecentMI = when (recentMI.checkedRadioButtonId) {
                 R.id.positiveRecentMI -> 0.1528943
                 else -> { 0.0
                 }
             }
-     val factorPulmotaryArteryPressure = when (pulmonaryArteryPressure.checkedRadioButtonId) {
+    val factorPulmotaryArteryPressure = when (pulmonaryArteryPressure.checkedRadioButtonId) {
                 R.id.lowPulmonaryArteryPressure -> 0.0
-                R.id.moderatePulmonaryArteryPressure -> 0.0
-                R.id.highPulmonaryArteryPressure -> 0.0
+                R.id.moderatePulmonaryArteryPressure -> 0.1788899
+                R.id.highPulmonaryArteryPressure -> 0.3491475
                 else -> { 0.0
                 }
             }
-     val factorUrgency = when (urgency.checkedRadioButtonId) {
+    val factorUrgency = when (urgency.checkedRadioButtonId) {
                 R.id.elective -> 0.0
                 R.id.urgent -> 0.3174673
                 R.id.emergency -> 0.7039121
@@ -170,7 +182,7 @@ class EuroSCORE : Fragment() {
                 else -> { 0.0
                 }
             }
-     val factorProcedureWeight = when (procedureWeight.checkedRadioButtonId) {
+    val factorProcedureWeight = when (procedureWeight.checkedRadioButtonId) {
                 R.id.cabg -> 0.0
                 R.id.nonCabg -> 0.0062118
                 R.id.twoProcedures -> 0.5521478
@@ -178,39 +190,30 @@ class EuroSCORE : Fragment() {
                 else -> { 0.0
                 }
             }
-     val factorAortaSurgery = when (aortaSurgery.checkedRadioButtonId) {
+    val factorAortaSurgery = when (aortaSurgery.checkedRadioButtonId) {
                 R.id.positiveAortaSurgery -> 0.6527205
                 else -> { 0.0
                 }
             }
-val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
+val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfunction +
         factorPoorMobility + factorRenalDisfunction + factorCriticalPreopState +
         factorNYHA + factorAnginaClass4 + factorExtracardiacArteriopathia +
         factorPreviousCardiacSurgery + factorActiveEndocarditis + factorEjectionFraction +
         factorRecentMI + factorPulmotaryArteryPressure + factorUrgency +
         factorProcedureWeight + factorAortaSurgery
+    println(otherFactors)
     return otherFactors
         }
- //расчет коэфициента возраста
-        fun ageFactor (): Double {
-     val ageText = age.text.toString()
-     val ageDouble = ageText.toDouble()
-     val ageFactor : Double
-     if (ageDouble >= 60.0){
-         ageFactor = 1.0
-     }else{
-         ageFactor = ageDouble - 60.0
-     }
-    return ageFactor
-        }
+
 // расчет суммы коэфициентов факторов
         fun factorsSumm (): Double {
-            val summOfFactors = ageFactor() * otherFactors ()
-            return -5.324537 + summOfFactors
+            return otherFactors() - 5.324537
         }
         //расчет вероятности смерти
         fun predictedMortality(): Double {
-            val predmort = E.pow(factorsSumm()) / (1.0 + E.pow(factorsSumm()))
+            val calc = E.pow(factorsSumm())
+            val predmort =100 * (E.pow(factorsSumm()) / (1.0 + E.pow(factorsSumm())) )
+            println(calc)
             return predmort
         }
 
@@ -224,7 +227,7 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
 
             override fun afterTextChanged(s: Editable?) {
                 if (age.text.isNotEmpty()){
-                    euroscoreRate.text = String.format("%.2f%%" , predictedMortality()*100)
+                    euroscoreRate.text = String.format("%.2f%%" , predictedMortality())
 //                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
                 }
@@ -233,16 +236,14 @@ val otherFactors = factorSex + factorDiabetes + factorPulmonaryDisfunction +
         }
         age.addTextChangedListener(ageTextWatcher)
 
-        val customChangeListener : OnCheckedChangeListener = object : OnCheckedChangeListener{
-            override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+        val customChangeListener =
+            OnCheckedChangeListener { group, checkedId ->
                 if (age.text.isNotEmpty()){
-                    euroscoreRate.text = String.format("%.2f%%" , predictedMortality()*100)
-//                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
+                    euroscoreRate.text = String.format("%.2f%%" , predictedMortality())
+                    //                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
                 }
             }
-
-        }
 
         sex.setOnCheckedChangeListener(customChangeListener)
         diabetes.setOnCheckedChangeListener(customChangeListener)

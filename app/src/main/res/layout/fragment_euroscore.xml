@@ -76,6 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|bottom"
+                    android:checked="true"
                     android:layout_weight="1"
                     android:text="@string/Male" />
 
@@ -123,6 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
             </RadioGroup>
 
@@ -161,6 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
@@ -200,6 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
@@ -265,6 +269,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:checked="true"
                             android:text="@string/noRenalDisfunction" />
 
                         <RadioButton
@@ -326,6 +331,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
@@ -371,6 +377,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_weight="2"
+                            android:checked="true"
                             android:text="@string/NYHA1" />
 
                         <RadioButton
@@ -434,6 +441,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
@@ -473,6 +481,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
             </RadioGroup>
 
@@ -511,6 +520,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
@@ -550,6 +560,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
@@ -594,6 +605,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:checked="true"
                             android:text="@string/goodEF" />
 
                         <RadioButton
@@ -656,6 +668,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:checked="true"
                     android:text="@string/negative" />
             </RadioGroup>
 
@@ -700,6 +713,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:checked="true"
                             android:text="@string/noPulmonaryHipertension" />
 
                         <RadioButton
@@ -761,6 +775,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:checked="true"
                             android:text="@string/elective" />
 
                         <RadioButton
@@ -831,6 +846,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:checked="true"
                             android:text="@string/cabg" />
 
                         <RadioButton
@@ -895,6 +911,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:text="@string/negative" />
 
             </RadioGroup>
