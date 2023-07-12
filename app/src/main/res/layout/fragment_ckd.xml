@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:orientation="vertical"
     tools:context=".CKD">
-    <Toolbar
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/CKD_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -16,28 +17,22 @@
         android:subtitle="@string/CKD"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
-        android:id="@+id/resultCKD"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="232dp"
+        android:text="@string/Sex"
+        />
     <RadioGroup
         android:id="@+id/sex"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003">
+       >
 
         <RadioButton
             android:id="@+id/male"
@@ -53,42 +48,96 @@
             android:layout_weight="2"
             android:text="@string/Female" />
     </RadioGroup>
+</LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/age"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:hint="@string/age"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ageField"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/creatinine"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:hint="@string/creatinine"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/age"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:hint="@string/age"
+            android:layout_margin="15dp"
+            >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/creatinineField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ageField"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/creatinine"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:hint="@string/creatinine"
+            android:orientation="vertical"
+            android:layout_margin="15dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/creatinineField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+    >
+
+<LinearLayout
+    android:id="@+id/bottom_sheet_ckd_result"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorTertiaryContainer"
+    android:orientation="horizontal"
+    app:behavior_hideable="false"
+    app:behavior_draggable = "false"
+    android:paddingBottom="10dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:elevation="5dp"
+        android:layout_margin="5dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:text="@string/CKD"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/resultCKD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

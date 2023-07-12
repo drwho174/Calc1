@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
 class CKD : Fragment() {
@@ -24,12 +25,12 @@ class CKD : Fragment() {
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
-
         val age : EditText = view.findViewById(R.id.ageField)
         val creatinine : EditText = view.findViewById(R.id.creatinineField)
         val res : TextView = view.findViewById(R.id.resultCKD)
+        val ckdsheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_ckd_result))
+
+        ckdsheet.state = BottomSheetBehavior.STATE_EXPANDED
 
 
         fun sexCoefivient(): Double {
@@ -43,9 +44,6 @@ class CKD : Fragment() {
         }
 
         fun calcCKD(): Double {
-            val age: EditText = view.findViewById(R.id.ageField)
-            val creatinine: EditText = view.findViewById(R.id.creatinineField)
-
             val ageString = age.text.toString()
             val creatinineString = creatinine.text.toString()
 
@@ -77,24 +75,14 @@ class CKD : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int
-            ) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
 
             override fun afterTextChanged(s: Editable) {
-                if (age.text.hashCode() === s.hashCode()) {
                     if (age.text.isNotEmpty() &&
                         creatinine.text.isNotEmpty()){
-                           res.text = calcCKD().toString()
+                           res.text = String.format("%.2f ml/min/1.73m2", calcCKD())
                     }
-
-                } else if (creatinine.text.hashCode() === s.hashCode()) {
-                    if (age.text.isNotEmpty() &&
-                        creatinine.text.isNotEmpty()) {
-                        res.text = calcCKD().toString()
-                    }
-                }
             }
         }
 

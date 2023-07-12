@@ -3,20 +3,21 @@ package com.drwho174.calc1
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
 class HbPerfusion : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {return inflater.inflate(R.layout.fragment_hb_perf, container, false)
+    ): View? {
+
+        return inflater.inflate(R.layout.fragment_hb_perf, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,6 +31,9 @@ class HbPerfusion : Fragment() {
         val primevol: EditText = view.findViewById(R.id.primeVol)
         val cpbexf: EditText = view.findViewById(R.id.cpbExfusionVol)
         val sex: RadioGroup = view.findViewById(R.id.SexRadioGroup)
+
+        val hbPerfSheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_hb_result))
+        hbPerfSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
         fun cbvfirst(): Double {
             val height1 = height.text.toString()
@@ -56,7 +60,7 @@ class HbPerfusion : Fragment() {
 
             val circulatiobloodvol = when (sex.checkedRadioButtonId) {
                 R.id.maleRadioButton -> (367 * (heightD / 100).pow(3) + 32.2 * weightD + 604) / 1000
-                R.id.femaleRadioButton -> (356 * (heightD / 100).pow(3) + 33.1 * weightD - 183) / 1000
+                R.id.femaleRadioButton -> (356 * (heightD / 100).pow(3) + 33.1 * weightD + 183) / 1000
 
                 else -> { 0.0
                 }
@@ -197,8 +201,6 @@ class HbPerfusion : Fragment() {
         primevol.addTextChangedListener(generalTextWatcher)
         cpbexf.addTextChangedListener(generalTextWatcher)
     }
-
-
 }
 
 
