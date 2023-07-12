@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.RadioGroup.OnCheckedChangeListener
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E
@@ -56,11 +57,20 @@ class EuroSCORE : Fragment() {
         opCKD.setOnClickListener{
             val ckddialog = CKDDial()
             ckddialog.show(childFragmentManager, CKDDial.TAG)
+            val agetext = age.text.toString()
+            val sextext = when (sex.checkedRadioButtonId){
+                R.id.male -> "male"
+                R.id.female -> "female"
+                else -> 0
+            }
+
+            childFragmentManager.setFragmentResult("age", bundleOf("ageBundle" to agetext))
+            childFragmentManager.setFragmentResult("sex", bundleOf("sexBundle" to sextext))
         }
 
         //childFragmentManager'ы для прослушивания результатов из диалога CKD,
         // записывают результат и выставляют выбор согласно результату
-        childFragmentManager.setFragmentResultListener("CKDres", this) { requestKey, bundle ->
+        childFragmentManager.setFragmentResultListener("CKDres", this) { _, bundle ->
             val CKDres = bundle.getDouble("CKDbundle")
             CKDRate.text = String.format("%.2f ml/min/1.73m2", CKDres)
             if (CKDres > 85.0) {
@@ -78,6 +88,7 @@ class EuroSCORE : Fragment() {
                     renalDisfunction.check(R.id.dialisysRenalDisfunction)
                 }
             }
+
         //расчет коэфициента возраста
         fun ageFactor (): Double {
             val ageText = age.text.toString()
@@ -229,7 +240,6 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
                 if (age.text.isNotEmpty()){
                     euroscoreRate.text = String.format("%.2f%%" , predictedMortality())
 //                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
-
                 }
             }
 
@@ -241,7 +251,6 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
                 if (age.text.isNotEmpty()){
                     euroscoreRate.text = String.format("%.2f%%" , predictedMortality())
                     //                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
-
                 }
             }
 

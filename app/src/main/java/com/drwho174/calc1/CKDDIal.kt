@@ -29,7 +29,22 @@ class CKDDial: DialogFragment(){
         val calculate : Button = view.findViewById(R.id.resultCKDButton)
         val dialisysCheckBox : CheckBox = view.findViewById(R.id.dialisysCheckBox)
 
-        fun sexCoefivient(): Double {
+        parentFragmentManager.setFragmentResultListener("age", this){ _, bundle ->
+            val ageBundle = bundle.getString("ageBundle")
+
+            age.setText(ageBundle)
+        }
+        parentFragmentManager.setFragmentResultListener("sex",this){
+         _, bundle  ->
+         val sexBundle = bundle.getString("sex")
+            if (sexBundle == "male"){
+                sex.check(R.id.male)
+            } else{
+                sex.check(R.id.female)
+            }
+        }
+
+        fun sexCoefficient(): Double {
             val sexCoeficient = when(sex.checkedRadioButtonId){
                 R.id.male -> 1.012
                 R.id.female -> 1.0
@@ -47,7 +62,7 @@ class CKDDial: DialogFragment(){
             val a: Double
             val b: Double
 
-            if (sexCoefivient() == 1.0) {
+            if (sexCoefficient() == 1.0) {
                 a = 0.7
                 if (creatinineDouble <= 0.7) {
                     b = -0.241
@@ -62,7 +77,7 @@ class CKDDial: DialogFragment(){
                     b = -1.2
                 }
             }
-            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(ageDouble)) * sexCoefivient()
+            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(ageDouble)) * sexCoefficient()
         }
 //результат по нажатию на кнопку отправляется в parentFragmentManager
         calculate.setOnClickListener {
