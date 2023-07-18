@@ -45,12 +45,12 @@ class CKDDial: DialogFragment(){
         }
 
         fun sexCoefficient(): Double {
-            val sexCoeficient = when(sex.checkedRadioButtonId){
+            val sexCoefficient = when(sex.checkedRadioButtonId){
                 R.id.male -> 1.012
                 R.id.female -> 1.0
                 else -> 0.0
             }
-            return sexCoeficient
+            return sexCoefficient
         }
 
         fun calcCKD(): Double {
@@ -87,8 +87,8 @@ class CKDDial: DialogFragment(){
                 parentFragmentManager.setFragmentResult("CKDres", bundleOf("CKDbundle" to CKDres))
             }
             if (dialisysCheckBox.isChecked){
-                val dialsisys = true
-                parentFragmentManager.setFragmentResult("dialisysBool", bundleOf("dialisysBundle" to dialsisys))
+                val dialysis = true
+                parentFragmentManager.setFragmentResult("dialysisBool", bundleOf("dialysisBundle" to dialysis))
            }
 //Закрывает Fragment
             val fragtran: FragmentTransaction = parentFragmentManager.beginTransaction()

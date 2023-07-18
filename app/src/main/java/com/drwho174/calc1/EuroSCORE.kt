@@ -81,10 +81,10 @@ class EuroSCORE : Fragment() {
                 renalDisfunction.check(R.id.severeRenalDisfunction)
             }
         }
-        childFragmentManager.setFragmentResultListener("dialisysBool",this){requestKey, bundle->
-               val dialisysBool = bundle.getBoolean("dialisysBundle")
+        childFragmentManager.setFragmentResultListener("dialysisBool",this){requestKey, bundle->
+               val dialysisBool = bundle.getBoolean("dialysisBundle")
 
-                if (dialisysBool){
+                if (dialysisBool){
                     renalDisfunction.check(R.id.dialisysRenalDisfunction)
                 }
             }
@@ -228,7 +228,7 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
             return predmort
         }
 
-        //TextWatcher и ChangeListener для расчетов "налету"
+        //TextWatcher и ChangeListener для расчетов "на лету"
         val ageTextWatcher : TextWatcher = object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }

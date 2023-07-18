@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.drwho174.calc1.databinding.FragmentBsaBinding
 import com.google.android.material.slider.Slider
 import kotlin.math.pow
+import kotlin.math.roundToInt
 
 
 class BSA : Fragment() {
@@ -35,6 +36,7 @@ class BSA : Fragment() {
         val bmi: TextView = binding.bmi
         val perfindexslider: Slider = binding.perfindexslider
         val perfprecentslider: Slider = binding.perfprecentslider
+        val perfspeedslider: Slider = binding.perfspeedslider
 
         //Body surface area calculator
         fun bsacalc(): Double {
@@ -61,17 +63,24 @@ class BSA : Fragment() {
         }
 
         //Slider for perfusion index
-        fun perfspeedslider(): Double {
+        fun perfindexslider(): Double {
             val v = perfindexslider.value
-            val bsa = bsaindex.text.toString()
 
-            val bsad = (bsa.replace(",", ".")).toDouble()
-            return v * bsad
+            return v * bsacalc()
         }
-
+//Slider for percentage
         fun perfprecentslider(): Double {
             val v = perfprecentslider.value
-            return perfspeedslider() * v / 100
+            val perfspeedlocal = perfindexslider() * v / 100
+
+            return perfspeedlocal
+        }
+//Slider for manual perfusion speed change and percentage change
+        fun speedslider (){
+           val v = perfspeedslider.value*100/(perfindexslider.value*bsacalc())
+           val vv =  (v/5).roundToInt()*5
+            if(vv in 0..150 ) {  perfprecentslider.value = vv.toFloat()}
+
         }
 
         val mTextWatcher = object : TextWatcher {
@@ -86,7 +95,7 @@ class BSA : Fragment() {
 
                     bsaindex.text = String.format("%.3f", bsacalc())
                     bmi.text = String.format("%.2f", bmi())
-                    perfspeed.text = String.format("%.2f", perfspeedslider())
+                    perfspeed.text = String.format("%.2f", perfindexslider())
                 }
             }
         }
@@ -96,15 +105,25 @@ class BSA : Fragment() {
 
         perfindexslider.addOnChangeListener { _, _, _ ->
             if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
+                val round = (perfprecentslider()*10).roundToInt()/10.0
+                perfspeedslider.value = round.toFloat()
                 perfspeed.text = String.format("%.2f", perfprecentslider())
             }
         }
         perfprecentslider.addOnChangeListener { _, _, _ ->
             if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
+                val round = (perfprecentslider()*10).roundToInt()/10.0
+                perfspeedslider.value = round.toFloat()
                 perfspeed.text = String.format("%.2f", perfprecentslider())
             }
         }
+        perfspeedslider.addOnChangeListener{_,_,_->
+            if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
+                speedslider()
 
+            }
+
+        }
 
     }
 }

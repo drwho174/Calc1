@@ -10,7 +10,7 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+//import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
 class CKD : Fragment() {
@@ -28,9 +28,9 @@ class CKD : Fragment() {
         val age : EditText = view.findViewById(R.id.ageField)
         val creatinine : EditText = view.findViewById(R.id.creatinineField)
         val res : TextView = view.findViewById(R.id.resultCKD)
-        val ckdsheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_ckd_result))
-
-        ckdsheet.state = BottomSheetBehavior.STATE_EXPANDED
+//        val ckdsheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_ckd_result))
+//
+//        ckdsheet.state = BottomSheetBehavior.STATE_EXPANDED
 
 
         fun sexCoefivient(): Double {
