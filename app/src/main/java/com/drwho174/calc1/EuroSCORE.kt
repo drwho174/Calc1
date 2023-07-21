@@ -52,17 +52,13 @@ class EuroSCORE : Fragment() {
         val euroScoreSheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_euroscore_result))
         euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
-//открывает диалог с калькулятором CKD
+//открывает диалог с калькулятором CKD и отправляет туда значения возраста и пола
         val opCKD : Button = view.findViewById(R.id.CKDDialog)
         opCKD.setOnClickListener{
             val ckddialog = CKDDial()
             ckddialog.show(childFragmentManager, CKDDial.TAG)
             val agetext = age.text.toString()
-            val sextext = when (sex.checkedRadioButtonId){
-                R.id.male -> "male"
-                R.id.female -> "female"
-                else -> 0
-            }
+            val sextext = sex.checkedRadioButtonId
 
             childFragmentManager.setFragmentResult("age", bundleOf("ageBundle" to agetext))
             childFragmentManager.setFragmentResult("sex", bundleOf("sexBundle" to sextext))
@@ -96,7 +92,7 @@ class EuroSCORE : Fragment() {
             val ageFactor : Double = if (ageDouble <= 60.0){
                 1.0
             }else{
-                ageDouble - 60.0
+                ageDouble - 60.0 + 1.0
             }
 
             return ageFactor
@@ -212,7 +208,7 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
         factorPreviousCardiacSurgery + factorActiveEndocarditis + factorEjectionFraction +
         factorRecentMI + factorPulmotaryArteryPressure + factorUrgency +
         factorProcedureWeight + factorAortaSurgery
-    println(otherFactors)
+
     return otherFactors
         }
 
@@ -222,9 +218,7 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
         }
         //расчет вероятности смерти
         fun predictedMortality(): Double {
-            val calc = E.pow(factorsSumm())
             val predmort =100 * (E.pow(factorsSumm()) / (1.0 + E.pow(factorsSumm())) )
-            println(calc)
             return predmort
         }
 

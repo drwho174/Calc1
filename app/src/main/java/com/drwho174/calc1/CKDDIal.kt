@@ -36,10 +36,10 @@ class CKDDial: DialogFragment(){
         }
         parentFragmentManager.setFragmentResultListener("sex",this){
          _, bundle  ->
-         val sexBundle = bundle.getString("sex")
-            if (sexBundle == "male"){
+         val sexBundle = bundle.getInt("sexBundle")
+            if (sexBundle == R.id.male){
                 sex.check(R.id.male)
-            } else{
+            }else{
                 sex.check(R.id.female)
             }
         }
