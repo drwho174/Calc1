@@ -15,7 +15,13 @@
         android:elevation="4dp"
         android:subtitle="@string/name_OxyButton"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Кнопка"
+        android:layout_gravity="end"/>
+    </Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +34,7 @@
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/bsa"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -36,13 +42,14 @@
                 android:hint="ППТ">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bsa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardiacoutput"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -50,13 +57,14 @@
                 android:hint="Сердечный выброс">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cardiacoutput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/hb"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -64,13 +72,14 @@
                 android:hint="Гемоглобин">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/hb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/spo2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -78,9 +87,10 @@
                 android:hint="SpO2">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/spo2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -91,7 +101,7 @@
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/po2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -99,13 +109,14 @@
                 android:hint="pO2">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/po2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etco2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -113,13 +124,14 @@
                 android:hint="EtCO2">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etco2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/freshgasflow"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -127,32 +139,38 @@
                 android:hint="Поток свежего газа">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/freshgasflow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
 
 <TextView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:id="@+id/arterialcontentO2"/>
 
     <TextView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+        android:id="@+id/do2"/>
 
     <TextView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+        android:id="@+id/do2i"/>
 
     <TextView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+        android:id="@+id/vco2i"/>
 
     <TextView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+        android:id="@+id/do2ivco2i"/>
 
 
 
