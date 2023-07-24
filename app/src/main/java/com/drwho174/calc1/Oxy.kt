@@ -90,11 +90,11 @@ class Oxy : Fragment() {
                     po2.text.isNotEmpty()&&
                     freshgasflow.text.isNotEmpty()){
 
-                    arterialcontentO2.text = oxygenarterialcontent().toString()
-                    do2.text = oxygendelivery().toString()
-                    do2i.text = oxygendelyveryindex().toString()
-                    vco2i.text = co2productionindex().toString()
-                    do2vco2i.text = do2indexco2index().toString()
+                    arterialcontentO2.text = String.format("%.1f мл/дл",oxygenarterialcontent())
+                    do2.text = String.format("%.1f мл/мин" ,oxygendelivery())
+                    do2i.text = String.format("%.1f мл/мин/м2",oxygendelyveryindex())
+                    vco2i.text = String.format("%.1f мл/мин",co2productionindex())
+                    do2vco2i.text = String.format("%.1f", do2indexco2index())
 
                 }
             }
