@@ -18,5 +18,9 @@ interface Navigator {
 
     fun showHbPerfusion ()
 
+    fun showMainSettings()
+
+    fun showAbout()
+
 
 }

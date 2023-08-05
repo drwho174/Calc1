@@ -48,6 +48,15 @@ class MainActivity : AppCompatActivity(), Navigator {
     override fun showHbPerfusion() {
         launchFragment(HbPerfusion())
     }
+
+    override fun showMainSettings() {
+        launchFragment(SettingsOnMainMenu())
+    }
+
+    override fun showAbout() {
+        TODO("Not yet implemented")
+    }
+
     private fun launchFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
@@ -57,4 +66,3 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 }
 
-//todo добавить top app bar к каждому activity(настройки, краткая информация о каждом калькуляторе, название калькулятора)

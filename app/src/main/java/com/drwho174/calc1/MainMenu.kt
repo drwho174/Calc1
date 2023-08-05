@@ -8,15 +8,15 @@ import androidx.fragment.app.Fragment
 import com.drwho174.calc1.contract.navigator
 import com.drwho174.calc1.databinding.FragmentMainMenuBinding
 
-class MainMenu : Fragment() {
-
+class MainMenu : Fragment(){
+private lateinit var binding: FragmentMainMenuBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val binding = FragmentMainMenuBinding.inflate(inflater, container, false)
+        binding = FragmentMainMenuBinding.inflate(inflater, container, false)
 
         binding.EuroSCRButton.setOnClickListener { onEuroSCRButtonPressed() }
         binding.CKDButton.setOnClickListener { onCKDButtonPressed() }
@@ -24,8 +24,20 @@ class MainMenu : Fragment() {
         binding.BSAButton.setOnClickListener { onBSAButtonPressed() }
         binding.OxyButton.setOnClickListener { onOxyButtonPressed() }
 
+        binding.mainMenuToolbar.setOnMenuItemClickListener {
+            when (it.itemId ){
+                R.id.settings -> {onMainSettingsPressed();true}
+                R.id.about -> {onAboutPressed(); true}
+                else -> true
+            }
+        }
+
+
+
         return binding.root
     }
+
+
 
     private fun onEuroSCRButtonPressed() {
         navigator().showEuroSCORE()
@@ -47,13 +59,12 @@ class MainMenu : Fragment() {
         navigator().showOxy()
     }
 
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainMenu().apply {
-                arguments = Bundle().apply {
-                }
-            }
+    private fun onMainSettingsPressed(){
+        navigator().showMainSettings()
     }
+
+    private fun onAboutPressed(){
+        navigator().showAbout()
+    }
+
 }
