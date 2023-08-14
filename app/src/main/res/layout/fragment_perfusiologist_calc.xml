@@ -112,7 +112,7 @@
                 android:text="Скорость перфузии" />
 
             <TextView
-                android:id="@+id/PerfSpeed"
+                android:id="@+id/perfspeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
