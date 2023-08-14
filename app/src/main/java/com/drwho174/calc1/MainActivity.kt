@@ -41,12 +41,20 @@ class MainActivity : AppCompatActivity(), Navigator {
         launchFragment(Oxy())
     }
 
-    override fun showBSA() {
-        launchFragment(BSA())
+    override fun showPerfusiologistCalc() {
+        launchFragment(PerfusiologistCalculator())
     }
 
     override fun showHbPerfusion() {
         launchFragment(HbPerfusion())
+    }
+
+    override fun showIdealBodyMassCalc() {
+        launchFragment(IdealBodyMass())
+    }
+
+    override fun showBSA() {
+        launchFragment(BSA())
     }
 
     override fun showMainSettings() {

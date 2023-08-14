@@ -9,7 +9,7 @@
     android:padding="16dp"
     android:orientation="vertical"
     tools:context=".CKDDial"
-    android:tag="@string/CKD">
+    android:tag="@string/creatinineClearance">
 
     <RadioGroup
         android:id="@+id/sex"

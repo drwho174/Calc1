@@ -14,9 +14,13 @@ interface Navigator {
 
     fun showOxy ()
 
-    fun showBSA ()
+    fun showPerfusiologistCalc ()
 
     fun showHbPerfusion ()
+
+    fun showIdealBodyMassCalc ()
+
+    fun showBSA()
 
     fun showMainSettings()
 

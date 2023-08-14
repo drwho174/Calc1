@@ -1,156 +1,95 @@
 package com.drwho174.calc1
 
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import android.view.inputmethod.InputMethodManager
 import com.drwho174.calc1.databinding.FragmentBsaBinding
-import com.google.android.material.slider.Slider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
-import kotlin.math.roundToInt
 
 
 class BSA : Fragment() {
 
-    private lateinit var binding: FragmentBsaBinding
+    private var _binding : FragmentBsaBinding? = null
+    private val binding
+    get() = _binding?: throw java.lang.IllegalStateException("_binding for BSAFragment must not be null")
 
-    override fun onCreateView(
+        override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBsaBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentBsaBinding.inflate(inflater,container, false)
+            return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val height: EditText = binding.heightField
-        val weight: EditText = binding.weightField
-        val bsaindex: TextView = binding.bsaIndication
-        val perfspeed: TextView = binding.PerfSpeed
-        val bmi: TextView = binding.bmi
-        val perfindexslider: Slider = binding.perfindexslider
-        val perfprecentslider: Slider = binding.perfprecentslider
-        val perfspeedslider: Slider = binding.perfspeedslider
+        super.onViewCreated(view, savedInstanceState)
 
-        //Body surface area calculator
-        fun bsacalc(): Double {
-            val height1 = height.text.toString()
-            val weight1 = weight.text.toString()
+        val bottomSheetBehaviorResult = BottomSheetBehavior.from(binding.bshBsa)
+        bottomSheetBehaviorResult.state = BottomSheetBehavior.STATE_HIDDEN
 
-            val heightD = height1.toDouble()
-            val weightD = weight1.toDouble()
+        fun mostlerCalc():Double{
+            val height = binding.etHeight.text.toString()
+            val weight = binding.etWeight.text.toString()
+
+            return 0.0167 * height.toDouble().pow(0.5) * weight.toDouble().pow(0.5)
+        }
+
+        fun duboisCalc(): Double {
+            val height = binding.etHeight.text.toString()
+            val weight = binding.etWeight.text.toString()
 
             val bsacoef = 0.007184
 
             // Du Bois formula of BSA
-            return bsacoef * (heightD.pow(0.725)) * (weightD.pow(0.425))
+            return bsacoef * (height.toDouble().pow(0.725)) * (weight.toDouble().pow(0.425))
         }
 
-        //Body mass index calculator
-        fun bmi(): Double {
-            val height1 = height.text.toString()
-            val weight1 = weight.text.toString()
+        fun hicockCalc(): Double{
+            val height = binding.etHeight.text.toString()
+            val weight = binding.etWeight.text.toString()
 
-            val heightD = height1.toDouble()
-            val weightD = weight1.toDouble()
-            return weightD / ((heightD / 100).pow(2))
-        }
-
-        //Slider for perfusion index
-        fun perfindexslider(): Double {
-            val v = perfindexslider.value
-
-            return v * bsacalc()
-        }
-//Slider for percentage
-        fun perfprecentslider(): Double {
-            val v = perfprecentslider.value
-            val perfspeedlocal = perfindexslider() * v / 100
-
-            return perfspeedlocal
-        }
-//Slider for manual perfusion speed change and percentage change
-        fun speedslider (){
-           val v = perfspeedslider.value*100/(perfindexslider.value*bsacalc())
-           val vv =  (v/5).roundToInt()*5
-            if(vv in 0..150 ) {  perfprecentslider.value = vv.toFloat()}
+            return 0.024265 * height.toDouble().pow(0.3964) * weight.toDouble().pow(0.5378)
 
         }
 
-        val mTextWatcher = object : TextWatcher {
-            override fun beforeTextChanged(et: CharSequence?, start: Int, count: Int, after: Int) {
-            }
 
-            override fun onTextChanged(p0: CharSequence?, start: Int, before: Int, count: Int) {
-            }
 
-            override fun afterTextChanged(et: Editable?) {
-                if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
+        binding.btCalculate.setOnClickListener {
+            hideKeyboard()
 
-                    bsaindex.text = String.format("%.3f", bsacalc())
-                    bmi.text = String.format("%.2f", bmi())
-                    perfspeed.text = String.format("%.2f", perfindexslider())
-                }
-            }
-        }
+            if (binding.etHeight.text?.isNotEmpty() == true && binding.etWeight.text?.isNotEmpty()== true){
+                binding.twMoustler.text = String.format("%.1f м2", mostlerCalc())
+                binding.twDubois.text = String.format("%.1f м2", duboisCalc())
+                binding.twHicock.text = String.format("%.1f м2", hicockCalc())
 
-        height.addTextChangedListener(mTextWatcher)
-        weight.addTextChangedListener(mTextWatcher)
+                bottomSheetBehaviorResult.state = BottomSheetBehavior.STATE_EXPANDED
+                binding.layoutHeight.error = null
+                binding.layoutWeight.error = null
 
-        perfindexslider.addOnChangeListener { _, _, _ ->
-            if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
-                val round = (perfprecentslider()*10).roundToInt()/10.0
-                perfspeedslider.value = round.toFloat()
-                perfspeed.text = String.format("%.2f", perfprecentslider())
-            }
-        }
-        perfprecentslider.addOnChangeListener { _, _, _ ->
-            if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
-                val round = (perfprecentslider()*10).roundToInt()/10.0
-                perfspeedslider.value = round.toFloat()
-                perfspeed.text = String.format("%.2f", perfprecentslider())
-            }
-        }
-        perfspeedslider.addOnChangeListener{_,_,_->
-            if (height.text.isNotEmpty() && weight.text.isNotEmpty()) {
-                speedslider()
+
+            }else{
+                binding.layoutHeight.error = "Введите рост"
+                binding.layoutWeight.error = "Введите вес"
 
             }
-
         }
 
     }
+
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

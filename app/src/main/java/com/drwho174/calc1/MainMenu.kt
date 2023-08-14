@@ -21,8 +21,10 @@ private lateinit var binding: FragmentMainMenuBinding
         binding.EuroSCRButton.setOnClickListener { onEuroSCRButtonPressed() }
         binding.CKDButton.setOnClickListener { onCKDButtonPressed() }
         binding.HbPerfButton.setOnClickListener { onHbPerfusionButtonPressed() }
-        binding.BSAButton.setOnClickListener { onBSAButtonPressed() }
+        binding.BSAButton.setOnClickListener { onPerfusiologistCalcButtonPressed() }
         binding.OxyButton.setOnClickListener { onOxyButtonPressed() }
+        binding.idealbodymassbutton.setOnClickListener { idealbodymassbuttonPressed() }
+        binding.btBsa.setOnClickListener { onBSAButtonPressed() }
 
         binding.mainMenuToolbar.setOnMenuItemClickListener {
             when (it.itemId ){
@@ -51,14 +53,21 @@ private lateinit var binding: FragmentMainMenuBinding
         navigator().showHbPerfusion()
     }
 
-    private fun onBSAButtonPressed() {
-        navigator().showBSA()
+    private fun onPerfusiologistCalcButtonPressed() {
+        navigator().showPerfusiologistCalc()
     }
 
     private fun onOxyButtonPressed() {
         navigator().showOxy()
     }
 
+    private fun idealbodymassbuttonPressed(){
+        navigator().showIdealBodyMassCalc()
+    }
+
+    private fun onBSAButtonPressed(){
+        navigator().showBSA()
+    }
     private fun onMainSettingsPressed(){
         navigator().showMainSettings()
     }

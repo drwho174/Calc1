@@ -254,8 +254,9 @@
                             android:layout_weight="1"
                             android:layout_margin="20dp"
                             android:clickable="true"
-                            android:text="@string/CKD"
-                            android:textSize="20sp"/>
+                            android:padding="5dp"
+                            android:text="@string/creatinineClearance"
+                            android:textSize="15sp"/>
                     </LinearLayout>
 
                     <RadioGroup
@@ -999,7 +1000,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
-                android:text="@string/CKD"
+                android:text="@string/creatinineClearance"
                 android:textSize="20sp" />
 
             <TextView

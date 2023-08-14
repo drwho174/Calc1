@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainMenu">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,7 +24,8 @@
         android:id="@+id/EuroSCRButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
         android:text="@string/name_EuroSCRButton"
         app:layout_constraintBottom_toTopOf="@+id/HbPerfButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +37,8 @@
         android:id="@+id/HbPerfButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
         android:text="@string/name_HbPerfButton"
         app:layout_constraintBottom_toTopOf="@+id/OxyButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +51,8 @@
         android:id="@+id/BSAButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
         android:text="@string/name_BSAButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +65,8 @@
         android:id="@+id/OxyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
         android:text="@string/name_OxyButton"
         app:layout_constraintBottom_toTopOf="@+id/BSAButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +79,9 @@
         android:id="@+id/CKDButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/CKD"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:text="@string/name_creatinine_clearence"
         app:layout_constraintBottom_toTopOf="@+id/HbPerfButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -82,4 +89,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.313" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/idealbodymassbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:text="Идеальная масса тела" />
+
+    <Button
+        android:id="@+id/bt_bsa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:text="Площадь поверхности тела"/>
+
+</LinearLayout>

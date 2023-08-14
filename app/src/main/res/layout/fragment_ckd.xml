@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorOnSecondary"
         android:elevation="4dp"
-        android:subtitle="@string/CKD" />
+        android:subtitle="@string/creatinineClearance" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/age"
@@ -65,7 +65,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ageField"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -80,15 +81,15 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/creatinineField"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:elevation="5dp"
         android:layout_margin="5dp">
         <LinearLayout
@@ -103,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
-                android:text="@string/CKD"
+                android:text="@string/creatinineClearance"
                 android:textSize="20sp" />
             <TextView
                 android:id="@+id/resultCKD"
