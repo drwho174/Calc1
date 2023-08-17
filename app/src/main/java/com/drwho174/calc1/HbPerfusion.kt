@@ -8,10 +8,11 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
-class HbPerfusion : Fragment() {
+class HbPerfusion : Fragment(), HasCustomTitle {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -177,7 +178,7 @@ class HbPerfusion : Fragment() {
                     }
                 }
             }
-        sex.setOnCheckedChangeListener { group: RadioGroup?, checkedId: Int ->
+        sex.setOnCheckedChangeListener { _: RadioGroup?, _: Int ->
             if (height.text.isNotEmpty() &&
                 weight.text.isNotEmpty() &&
                 hbinit.text.isNotEmpty() &&
@@ -201,6 +202,8 @@ class HbPerfusion : Fragment() {
         primevol.addTextChangedListener(generalTextWatcher)
         cpbexf.addTextChangedListener(generalTextWatcher)
     }
+
+    override fun getTitleRes(): Int = R.string.name_hb_on_perfusion
 }
 
 

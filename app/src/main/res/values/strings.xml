@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">Cardiac Anaesthesiologist Calculator</string>
     <!--Main Names-->
-    <string name="name_EuroSCRButton">EuroSCORE</string>
-    <string name="name_HbPerfButton">Расчет гемоглобина на перфузии</string>
-    <string name="name_OxyButton">Доставка кислорода</string>
-    <string name="name_BSAButton">Калькулятор перфузиолога</string>
+    <string name="name_main_menu">Главное меню</string>
+    <string name="name_euroscore_2">EuroSCORE 2</string>
+    <string name="name_hb_on_perfusion">Расчет гемоглобина на перфузии</string>
+    <string name="name_oxygen_delivery">Доставка кислорода</string>
+    <string name="name_perfusion_calculator">Калькулятор перфузиолога</string>
     <string name="name_creatinine_clearence">Клиренс креатинина</string>
+    <string name="name_ideal_body_mass">Идеальная масса тела</string>
+    <string name="name_body_surface_area">Площадь поверхности тела</string>
+    <string name="name_settings">Настройки</string>
     <!--PerfusiologistCalculator Names-->
     <string name="name_Height">Рост</string>
     <string name="name_Weight">Вес</string>
@@ -43,7 +47,7 @@
     <string name="title_activity_euroscore_and_ckd">Euroscore_and_CKD</string>
     <string name="creatinineClearance">Клиренс креатинина</string>
     <string name="tab_text_2">EuroSCORE</string>
-    <!--CKD Names-->
+    <!--CreatinineClearance Names-->
     <string name="age">Возраст</string>
     <string name="creatinine">Креатинин</string>
     <string name="positive">Да</string>

@@ -1,22 +1,45 @@
 package com.drwho174.calc1
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.contract.Navigator
+import com.drwho174.calc1.databinding.ActivityMainBinding
+
+
+const val APP_PREFERENCES = "settings"
+const val THEME_SET = true
 
 class MainActivity : AppCompatActivity(), Navigator {
 
-    /*private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+
+    private lateinit var binding: ActivityMainBinding
+
+    private val currentFragment: Fragment
+        get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer)!!
+
+    private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
+        override fun onFragmentViewCreated(
+            fm: FragmentManager,
+            f: Fragment,
+            v: View,
+            savedInstanceState: Bundle?
+        ) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState)
             updateUi()
         }
-    }*/ //эта штука и связанные с ней нужны для реализации изменений в appbar на каждом экране
+    } //эта штука и связанные с ней нужны для реализации изменений в appbar на каждом экране
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
+        setSupportActionBar(binding.mainToolbar)
 
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -25,8 +48,18 @@ class MainActivity : AppCompatActivity(), Navigator {
                 .commit()
         }
 
-      //  supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
+        supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentListener)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     override fun showEuroSCORE() {
@@ -34,11 +67,11 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showCKD() {
-        launchFragment(CKD())
+        launchFragment(CreatinineClearance())
     }
 
     override fun showOxy() {
-        launchFragment(Oxy())
+        launchFragment(OxygenDelivery())
     }
 
     override fun showPerfusiologistCalc() {
@@ -72,5 +105,39 @@ class MainActivity : AppCompatActivity(), Navigator {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // we've called setSupportActionBar in onCreate,
+        // that's why we need to override this method too
+        updateUi()
+        return true
+    }
+
+    private fun updateUi() {
+        val fragment = currentFragment
+
+        if (fragment is HasCustomTitle) {
+            binding.mainToolbar.title = getString(fragment.getTitleRes())
+        } else {
+            binding.mainToolbar.title = getString(R.string.app_name)
+        }
+
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+        } else {
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            supportActionBar?.setDisplayShowHomeEnabled(false)
+        }
+
+        binding.mainToolbar.menu.clear()
+
+//        if (fragment is HasCustomAction) {
+//            createCustomToolbarAction(fragment.getCustomAction())
+//        } else {
+//            binding.mainToolbar.menu.clear()
+//        }
+    }
 }
+
 

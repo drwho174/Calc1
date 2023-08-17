@@ -10,10 +10,11 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.contract.HasCustomTitle
 //import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
-class CKD : Fragment() {
+class CreatinineClearance : Fragment(), HasCustomTitle {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,5 +93,7 @@ class CKD : Fragment() {
 
 
     }
+
+    override fun getTitleRes(): Int = R.string.name_creatinine_clearence
 }
 

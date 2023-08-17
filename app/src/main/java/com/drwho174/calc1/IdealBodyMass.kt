@@ -8,9 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentIdialBodyMassBinding
 
-class IdealBodyMass : Fragment() {
+class IdealBodyMass : Fragment(), HasCustomTitle {
 
     private var _binding : FragmentIdialBodyMassBinding? = null
     private val binding
@@ -74,4 +75,6 @@ class IdealBodyMass : Fragment() {
             }
         }
     }
+
+    override fun getTitleRes(): Int = R.string.name_ideal_body_mass
 }

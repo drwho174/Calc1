@@ -9,12 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentPerfusiologistCalcBinding
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
 
-class PerfusiologistCalculator : Fragment() {
+class PerfusiologistCalculator : Fragment(), HasCustomTitle {
 
     private var _binding: FragmentPerfusiologistCalcBinding? = null
     private val binding
@@ -122,6 +123,8 @@ class PerfusiologistCalculator : Fragment() {
      }
  }
     }
+
+    override fun getTitleRes(): Int = R.string.name_perfusion_calculator
 }
 
 

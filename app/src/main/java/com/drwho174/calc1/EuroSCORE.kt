@@ -13,11 +13,12 @@ import android.widget.RadioGroup.OnCheckedChangeListener
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E
 import kotlin.math.pow
 
-class EuroSCORE : Fragment() {
+class EuroSCORE : Fragment(), HasCustomTitle {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +53,7 @@ class EuroSCORE : Fragment() {
         val euroScoreSheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_euroscore_result))
         euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
-//открывает диалог с калькулятором CKD и отправляет туда значения возраста и пола
+//открывает диалог с калькулятором CreatinineClearance и отправляет туда значения возраста и пола
         val opCKD : Button = view.findViewById(R.id.CKDDialog)
         opCKD.setOnClickListener{
             val ckddialog = CKDDial()
@@ -64,7 +65,7 @@ class EuroSCORE : Fragment() {
             childFragmentManager.setFragmentResult("sex", bundleOf("sexBundle" to sextext))
         }
 
-        //childFragmentManager'ы для прослушивания результатов из диалога CKD,
+        //childFragmentManager'ы для прослушивания результатов из диалога CreatinineClearance,
         // записывают результат и выставляют выбор согласно результату
         childFragmentManager.setFragmentResultListener("CKDres", this) { _, bundle ->
             val CKDres = bundle.getDouble("CKDbundle")
@@ -241,7 +242,7 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
         age.addTextChangedListener(ageTextWatcher)
 
         val customChangeListener =
-            OnCheckedChangeListener { group, checkedId ->
+            OnCheckedChangeListener { _, _ ->
                 if (age.text.isNotEmpty()){
                     euroscoreRate.text = String.format("%.2f%%" , predictedMortality())
                     //                    euroScoreSheet.state = BottomSheetBehavior.STATE_EXPANDED
@@ -266,6 +267,9 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
         procedureWeight.setOnCheckedChangeListener(customChangeListener)
         aortaSurgery.setOnCheckedChangeListener(customChangeListener)
     }
+
+    override fun getTitleRes(): Int = R.string.name_euroscore_2
+
 
 }
 

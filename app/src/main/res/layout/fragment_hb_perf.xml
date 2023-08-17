@@ -9,15 +9,6 @@
     tools:context=".HbPerfusion"
     android:windowSoftInputMode="adjustResize">
 
-    <Toolbar
-        android:id="@+id/hb_perf_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorOnSecondary"
-        android:elevation="4dp"
-        android:subtitle="@string/name_HbPerfButton"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

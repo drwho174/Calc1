@@ -9,12 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentBsaBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
 
-class BSA : Fragment() {
+class BSA : Fragment(), HasCustomTitle {
 
     private var _binding : FragmentBsaBinding? = null
     private val binding
@@ -91,5 +92,7 @@ class BSA : Fragment() {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+    override fun getTitleRes(): Int = R.string.name_BSA
 
 }

@@ -5,15 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CKD">
-
-    <Toolbar
-        android:id="@+id/CKD_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorOnSecondary"
-        android:elevation="4dp"
-        android:subtitle="@string/creatinineClearance" />
+    tools:context=".CreatinineClearance">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

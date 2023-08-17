@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentOxyBinding
 
-class Oxy : Fragment() {
+class OxygenDelivery : Fragment(), HasCustomTitle {
 
     private lateinit var binding: FragmentOxyBinding
     override fun onCreateView(
@@ -109,4 +110,6 @@ class Oxy : Fragment() {
         freshgasflow.addTextChangedListener(TextWatcher)
 
     }
+
+    override fun getTitleRes(): Int = R.string.name_oxygen_delivery
 }
