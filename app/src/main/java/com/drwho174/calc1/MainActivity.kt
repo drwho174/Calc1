@@ -11,8 +11,7 @@ import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.ActivityMainBinding
 
 
-const val APP_PREFERENCES = "settings"
-const val THEME_SET = true
+
 
 class MainActivity : AppCompatActivity(), Navigator {
 

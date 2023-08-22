@@ -1,7 +1,5 @@
 package com.drwho174.calc1
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
@@ -16,11 +14,11 @@ private lateinit var binding: FragmentMainMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val loadsettings: SharedPreferences = activity?.getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE) ?: return
+        val prefRepository = PreferenceRepository(context?.applicationContext ?: return)
 
 
         fun setuptheme(){
-            val themeset = loadsettings.getBoolean("THEME_SET",true)
+            val themeset = prefRepository.getThemeSetting()
             when (themeset){
                 true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

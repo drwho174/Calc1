@@ -1,15 +1,11 @@
 package com.drwho174.calc1
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.drwho174.calc1.contract.HasCustomTitle
-
-
 
 
 class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
@@ -41,7 +37,8 @@ class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
         setPreferencesFromResource(R.xml.preference_settings,rootKey)
                 val themeselector : SwitchPreferenceCompat? = findPreference("themeselector")
 
-        val settings : SharedPreferences = activity?.getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE) ?: return
+        val prefRepository = PreferenceRepository(context?.applicationContext ?: return)
+
 
         val nightModeFlags = context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         when (nightModeFlags){
@@ -53,19 +50,14 @@ class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
 
             if (newValue == false){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                prefRepository.setThemeSetting(false)
 
-                with(settings.edit()){
-                    putBoolean("THEME_SET", false)
-                    apply()
-                }
                 true
 
             }else{
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                with(settings.edit()){
-                    putBoolean("THEME_SET", true)
-                    apply()
-                }
+                prefRepository.setThemeSetting(true)
+
                 true
             }
         }
