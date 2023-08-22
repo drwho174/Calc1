@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Cardiac Anaesthesiologist Calculator</string>
+    <string name="app_name">Anaesthesiologist Calculator</string>
+    <string name="version">Version</string>
+    <string name="authors_email">filipphome@mail.ru</string>
     <!--Main Names-->
     <string name="name_main_menu">Главное меню</string>
     <string name="name_euroscore_2">EuroSCORE 2</string>
@@ -10,6 +12,7 @@
     <string name="name_ideal_body_mass">Идеальная масса тела</string>
     <string name="name_body_surface_area">Площадь поверхности тела</string>
     <string name="name_settings">Настройки</string>
+    <string name="name_about">О программе</string>
     <!--PerfusiologistCalculator Names-->
     <string name="name_Height">Рост</string>
     <string name="name_Weight">Вес</string>

@@ -6,11 +6,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.drwho174.calc1.calcsfragments.*
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.ActivityMainBinding
-
-
+import com.drwho174.calc1.textandsettings.About
+import com.drwho174.calc1.textandsettings.SettingsOnMainMenu
 
 
 class MainActivity : AppCompatActivity(), Navigator {
@@ -94,7 +95,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showAbout() {
-        TODO("Not yet implemented")
+        launchFragment(About())
     }
 
     private fun launchFragment(fragment: Fragment) {

@@ -1,10 +1,12 @@
-package com.drwho174.calc1
+package com.drwho174.calc1.textandsettings
 
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import com.drwho174.calc1.PreferenceRepository
+import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.HasCustomTitle
 
 

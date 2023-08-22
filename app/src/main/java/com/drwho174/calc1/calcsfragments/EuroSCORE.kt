@@ -1,4 +1,4 @@
-package com.drwho174.calc1
+package com.drwho174.calc1.calcsfragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -13,6 +13,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E

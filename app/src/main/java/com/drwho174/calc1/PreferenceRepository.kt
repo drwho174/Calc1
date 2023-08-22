@@ -5,10 +5,9 @@ import android.content.SharedPreferences
 
 class PreferenceRepository(context: Context) {
 
-    val APP_PREFERENCES = "settings"
-    val THEME_SET = true
+    private val APP_PREFERENCES = "settings"
 
-     var settings : SharedPreferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+     private var settings : SharedPreferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
 
 

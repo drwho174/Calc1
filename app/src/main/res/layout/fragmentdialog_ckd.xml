@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".CKDDial"
+    tools:context=".calcsfragments.CKDDial"
     android:tag="@string/creatinineClearance">
 
     <RadioGroup

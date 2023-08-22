@@ -1,4 +1,4 @@
-package com.drwho174.calc1
+package com.drwho174.calc1.calcsfragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentOxyBinding
 

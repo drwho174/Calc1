@@ -1,4 +1,4 @@
-package com.drwho174.calc1
+package com.drwho174.calc1.calcsfragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
+import com.drwho174.calc1.R
 import com.drwho174.calc1.databinding.FragmentdialogCkdBinding
 import kotlin.math.pow
 

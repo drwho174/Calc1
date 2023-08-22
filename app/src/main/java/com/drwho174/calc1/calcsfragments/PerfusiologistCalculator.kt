@@ -1,4 +1,4 @@
-package com.drwho174.calc1
+package com.drwho174.calc1.calcsfragments
 
 
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.fragment.app.Fragment
+import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentPerfusiologistCalcBinding
 import kotlin.math.pow

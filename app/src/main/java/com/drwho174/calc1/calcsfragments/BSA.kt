@@ -1,4 +1,4 @@
-package com.drwho174.calc1
+package com.drwho174.calc1.calcsfragments
 
 
 import android.app.Activity
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentBsaBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
