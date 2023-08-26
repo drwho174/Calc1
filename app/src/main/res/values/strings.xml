@@ -2,6 +2,7 @@
     <string name="app_name">Anaesthesiologist Calculator</string>
     <string name="version">Version</string>
     <string name="authors_email">filipphome@mail.ru</string>
+    <string name="about_calculator">О калькуляторе</string>
     <!--Main Names-->
     <string name="name_main_menu">Главное меню</string>
     <string name="name_euroscore_2">EuroSCORE 2</string>

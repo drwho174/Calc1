@@ -14,13 +14,17 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
+import com.drwho174.calc1.textandsettings.AboutEuroSCORE
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E
 import kotlin.math.pow
 
-class EuroSCORE : Fragment(), HasCustomTitle {
+class EuroSCORE : Fragment(), HasCustomTitle, HasCustomAction {
 
+    //TODO viewBinding needed
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -270,7 +274,22 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
     }
 
     override fun getTitleRes(): Int = R.string.name_euroscore_2
-
+    override fun getCustomAction(): CustomAction {
+        return CustomAction(
+            iconRes = R.drawable.ic_info,
+            onCustomAction = {
+                launchFragment(AboutEuroSCORE())
+            }
+        )
+    }
+    //start yours fragment
+    fun launchFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 
 }
 

@@ -11,11 +11,13 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
-//import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.drwho174.calc1.textandsettings.AboutCreatinineClearence
 import kotlin.math.pow
 
-class CreatinineClearance : Fragment(), HasCustomTitle {
+class CreatinineClearance : Fragment(), HasCustomTitle, HasCustomAction {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,5 +98,21 @@ class CreatinineClearance : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.name_creatinine_clearence
+    override fun getCustomAction(): CustomAction {
+        return CustomAction(
+            iconRes = R.drawable.ic_info,
+            onCustomAction = {
+                launchFragment(AboutCreatinineClearence())
+            }
+        )
+    }
+    //start yours fragment
+    fun launchFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 }
 

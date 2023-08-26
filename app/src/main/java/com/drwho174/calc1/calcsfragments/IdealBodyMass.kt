@@ -3,16 +3,19 @@ package com.drwho174.calc1.calcsfragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentIdialBodyMassBinding
+import com.drwho174.calc1.textandsettings.AboutIdealBodyMass
 
-class IdealBodyMass : Fragment(), HasCustomTitle {
+class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
 
     private var _binding : FragmentIdialBodyMassBinding? = null
     private val binding
@@ -78,4 +81,21 @@ class IdealBodyMass : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.name_ideal_body_mass
+
+    override fun getCustomAction(): CustomAction {
+        return CustomAction(
+            iconRes = R.drawable.ic_info,
+            onCustomAction = {
+                launchFragment(AboutIdealBodyMass())
+            }
+        )
+    }
+    //start yours fragment
+    fun launchFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 }

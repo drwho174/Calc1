@@ -7,16 +7,18 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentPerfusiologistCalcBinding
+import com.drwho174.calc1.textandsettings.AboutPerfusiologistCalc
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
 
-class PerfusiologistCalculator : Fragment(), HasCustomTitle {
+class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
 
     private var _binding: FragmentPerfusiologistCalcBinding? = null
     private val binding
@@ -126,6 +128,23 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.name_perfusion_calculator
+
+    override fun getCustomAction(): CustomAction {
+        return CustomAction(
+            iconRes = R.drawable.ic_info,
+            onCustomAction = {
+                launchFragment(AboutPerfusiologistCalc())
+            }
+        )
+    }
+    //start yours fragment
+    fun launchFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 }
 
 

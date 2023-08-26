@@ -3,17 +3,22 @@ package com.drwho174.calc1.calcsfragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
+import com.drwho174.calc1.textandsettings.AboutHbPerfision
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
-class HbPerfusion : Fragment(), HasCustomTitle {
+class HbPerfusion : Fragment(), HasCustomTitle, HasCustomAction {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,7 +26,7 @@ class HbPerfusion : Fragment(), HasCustomTitle {
 
         return inflater.inflate(R.layout.fragment_hb_perf, container, false)
     }
-
+//TODO viewBinding needed
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val height: EditText = view.findViewById(R.id.heightField)
@@ -205,6 +210,22 @@ class HbPerfusion : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.name_hb_on_perfusion
+    override fun getCustomAction(): CustomAction {
+        return CustomAction(
+            iconRes = R.drawable.ic_info,
+            onCustomAction = {
+                launchFragment(AboutHbPerfision())
+            }
+        )
+    }
+    //start yours fragment
+    fun launchFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 }
 
 

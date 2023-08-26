@@ -1,6 +1,6 @@
 package com.drwho174.calc1.contract
 
-import androidx.core.view.MenuHost
+import androidx.annotation.DrawableRes
 
 interface HasCustomAction {
     /* @return a custom action specification, see [CustomAction] class for details
@@ -10,6 +10,6 @@ interface HasCustomAction {
 }
 
 class CustomAction (
-menuHost: MenuHost,
+    @DrawableRes val iconRes: Int,
     val onCustomAction: Runnable
 )

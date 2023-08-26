@@ -4,19 +4,22 @@ package com.drwho174.calc1.calcsfragments
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentBsaBinding
+import com.drwho174.calc1.textandsettings.AboutBSA
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
 
-class BSA : Fragment(), HasCustomTitle {
+class BSA : Fragment(), HasCustomTitle, HasCustomAction {
 
     private var _binding : FragmentBsaBinding? = null
     private val binding
@@ -95,5 +98,21 @@ class BSA : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.name_BSA
+    override fun getCustomAction(): CustomAction {
+        return CustomAction(
+            iconRes = R.drawable.ic_info,
+            onCustomAction = {
+                launchFragment(AboutBSA())
+            }
+        )
+    }
+    //start yours fragment
+    fun launchFragment(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+    }
 
 }

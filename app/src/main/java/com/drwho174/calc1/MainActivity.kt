@@ -2,11 +2,16 @@ package com.drwho174.calc1
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.drwho174.calc1.calcsfragments.*
+import com.drwho174.calc1.contract.CustomAction
+import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.ActivityMainBinding
@@ -132,11 +137,25 @@ class MainActivity : AppCompatActivity(), Navigator {
 
         binding.mainToolbar.menu.clear()
 
-//        if (fragment is HasCustomAction) {
-//            createCustomToolbarAction(fragment.getCustomAction())
-//        } else {
-//            binding.mainToolbar.menu.clear()
-//        }
+        if (fragment is HasCustomAction) {
+            createCustomToolbarAction(fragment.getCustomAction())
+        } else {
+            binding.mainToolbar.menu.clear()
+        }
+    }
+    private fun createCustomToolbarAction(action: CustomAction) {
+        binding.mainToolbar.menu.clear() // clearing old action if it exists before assigning a new one
+
+        val iconDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(this, action.iconRes)!!)
+
+
+        val menuItem = binding.mainToolbar.menu.add(action.iconRes)
+        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        menuItem.icon = iconDrawable
+        menuItem.setOnMenuItemClickListener {
+            action.onCustomAction.run()
+            return@setOnMenuItemClickListener true
+        }
     }
 }
 
