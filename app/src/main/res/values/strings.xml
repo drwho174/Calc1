@@ -12,6 +12,8 @@
     <string name="name_creatinine_clearence">Клиренс креатинина</string>
     <string name="name_ideal_body_mass">Идеальная масса тела</string>
     <string name="name_body_surface_area">Площадь поверхности тела</string>
+    <string name="name_oxygenation_params">Показатели оксигенации</string>
+    <string name="name_mehran_score">Mehran Score</string>
     <string name="name_settings">Настройки</string>
     <string name="name_about">О программе</string>
     <!--PerfusiologistCalculator Names-->
@@ -51,7 +53,7 @@
     <string name="title_activity_euroscore_and_ckd">Euroscore_and_CKD</string>
     <string name="creatinineClearance">Клиренс креатинина</string>
     <string name="tab_text_2">EuroSCORE</string>
-    <!--CreatinineClearance Names-->
+    <!--GFR Names-->
     <string name="age">Возраст</string>
     <string name="creatinine">Креатинин</string>
     <string name="positive">Да</string>

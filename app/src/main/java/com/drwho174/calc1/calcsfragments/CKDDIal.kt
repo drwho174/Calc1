@@ -31,20 +31,20 @@ class CKDDial: DialogFragment(){
             parentFragmentManager.setFragmentResultListener("age", viewLifecycleOwner){ _, bundle ->
                 val ageBundle = bundle.getString("ageBundle")
 
-                ageField.setText(ageBundle)
+                etAgeField.setText(ageBundle)
             }
             parentFragmentManager.setFragmentResultListener("sex",viewLifecycleOwner){
                     _, bundle  ->
                 val sexBundle = bundle.getInt("sexBundle")
                 if (sexBundle == R.id.male){
-                    sex.check(R.id.male)
+                    rgSex.check(R.id.male)
                 }else{
-                    sex.check(R.id.female)
+                    rgSex.check(R.id.female)
                 }
             }
 
             fun sexCoefficient(): Double {
-                val sexCoefficient = when(sex.checkedRadioButtonId){
+                val sexCoefficient = when(rgSex.checkedRadioButtonId){
                     R.id.male -> 1.012
                     R.id.female -> 1.0
                     else -> 0.0
@@ -53,8 +53,8 @@ class CKDDial: DialogFragment(){
             }
 
             fun calcCKD(): Double {
-                val ageString = ageField.text.toString()
-                val creatinineString = creatinineField.text.toString()
+                val ageString = etAgeField.text.toString()
+                val creatinineString = etCreatinineField.text.toString()
 
                 val ageDouble = ageString.toDouble()
                 val creatinineDouble = creatinineString.toDouble() / 88.4055
@@ -63,29 +63,29 @@ class CKDDial: DialogFragment(){
 
                 if (sexCoefficient() == 1.0) {
                     a = 0.7
-                    if (creatinineDouble <= 0.7) {
-                        b = -0.241
+                    b = if (creatinineDouble <= 0.7) {
+                        -0.241
                     } else {
-                        b = -1.2
+                        -1.2
                     }
                 } else {
                     a = 0.9
-                    if (creatinineDouble <= 0.9) {
-                        b = -0.302
+                    b = if (creatinineDouble <= 0.9) {
+                        -0.302
                     } else {
-                        b = -1.2
+                        -1.2
                     }
                 }
                 return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(ageDouble)) * sexCoefficient()
             }
 //результат по нажатию на кнопку отправляется в parentFragmentManager
-            resultCKDButton.setOnClickListener {
-                if(creatinineField.text?.isNotEmpty() == true &&
-                    ageField.text?.isNotEmpty()== true) {
-                    val CKDres = calcCKD()
-                    parentFragmentManager.setFragmentResult("CKDres", bundleOf("CKDbundle" to CKDres))
+            btResultGfr.setOnClickListener {
+                if(etCreatinineField.text?.isNotEmpty() == true &&
+                    etAgeField.text?.isNotEmpty()== true) {
+                    val gfrRes = calcCKD()
+                    parentFragmentManager.setFragmentResult("CKDres", bundleOf("CKDbundle" to gfrRes))
                 }
-                if (dialisysCheckBox.isChecked){
+                if (cbDialisys.isChecked){
                     val dialysis = true
                     parentFragmentManager.setFragmentResult("dialysisBool", bundleOf("dialysisBundle" to dialysis))
                 }
@@ -95,13 +95,6 @@ class CKDDial: DialogFragment(){
                 fragtran.commit()
             }
         }
-//        val age : EditText = view.findViewById(R.id.ageField)
-//        val creatinine : EditText = view.findViewById(R.id.creatinineField)
-//        val sex: RadioGroup = view.findViewById(R.id.sex)
-//        val calculate : Button = view.findViewById(R.id.resultCKDButton)
-//        val dialisysCheckBox : CheckBox = view.findViewById(R.id.dialisysCheckBox)
-
-
     }
     companion object {
         const val TAG = "CKDDialog"

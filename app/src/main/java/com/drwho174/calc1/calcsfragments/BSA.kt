@@ -2,7 +2,6 @@ package com.drwho174.calc1.calcsfragments
 
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,7 @@ import com.drwho174.calc1.databinding.FragmentBsaBinding
 import com.drwho174.calc1.textandsettings.AboutBSA
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
+import android.content.Context as Context
 
 
 class BSA : Fragment(), HasCustomTitle, HasCustomAction {
@@ -88,11 +88,11 @@ class BSA : Fragment(), HasCustomTitle, HasCustomAction {
 
     }
 
-    fun Fragment.hideKeyboard() {
+    private fun Fragment.hideKeyboard() {
         view?.let { activity?.hideKeyboard(it) }
     }
 
-    fun Context.hideKeyboard(view: View) {
+    private fun Context.hideKeyboard(view: View) {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
@@ -107,7 +107,7 @@ class BSA : Fragment(), HasCustomTitle, HasCustomAction {
         )
     }
     //start yours fragment
-    fun launchFragment(fragment: Fragment){
+    private fun launchFragment(fragment: Fragment){
         requireActivity().supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)

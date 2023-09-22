@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text=""
+        android:layout_margin="5dp"
         android:textSize = "14sp"/>
 
 </FrameLayout>

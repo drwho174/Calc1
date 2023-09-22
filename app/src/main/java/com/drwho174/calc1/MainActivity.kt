@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showCKD() {
-        launchFragment(CreatinineClearance())
+        launchFragment(GFR())
     }
 
     override fun showOxy() {
@@ -93,6 +93,14 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun showBSA() {
         launchFragment(BSA())
+    }
+
+    override fun showResriratoryIndex() {
+        launchFragment(RespiratoryCalc())
+    }
+
+    override fun showMehranScore() {
+        launchFragment(MehranScore())
     }
 
     override fun showMainSettings() {

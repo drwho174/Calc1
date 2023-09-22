@@ -18,8 +18,7 @@ private lateinit var binding: FragmentMainMenuBinding
 
 
         fun setuptheme(){
-            val themeset = prefRepository.getThemeSetting()
-            when (themeset){
+            when (prefRepository.getThemeSetting()){
                 true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
@@ -39,18 +38,10 @@ private lateinit var binding: FragmentMainMenuBinding
         binding.HbPerfButton.setOnClickListener { onHbPerfusionButtonPressed() }
         binding.BSAButton.setOnClickListener { onPerfusiologistCalcButtonPressed() }
         binding.OxyButton.setOnClickListener { onOxyButtonPressed() }
-        binding.idealbodymassbutton.setOnClickListener { idealbodymassbuttonPressed() }
+        binding.idealbodymassbutton.setOnClickListener { onIdealBodyMassButtonPressed() }
         binding.btBsa.setOnClickListener { onBSAButtonPressed() }
-        
-
-//        binding.mainMenuToolbar.setOnMenuItemClickListener {
-//            when (it.itemId ){
-//                R.id.settings -> {onMainSettingsPressed();true}
-//                R.id.about -> {onAboutPressed(); true}
-//                else -> true
-//            }
-//        }
-
+        binding.btRespiratoryIndex.setOnClickListener { onRespiratoryIndexButtonPressed() }
+        binding.btMehranScore.setOnClickListener { onMehranScoreButtonPressed() }
 
         return binding.root
     }
@@ -96,12 +87,20 @@ private lateinit var binding: FragmentMainMenuBinding
         navigator().showOxy()
     }
 
-    private fun idealbodymassbuttonPressed(){
+    private fun onIdealBodyMassButtonPressed(){
         navigator().showIdealBodyMassCalc()
     }
 
     private fun onBSAButtonPressed(){
         navigator().showBSA()
+    }
+
+    private fun onRespiratoryIndexButtonPressed(){
+        navigator().showResriratoryIndex()
+    }
+
+    private fun onMehranScoreButtonPressed(){
+        navigator().showMehranScore()
     }
     private fun onMainSettingsPressed(){
         navigator().showMainSettings()
@@ -111,14 +110,7 @@ private lateinit var binding: FragmentMainMenuBinding
         navigator().showAbout()
     }
 
-//    override fun getCustomAction(): CustomAction {
-//        return CustomAction(
-//            menu = R.menu.settings,
-//            onCustomAction = Runnable {
-//
-//            }
-//        )
-//    }
+
 
     override fun getTitleRes(): Int = R.string.name_main_menu
 

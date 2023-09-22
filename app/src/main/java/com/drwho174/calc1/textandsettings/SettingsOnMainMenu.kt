@@ -42,8 +42,7 @@ class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
         val prefRepository = PreferenceRepository(context?.applicationContext ?: return)
 
 
-        val nightModeFlags = context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        when (nightModeFlags){
+        when (context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK){
             Configuration.UI_MODE_NIGHT_YES -> themeselector?.setDefaultValue(true)
             Configuration.UI_MODE_NIGHT_NO -> themeselector?.setDefaultValue(false)
         }

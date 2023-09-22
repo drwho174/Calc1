@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".calcsfragments.MehranScore">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:helperText="в мл"
+        app:helperTextEnabled="true"
+        android:hint="Объем контраста" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_contrast_volume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLines="1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/cb_heart_falure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Застойная сердечная недостаточность"
+        android:layoutDirection="rtl"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_frailty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Возраст более 75 лет"
+            android:layoutDirection="rtl"/>
+        <CheckBox
+            android:id="@+id/cb_iabp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="ВАБК"
+            android:layoutDirection="rtl"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cb_hypotension"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Гипотензия"
+            android:layoutDirection="rtl"/>
+        <CheckBox
+            android:id="@+id/cb_anaemia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Анемия"
+            android:layoutDirection="rtl"/>
+        <CheckBox
+            android:id="@+id/cb_diabetes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Диабет"
+            android:layoutDirection="rtl"/>
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/bt_gfr_in_mehran_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="СКФ"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_weight="1"/>
+    <RadioGroup
+        android:id="@+id/rg_eGFR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_high_gfr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="более 60"/>
+        <RadioButton
+            android:id="@+id/rb_middle_gfr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60 - 40"/>
+        <RadioButton
+            android:id="@+id/rb_low_gfr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="40 - 20"/>
+        <RadioButton
+            android:id="@+id/rb_lowest_gfr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="менее 20"/>
+
+    </RadioGroup>
+</LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:elevation="15dp"
+        app:cardCornerRadius="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tw_nephropatia_risk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            tools:text = "Риск Нефропатии - 57.3%"
+            />
+        <TextView
+            android:id="@+id/tw_dialisys_risk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            tools:text = "Риск Диализа - 12.6%"
+            />
+            <TextView
+            android:id="@+id/tw_gfr_in_mehrane_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            tools:text = "Риск Диализа - 12.6%"
+            /></LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

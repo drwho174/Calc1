@@ -36,7 +36,7 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             fun sexcoef(): Double {
-                val sexcoef = when (SexRadioGroup.checkedRadioButtonId) {
+                val sexcoef = when (rgSexInIbmCalc.checkedRadioButtonId) {
                     R.id.male -> 50.0
                     R.id.female -> 45.5
                     else -> 0.0
@@ -45,7 +45,7 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
             }
 
             fun calculator() {
-                val height = heightField.text.toString()
+                val height = etHeightField.text.toString()
                 val idealbodymassformula = sexcoef() + 0.91 * (height.toDouble() - 152.4)
 
                 idealbodymass.text = String.format("%.1f  кг", idealbodymassformula)
@@ -63,17 +63,17 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
                 override fun afterTextChanged(s: Editable?) {
-                    if (heightField.text?.isNotEmpty() == true) {
+                    if (etHeightField.text?.isNotEmpty() == true) {
                         calculator()
                     }
                 }
 
             }
 
-            heightField.addTextChangedListener(textwatcher)
+            etHeightField.addTextChangedListener(textwatcher)
 
-            SexRadioGroup.setOnCheckedChangeListener { _: RadioGroup?, _: Int ->
-                if (heightField.text?.isNotEmpty() == true) {
+            rgSexInIbmCalc.setOnCheckedChangeListener { _: RadioGroup?, _: Int ->
+                if (etHeightField.text?.isNotEmpty() == true) {
                     calculator()
                 }
             }
@@ -91,7 +91,7 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
         )
     }
     //start yours fragment
-    fun launchFragment(fragment: Fragment){
+    private fun launchFragment(fragment: Fragment){
         requireActivity().supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)

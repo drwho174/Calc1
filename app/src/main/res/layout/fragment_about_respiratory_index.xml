@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".textandsettings.AboutPerfusiologistCalc">
+    tools:context=".textandsettings.AboutRespiratoryIndex">
 
     <TextView
-        android:id="@+id/tw_about_perfusiologist_calc"
+        android:id="@+id/tw_about_respiratory_index"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text=""

@@ -22,6 +22,10 @@ interface Navigator {
 
     fun showBSA()
 
+    fun showResriratoryIndex()
+
+    fun showMehranScore()
+
     fun showMainSettings()
 
     fun showAbout()

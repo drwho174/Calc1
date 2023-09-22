@@ -37,8 +37,8 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
  with(binding) {
      //Body surface area calculator
      fun bsacalc(): Double {
-         val height = heightField.text.toString()
-         val weight = weightField.text.toString()
+         val height = etHeightField.text.toString()
+         val weight = etWeightField.text.toString()
 
          val bsacoef = 0.007184
 
@@ -48,32 +48,32 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
 
      //Body mass index calculator
      fun bmi(): Double {
-         val height = heightField.text.toString()
-         val weight = weightField.text.toString()
+         val height = etHeightField.text.toString()
+         val weight = etWeightField.text.toString()
 
          return weight.toDouble() / ((height.toDouble() / 100).pow(2))
      }
 
      //Slider for perfusion index
      fun perfindexslider(): Double {
-         val v = perfindexslider.value
+         val v = slPerfIndex.value
 
          return v * bsacalc()
      }
 
      //Slider for percentage
      fun perfprecentslider(): Double {
-         val v = perfprecentslider.value
+         val v = slPerfPrecent.value
 
          return perfindexslider() * v / 100
      }
 
      //Slider for manual perfusion speed change and percentage change
      fun speedslider() {
-         val v = perfspeedslider.value * 100 / (perfindexslider.value * bsacalc())
+         val v = slPerfSpeed.value * 100 / (slPerfIndex.value * bsacalc())
          val vv = (v / 5).roundToInt() * 5
          if (vv in 0..150) {
-             perfprecentslider.value = vv.toFloat()
+             slPerfPrecent.value = vv.toFloat()
          }
 
      }
@@ -86,39 +86,39 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
          }
 
          override fun afterTextChanged(et: Editable?) {
-             if (heightField.text?.isNotEmpty() == true
-                 && weightField.text?.isNotEmpty() == true
+             if (etHeightField.text?.isNotEmpty() == true
+                 && etWeightField.text?.isNotEmpty() == true
              ) {
-                 bsaIndication.text = String.format("%.3f", bsacalc())
-                 bmi.text = String.format("%.2f", bmi())
-                 perfspeed.text = String.format("%.2f", perfindexslider())
+                 twBsa.text = String.format("%.3f", bsacalc())
+                 twBmi.text = String.format("%.2f", bmi())
+                 twPerfSpeed.text = String.format("%.2f", perfindexslider())
              }
          }
      }
 
-     heightField.addTextChangedListener(mTextWatcher)
-     weightField.addTextChangedListener(mTextWatcher)
+     etHeightField.addTextChangedListener(mTextWatcher)
+     etWeightField.addTextChangedListener(mTextWatcher)
 
-     perfindexslider.addOnChangeListener { _, _, _ ->
-         if (heightField.text?.isNotEmpty() == true
-             && weightField.text?.isNotEmpty() == true) {
+     slPerfIndex.addOnChangeListener { _, _, _ ->
+         if (etHeightField.text?.isNotEmpty() == true
+             && etWeightField.text?.isNotEmpty() == true) {
              val round = (perfprecentslider() * 10).roundToInt() / 10.0
-             perfspeedslider.value = round.toFloat()
-             perfspeed.text = String.format("%.2f", perfprecentslider())
+             slPerfIndex.value = round.toFloat()
+             twPerfSpeed.text = String.format("%.2f", perfprecentslider())
          }
      }
-     perfprecentslider.addOnChangeListener { _, _, _ ->
-         if (heightField.text?.isNotEmpty() == true
-             && weightField.text?.isNotEmpty() == true
+     slPerfPrecent.addOnChangeListener { _, _, _ ->
+         if (etHeightField.text?.isNotEmpty() == true
+             && etWeightField.text?.isNotEmpty() == true
          ) {
              val round = (perfprecentslider() * 10).roundToInt() / 10.0
-             perfspeedslider.value = round.toFloat()
-             perfspeed.text = String.format("%.2f", perfprecentslider())
+             slPerfSpeed.value = round.toFloat()
+             twPerfSpeed.text = String.format("%.2f", perfprecentslider())
          }
      }
-     perfspeedslider.addOnChangeListener { _, _, _ ->
-         if (heightField.text?.isNotEmpty() == true
-             && weightField.text?.isNotEmpty() == true
+     slPerfSpeed.addOnChangeListener { _, _, _ ->
+         if (etHeightField.text?.isNotEmpty() == true
+             && etWeightField.text?.isNotEmpty() == true
          ) {
              speedslider()
          }
@@ -138,7 +138,7 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
         )
     }
     //start yours fragment
-    fun launchFragment(fragment: Fragment){
+    private fun launchFragment(fragment: Fragment){
         requireActivity().supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)

@@ -18,14 +18,16 @@ import com.drwho174.calc1.textandsettings.AboutOxygenDelivery
 
 class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
 
-    private lateinit var binding: FragmentOxyBinding
+    private var _binding: FragmentOxyBinding? = null
+    private val binding
+    get() = _binding?: throw java.lang.IllegalStateException("_binding in OxygenDeliveryFragment must be not null")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOxyBinding.inflate(inflater , container ,false)
+        _binding = FragmentOxyBinding.inflate(inflater , container ,false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,7 +80,7 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
             return oxygendelyveryindex() / co2productionindex()
         }
 
-        val TextWatcher = object : TextWatcher{
+        val textWatcher = object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -105,13 +107,13 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
             }
         }
 
-        bsa.addTextChangedListener(TextWatcher)
-        cardiacoutput.addTextChangedListener(TextWatcher)
-        hb.addTextChangedListener(TextWatcher)
-        spo2.addTextChangedListener(TextWatcher)
-        etco2.addTextChangedListener(TextWatcher)
-        po2.addTextChangedListener(TextWatcher)
-        freshgasflow.addTextChangedListener(TextWatcher)
+        bsa.addTextChangedListener(textWatcher)
+        cardiacoutput.addTextChangedListener(textWatcher)
+        hb.addTextChangedListener(textWatcher)
+        spo2.addTextChangedListener(textWatcher)
+        etco2.addTextChangedListener(textWatcher)
+        po2.addTextChangedListener(textWatcher)
+        freshgasflow.addTextChangedListener(textWatcher)
 
     }
 
@@ -126,7 +128,7 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
         )
     }
     //start yours fragment
-    fun launchFragment(fragment: Fragment){
+    private fun launchFragment(fragment: Fragment){
         requireActivity().supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)

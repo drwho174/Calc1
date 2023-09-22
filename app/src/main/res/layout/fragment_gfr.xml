@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".calcsfragments.CreatinineClearance">
+    tools:context=".calcsfragments.GFR">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:text="@string/Sex"
         />
     <RadioGroup
-        android:id="@+id/sex"
+        android:id="@+id/rg_sex"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
@@ -55,7 +55,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ageField"
+                android:id="@+id/et_age_field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number"/>
@@ -71,7 +71,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/creatinineField"
+                android:id="@+id/et_creatinine_field_gfr_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"/>
@@ -99,7 +99,7 @@
                 android:text="@string/creatinineClearance"
                 android:textSize="20sp" />
             <TextView
-                android:id="@+id/resultCKD"
+                android:id="@+id/tw_result_gfr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

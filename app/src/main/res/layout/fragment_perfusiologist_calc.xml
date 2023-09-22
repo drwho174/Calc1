@@ -23,7 +23,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/heightField"
+            android:id="@+id/et_height_field"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:imeOptions="actionDone"
@@ -45,7 +45,7 @@
         android:layout_margin="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/weightField"
+            android:id="@+id/et_weight_field"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:imeOptions="actionDone"
@@ -75,7 +75,7 @@
             android:text="Площадь поверхности тела" />
 
         <TextView
-            android:id="@+id/bsaIndication"
+            android:id="@+id/tw_bsa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -103,7 +103,7 @@
                 android:text="Скорость перфузии" />
 
             <TextView
-                android:id="@+id/perfspeed"
+                android:id="@+id/tw_perf_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -123,7 +123,7 @@
             android:text="Индекс массы тела" />
 
         <TextView
-            android:id="@+id/bmi"
+            android:id="@+id/tw_bmi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -141,7 +141,7 @@
     android:layout_height="wrap_content"
     android:text="@string/name_PerfusionIndex"/>
     <com.google.android.material.slider.Slider
-        android:id="@+id/perfindexslider"
+        android:id="@+id/sl_perf_index"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -282,7 +282,7 @@
         android:text="Производительность"/>
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/perfprecentslider"
+        android:id="@+id/sl_perf_precent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -352,7 +352,7 @@
         android:text="@string/name_PerfusionRate"/>
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/perfspeedslider"
+        android:id="@+id/sl_perf_speed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

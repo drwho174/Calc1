@@ -6,40 +6,34 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
+import com.drwho174.calc1.databinding.FragmentGfrBinding
 import com.drwho174.calc1.textandsettings.AboutCreatinineClearence
 import kotlin.math.pow
 
-class CreatinineClearance : Fragment(), HasCustomTitle, HasCustomAction {
+class GFR : Fragment(), HasCustomTitle, HasCustomAction {
+
+    private var _binding: FragmentGfrBinding? = null
+    private val binding
+    get() = _binding?: throw java.lang.IllegalStateException("_binding in GFRFragment must not be null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ckd, container, false)
+    ): View {
+        _binding = FragmentGfrBinding.inflate(inflater,container,false)
+        return binding.root
 
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val age : EditText = view.findViewById(R.id.ageField)
-        val creatinine : EditText = view.findViewById(R.id.creatinineField)
-        val res : TextView = view.findViewById(R.id.resultCKD)
-//        val ckdsheet = BottomSheetBehavior.from(view.findViewById(R.id.bottom_sheet_ckd_result))
-//
-//        ckdsheet.state = BottomSheetBehavior.STATE_EXPANDED
-
 
         fun sexCoefivient(): Double {
-            val sex: RadioGroup = view.findViewById(R.id.sex)
-            val sexCoeficient = when(sex.checkedRadioButtonId){
+            val sexCoeficient = when(binding.rgSex.checkedRadioButtonId){
                 R.id.male -> 1.012
                 R.id.female -> 1.0
                 else -> 0.0
@@ -48,31 +42,29 @@ class CreatinineClearance : Fragment(), HasCustomTitle, HasCustomAction {
         }
 
         fun calcCKD(): Double {
-            val ageString = age.text.toString()
-            val creatinineString = creatinine.text.toString()
+            val age = binding.etAgeField.text.toString()
+            val creatinine = binding.etCreatinineFieldGfrFragment.text.toString()
 
-            val ageDouble = ageString.toDouble()
-            val creatinineDouble = creatinineString.toDouble() / 88.4055
+            val creatinineDouble = creatinine.toDouble() / 88.4055
             val a: Double
             val b: Double
 
             if (sexCoefivient() == 1.0) {
                 a = 0.7
-                if (creatinineDouble <= 0.7) {
-                    b = -0.241
+                b = if (creatinineDouble <= 0.7) {
+                    -0.241
                 } else {
-                    b = -1.2
+                    -1.2
                 }
             } else {
                 a = 0.9
-                if (creatinineDouble <= 0.9) {
-                    b = -0.302
+                b = if (creatinineDouble <= 0.9) {
+                    -0.302
                 } else {
-                    b = -1.2
+                    -1.2
                 }
             }
-            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(ageDouble)) * sexCoefivient()
-
+            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(age.toDouble())) * sexCoefivient()
         }
 
         val generalTextWatcher: TextWatcher = object : TextWatcher {
@@ -83,17 +75,16 @@ class CreatinineClearance : Fragment(), HasCustomTitle, HasCustomAction {
             }
 
             override fun afterTextChanged(s: Editable) {
-                    if (age.text.isNotEmpty() &&
-                        creatinine.text.isNotEmpty()){
-                           res.text = String.format("%.2f ml/min/1.73m2", calcCKD())
+                    if (binding.etAgeField.text?.isNotEmpty() == true
+                        && binding.etCreatinineFieldGfrFragment.text?.isNotEmpty() == true){
+
+                        binding.twResultGfr.text = String.format("%.2f ml/min/1.73m2", calcCKD())
                     }
             }
         }
 
-        age.addTextChangedListener(generalTextWatcher)
-        creatinine.addTextChangedListener(generalTextWatcher)
-
-
+        binding.etAgeField.addTextChangedListener(generalTextWatcher)
+        binding.etCreatinineFieldGfrFragment.addTextChangedListener(generalTextWatcher)
 
     }
 
@@ -107,7 +98,7 @@ class CreatinineClearance : Fragment(), HasCustomTitle, HasCustomAction {
         )
     }
     //start yours fragment
-    fun launchFragment(fragment: Fragment){
+    private fun launchFragment(fragment: Fragment){
         requireActivity().supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
