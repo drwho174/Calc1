@@ -294,6 +294,11 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
             .commit()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
 
 

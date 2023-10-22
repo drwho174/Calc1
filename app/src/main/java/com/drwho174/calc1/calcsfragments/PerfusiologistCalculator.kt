@@ -34,7 +34,7 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
- with(binding) {
+   with(binding) {
      //Body surface area calculator
      fun bsacalc(): Double {
          val height = etHeightField.text.toString()
@@ -103,7 +103,7 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
          if (etHeightField.text?.isNotEmpty() == true
              && etWeightField.text?.isNotEmpty() == true) {
              val round = (perfprecentslider() * 10).roundToInt() / 10.0
-             slPerfIndex.value = round.toFloat()
+             slPerfSpeed.value = round.toFloat()
              twPerfSpeed.text = String.format("%.2f", perfprecentslider())
          }
      }
@@ -124,7 +124,7 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
          }
 
      }
- }
+   }
     }
 
     override fun getTitleRes(): Int = R.string.name_perfusion_calculator
@@ -145,6 +145,12 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
 
 

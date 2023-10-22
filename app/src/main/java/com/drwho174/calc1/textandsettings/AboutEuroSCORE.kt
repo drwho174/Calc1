@@ -31,7 +31,7 @@ class AboutEuroSCORE : Fragment(), HasCustomTitle {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val string = context!!.applicationContext
+        val string = requireContext().applicationContext
             .assets
             .open("about/EUROSCORE_2.md")
             .bufferedReader()

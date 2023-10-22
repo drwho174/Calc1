@@ -32,7 +32,7 @@ class AboutIdealBodyMass : Fragment(), HasCustomTitle {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val string = context!!.applicationContext
+        val string = requireContext().applicationContext
             .assets
             .open("about/Ideal_Body_Mass.md")
             .bufferedReader()
@@ -52,5 +52,10 @@ class AboutIdealBodyMass : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.about_calculator
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

@@ -12,12 +12,12 @@ import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
-import com.drwho174.calc1.databinding.FragmentIdialBodyMassBinding
+import com.drwho174.calc1.databinding.FragmentIdealBodyMassBinding
 import com.drwho174.calc1.textandsettings.AboutIdealBodyMass
 
 class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
 
-    private var _binding : FragmentIdialBodyMassBinding? = null
+    private var _binding : FragmentIdealBodyMassBinding? = null
     private val binding
     get() = _binding?: throw java.lang.IllegalStateException("_binding for IdealBodyMass must not be null")
 
@@ -27,7 +27,7 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentIdialBodyMassBinding.inflate(inflater, container,false)
+        _binding = FragmentIdealBodyMassBinding.inflate(inflater, container,false)
 
         return binding.root
     }
@@ -98,4 +98,10 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

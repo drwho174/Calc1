@@ -35,9 +35,18 @@ class About : Fragment() , HasCustomTitle{
             val sendEmail = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto: " + getString(R.string.authors_email)))
             startActivity(sendEmail)
         }
+        binding.twAuthorsTelegram.setOnClickListener {
+            val openTelegram = Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=drwho174"))
+            startActivity(openTelegram)
+        }
 
     }
 
     override fun getTitleRes(): Int = R.string.name_about
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

@@ -44,9 +44,11 @@ class MehranScore : Fragment(), HasCustomTitle, HasCustomAction {
             binding.twGfrInMehraneScore.text = String.format("СКФ %.2f ml/min/1.73m2", gfrResult)
             if (gfrResult > 60.0) {
                 binding.rgEGFR.check(R.id.rb_high_gfr)
-            } else if (gfrResult in 60.0..40.0) {
+            } else if (gfrResult in 40.0..60.0) {
                 binding.rgEGFR.check(R.id.rb_middle_gfr)
-            } else if (gfrResult <= 50.0) {
+            } else if (gfrResult in 20.0..40.0) {
+                binding.rgEGFR.check(R.id.rb_low_gfr)
+            } else if (gfrResult < 20.0){
                 binding.rgEGFR.check(R.id.rb_lowest_gfr)
             }
         }
@@ -211,5 +213,9 @@ class MehranScore : Fragment(), HasCustomTitle, HasCustomAction {
 
     override fun getTitleRes(): Int = R.string.name_mehran_score
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,104 +8,48 @@
 
     <Button
         android:id="@+id/EuroSCRButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
         android:text="@string/name_euroscore_2"
-        app:layout_constraintBottom_toTopOf="@+id/HbPerfButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CKDButton" />
+        style="@style/ButtonStyle" />
 
     <Button
         android:id="@+id/HbPerfButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/name_hb_on_perfusion"
-        app:layout_constraintBottom_toTopOf="@+id/OxyButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EuroSCRButton"
-        app:layout_constraintVertical_bias="0.768" />
+        style="@style/ButtonStyle"
+        android:text="@string/name_hb_on_perfusion" />
 
     <Button
         android:id="@+id/BSAButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/name_perfusion_calculator"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OxyButton"
-        app:layout_constraintVertical_bias="0.65" />
+        style="@style/ButtonStyle"
+        android:text="@string/name_perfusion_calculator" />
 
     <Button
         android:id="@+id/OxyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/name_oxygen_delivery"
-        app:layout_constraintBottom_toTopOf="@+id/BSAButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HbPerfButton"
-        app:layout_constraintVertical_bias="0.83" />
+        style="@style/ButtonStyle"
+        android:text="@string/name_oxygen_delivery" />
 
     <Button
         android:id="@+id/CKDButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/name_creatinine_clearence"
-        app:layout_constraintBottom_toTopOf="@+id/HbPerfButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        style="@style/ButtonStyle"
+        android:text="@string/name_glomerular_filtration_rate" />
 
     <Button
         android:id="@+id/idealbodymassbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="Идеальная масса тела" />
+        style="@style/ButtonStyle"
+        android:text="@string/name_ideal_body_mass" />
 
     <Button
         android:id="@+id/bt_bsa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="Площадь поверхности тела"/>
+        style="@style/ButtonStyle"
+        android:text="@string/name_body_surface_area" />
 
     <Button
         android:id="@+id/bt_respiratory_index"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/name_oxygenation_params"/>
+        style="@style/ButtonStyle"
+        android:text="@string/name_oxygenation_params" />
 
     <Button
         android:id="@+id/bt_mehran_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:text="@string/name_mehran_score"/>
+        style="@style/ButtonStyle"
+        android:text="@string/name_mehran_score" />
 
 
 </LinearLayout>

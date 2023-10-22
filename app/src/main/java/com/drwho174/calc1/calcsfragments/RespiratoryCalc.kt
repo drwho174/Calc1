@@ -109,4 +109,10 @@ class RespiratoryCalc : Fragment(), HasCustomTitle, HasCustomAction {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

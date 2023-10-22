@@ -10,7 +10,9 @@ import com.drwho174.calc1.contract.navigator
 import com.drwho174.calc1.databinding.FragmentMainMenuBinding
 
 class MainMenu : Fragment(), HasCustomTitle{
-private lateinit var binding: FragmentMainMenuBinding
+        private var _binding: FragmentMainMenuBinding? = null
+        private val binding
+        get() = _binding?: throw java.lang.IllegalStateException("_binding for MainMenuFragment must not be null")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,7 @@ private lateinit var binding: FragmentMainMenuBinding
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainMenuBinding.inflate(inflater, container, false)
+        _binding = FragmentMainMenuBinding.inflate(inflater, container, false)
 
         binding.EuroSCRButton.setOnClickListener { onEuroSCRButtonPressed() }
         binding.CKDButton.setOnClickListener { onCKDButtonPressed() }
@@ -114,6 +116,9 @@ private lateinit var binding: FragmentMainMenuBinding
 
     override fun getTitleRes(): Int = R.string.name_main_menu
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

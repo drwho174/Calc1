@@ -2,6 +2,7 @@
     <string name="app_name">Anaesthesiologist Calculator</string>
     <string name="version">Version</string>
     <string name="authors_email">filipphome@mail.ru</string>
+    <string name="authors_telegram">drwho174</string>
     <string name="about_calculator">О калькуляторе</string>
     <!--Main Names-->
     <string name="name_main_menu">Главное меню</string>
@@ -9,13 +10,15 @@
     <string name="name_hb_on_perfusion">Расчет гемоглобина на перфузии</string>
     <string name="name_oxygen_delivery">Доставка кислорода</string>
     <string name="name_perfusion_calculator">Калькулятор перфузиолога</string>
-    <string name="name_creatinine_clearence">Клиренс креатинина</string>
+    <string name="name_glomerular_filtration_rate">СКФ</string>
     <string name="name_ideal_body_mass">Идеальная масса тела</string>
     <string name="name_body_surface_area">Площадь поверхности тела</string>
     <string name="name_oxygenation_params">Показатели оксигенации</string>
     <string name="name_mehran_score">Mehran Score</string>
     <string name="name_settings">Настройки</string>
     <string name="name_about">О программе</string>
+    <string name="result">Результат</string>
+    <string name="calculate">Рассчитать</string>
     <!--PerfusiologistCalculator Names-->
     <string name="name_Height">Рост</string>
     <string name="name_Weight">Вес</string>
@@ -50,15 +53,15 @@
     <string name="hbap1">На ИК 1</string>
     <string name="hbap2">На ИК 2</string>
     <string name="gpl">г/л</string>
-    <string name="title_activity_euroscore_and_ckd">Euroscore_and_CKD</string>
-    <string name="creatinineClearance">Клиренс креатинина</string>
-    <string name="tab_text_2">EuroSCORE</string>
+
     <!--GFR Names-->
     <string name="age">Возраст</string>
     <string name="creatinine">Креатинин</string>
     <string name="positive">Да</string>
     <string name="negative">Нет</string>
+
     <!--Euroscore Names-->
+    <string name="creatinineClearance">СКФ</string>
     <string name="noRenalDisfunction">&gt;85 мл/мин</string>
     <string name="mildRenalDisfunction">51–85 мл/мин</string>
     <string name="severeRenalDisfunction">" ⩽50 мл/мин"</string>
@@ -82,7 +85,7 @@
     <string name="nonCabg">1 не-АКШ процедура</string>
     <string name="twoProcedures">Две процедуры</string>
     <string name="threeProcedures">Три и более процедуры</string>
-    <string name="diabetis">Инсулин-зависимый Сахарный Диабет</string>
+    <string name="insulin_dependent_diabetis_melitus">Инсулин-зависимый Сахарный Диабет</string>
     <string name="pulmonaryDisfunction">Хронические заболевания легких</string>
     <string name="poorMobility">Сниженная мобильность</string>
     <string name="criticalPreopState">Критическое состояние</string>
@@ -98,4 +101,31 @@
     <string name="pulmonaryArteryPressure">Давление в легочной артерии</string>
     <string name="urgency">Срочность вмешательства</string>
     <string name="procedureWeight">Сложность вмешательства</string>
+
+    <!--Mehrane score-->
+    <string name="contrast_volume">Объем контраста</string>
+    <string name="congestive_heart_falure">Застойная сердечная недостаточность</string>
+    <string name="age_older_75">Возраст более 75 лет</string>
+    <string name="IABP">ВАБК</string>
+    <string name="hypotension">Гипотензия</string>
+    <string name="anemia">Анемия</string>
+    <string name="diabetis">Диабет</string>
+
+    <!--Units-->
+    <string name="centimeters">сантиметры</string>
+    <string name="kilograms">килограммы</string>
+    <string name="milliliters">миллилитры</string>
+    <string name="bsa">ППТ</string>
+    <string name="cardiac_output">Сердечный выброс</string>
+    <string name="haemoglobin">Гемоглобин</string>
+    <string name="spo2">SpO2</string>
+    <string name="pao2">PaO2</string>
+    <string name="etco2">EtCO2</string>
+    <string name="fresh_gas_flow">Поток свежего газа</string>
+    <string name="arterial_oxygen_content">Артериальный контент O2</string>
+    <string name="do2">DO2</string>
+    <string name="do2i">DO2i</string>
+    <string name="vco2i">VCO2i</string>
+    <string name="do2i_vco2i">DO2i/VCO2i</string>
+
 </resources>

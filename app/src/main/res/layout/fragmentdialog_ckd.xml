@@ -42,7 +42,6 @@
         android:layout_marginTop="10dp"
         android:hint="@string/age"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,13 +77,12 @@
 <CheckBox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Диализ"
+    android:text="@string/dialisysRenalDisfunction"
     android:id="@+id/cb_dialisys"/>
 <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    style="@style/ButtonStyle"
     android:layout_weight="1"
     android:layout_gravity="end"
     android:id="@+id/bt_result_gfr"
-    android:text="Результат"/>
+    android:text="@string/result"/>
 </LinearLayout>

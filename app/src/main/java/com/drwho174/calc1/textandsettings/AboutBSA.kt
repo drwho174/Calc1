@@ -31,7 +31,7 @@ class AboutBSA : Fragment(), HasCustomTitle {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val string = context!!.applicationContext
+        val string = requireContext().applicationContext
             .assets
             .open("about/Body_Surface_Area.md")
             .bufferedReader()
@@ -51,5 +51,10 @@ class AboutBSA : Fragment(), HasCustomTitle {
     }
 
     override fun getTitleRes(): Int = R.string.about_calculator
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

@@ -5,15 +5,15 @@ plugins {
 
 android {
     namespace 'com.drwho174.calc1'
-    compileSdk 33
+    compileSdk 34
 
 
     defaultConfig {
         applicationId "com.drwho174.calc1"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
-        versionName "0.7"
+        versionName "0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,15 +41,18 @@ android {
 }
 
 dependencies {
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.fragment:fragment-ktx:1.6.1'
-    implementation 'androidx.lifecycle:lifecycle-common:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+
+    implementation 'androidx.recyclerview:recyclerview:1.3.1'
+
+
+    //markdown implementation
     implementation "io.noties.markwon:core:4.6.2"
     implementation "io.noties.markwon:ext-latex:4.6.2"
     implementation "io.noties.markwon:ext-tables:4.6.2"

@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:helperText="в мл"
+        app:helperText="@string/milliliters"
         app:helperTextEnabled="true"
-        android:hint="Объем контраста" >
+        android:hint="@string/contrast_volume" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_contrast_volume"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Застойная сердечная недостаточность"
+        android:text="@string/congestive_heart_falure"
         android:layoutDirection="rtl"/>
 
     <LinearLayout
@@ -42,14 +42,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Возраст более 75 лет"
+            android:text="@string/age_older_75"
             android:layoutDirection="rtl"/>
         <CheckBox
             android:id="@+id/cb_iabp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="ВАБК"
+            android:text="@string/IABP"
             android:layoutDirection="rtl"/>
     </LinearLayout>
 
@@ -62,21 +62,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Гипотензия"
+            android:text="@string/hypotension"
             android:layoutDirection="rtl"/>
         <CheckBox
             android:id="@+id/cb_anaemia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Анемия"
+            android:text="@string/anemia"
             android:layoutDirection="rtl"/>
         <CheckBox
             android:id="@+id/cb_diabetes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Диабет"
+            android:text="@string/diabetis"
             android:layoutDirection="rtl"/>
     </LinearLayout>
 
@@ -86,13 +86,9 @@
     android:orientation="horizontal">
     <Button
         android:id="@+id/bt_gfr_in_mehran_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="СКФ"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        style="@style/ButtonStyle"
+        android:text="@string/creatinineClearance"
         android:textSize="18sp"
-        android:layout_gravity="center_horizontal|center_vertical"
         android:layout_weight="1"/>
     <RadioGroup
         android:id="@+id/rg_eGFR"
@@ -157,7 +153,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_margin="5dp"
-            tools:text = "Риск Диализа - 12.6%"
+            tools:text = "СКФ"
             /></LinearLayout>
     </androidx.cardview.widget.CardView>
 

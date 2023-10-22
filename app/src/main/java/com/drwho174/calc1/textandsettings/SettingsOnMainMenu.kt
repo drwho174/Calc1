@@ -11,28 +11,6 @@ import com.drwho174.calc1.contract.HasCustomTitle
 
 
 class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
-//    private var _binding: PreferenceSett? = null
-//    private val binding
-//    get() = _binding?: throw java.lang.IllegalStateException("_binding for SettingsOnMainMenu must not be null")
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        _binding = FragmentSettingsOnMainMenuBinding.inflate(inflater, container, false)
-//     //   val themeselector = binding.themeselector
-//        binding.themeselector.setOnCheckedChangeListener{ _, isChecked ->
-//            if (isChecked){
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//
-//            }else{
-//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//            }
-//        }
-//        return binding.root
-//    }
-
-
-
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
@@ -42,7 +20,7 @@ class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
         val prefRepository = PreferenceRepository(context?.applicationContext ?: return)
 
 
-        when (context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK){
+        when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK){
             Configuration.UI_MODE_NIGHT_YES -> themeselector?.setDefaultValue(true)
             Configuration.UI_MODE_NIGHT_NO -> themeselector?.setDefaultValue(false)
         }
@@ -66,4 +44,5 @@ class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
     }
 
     override fun getTitleRes(): Int = R.string.name_settings
+
 }

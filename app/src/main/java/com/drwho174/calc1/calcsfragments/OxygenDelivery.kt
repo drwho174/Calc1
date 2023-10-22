@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.CustomAction
@@ -43,7 +44,7 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
         val do2 : TextView = binding.do2
         val do2i : TextView = binding.do2i
         val vco2i : TextView = binding.vco2i
-        val do2vco2i : TextView = binding.do2ivco2i
+        val do2vco2i : TextView = binding.twDo2ivco2i
 
 
 
@@ -63,7 +64,7 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
             return cardiacoutputtext.toDouble() * oxygenarterialcontent() * 10
         }
 
-        fun oxygendelyveryindex(): Double{
+        fun oxygendeliveryindex(): Double{
             val bsatext = bsa.text.toString()
             return oxygendelivery()/ bsatext.toDouble()
         }
@@ -77,18 +78,38 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
         }
 
         fun do2indexco2index(): Double{
-            return oxygendelyveryindex() / co2productionindex()
+            return oxygendeliveryindex() / co2productionindex()
+        }
+
+        fun colorSignalOfIndex (){
+            val v = do2indexco2index()
+
+            if(v >= 5){
+                binding.cvDo2Vco2.setCardBackgroundColor(ContextCompat.getColor(requireContext().applicationContext, R.color.green ))
+            }else{
+                binding.cvDo2Vco2.setCardBackgroundColor(ContextCompat.getColor(requireContext().applicationContext, R.color.red ))
+            }
+        }
+
+        fun colorSignalOfOxygenDelivery () {
+            val v = oxygendeliveryindex()
+
+            if(v > 270.0){
+                binding.cvIndexedOxygenDelivery.setCardBackgroundColor(ContextCompat.getColor(requireContext().applicationContext, R.color.green ))
+            }else{
+                binding.cvIndexedOxygenDelivery.setCardBackgroundColor(ContextCompat.getColor(requireContext().applicationContext, R.color.red ))
+            }
         }
 
         val textWatcher = object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
 
             override fun afterTextChanged(s: Editable?) {
+
                 if (bsa.text.isNotEmpty() &&
                     cardiacoutput.text.isNotEmpty() &&
                     hb.text.isNotEmpty()&&
@@ -97,9 +118,12 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
                     po2.text.isNotEmpty()&&
                     freshgasflow.text.isNotEmpty()){
 
+                    colorSignalOfIndex()
+                    colorSignalOfOxygenDelivery()
+
                     arterialcontentO2.text = String.format("%.1f мл/дл",oxygenarterialcontent())
                     do2.text = String.format("%.1f мл/мин" ,oxygendelivery())
-                    do2i.text = String.format("%.1f мл/мин/м2",oxygendelyveryindex())
+                    do2i.text = String.format("%.1f мл/мин/м2",oxygendeliveryindex())
                     vco2i.text = String.format("%.1f мл/мин",co2productionindex())
                     do2vco2i.text = String.format("%.1f", do2indexco2index())
 
@@ -134,5 +158,10 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
             .addToBackStack(null)
             .replace(R.id.fragmentContainer, fragment)
             .commit()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

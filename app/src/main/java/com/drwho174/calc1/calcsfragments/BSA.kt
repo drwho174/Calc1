@@ -115,4 +115,9 @@ class BSA : Fragment(), HasCustomTitle, HasCustomAction {
             .commit()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

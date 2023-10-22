@@ -88,7 +88,7 @@ class GFR : Fragment(), HasCustomTitle, HasCustomAction {
 
     }
 
-    override fun getTitleRes(): Int = R.string.name_creatinine_clearence
+    override fun getTitleRes(): Int = R.string.name_glomerular_filtration_rate
     override fun getCustomAction(): CustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
@@ -105,5 +105,11 @@ class GFR : Fragment(), HasCustomTitle, HasCustomAction {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
 

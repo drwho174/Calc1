@@ -30,7 +30,7 @@ class AboutMehraneScore : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val string = context!!.applicationContext
+        val string = requireContext().applicationContext
             .assets
             .open("about/MehraneScore.md")
             .bufferedReader()
@@ -47,4 +47,10 @@ class AboutMehraneScore : Fragment() {
             .build()
         markvon.setMarkdown(markdowntext,string)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
