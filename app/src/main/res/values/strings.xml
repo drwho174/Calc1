@@ -25,6 +25,8 @@
     <string name="name_PerfusionIndex">Индекс перфузии</string>
     <string name="name_BSA">Площадь поверхности тела</string>
     <string name="name_IBM">Индекс массы тела</string>
+    <string name="name_PerfusoionPerfomance">Производительность</string>
+
     <string name="name_PerfusionRate">Скорость перфузии</string>
     <string name="HeightField">Введите рост</string>
     <string name="WeightField">Введите вес</string>
@@ -48,10 +50,10 @@
     <string name="Sex">Пол</string>
     <string name="Male">Мужчина</string>
     <string name="Female">Женщина</string>
-    <string name="hbbp1">До ИК 1</string>
-    <string name="hbbp2">До ИК 2</string>
-    <string name="hbap1">На ИК 1</string>
-    <string name="hbap2">На ИК 2</string>
+    <string name="hbbp1">До ИК по Allen</string>
+    <string name="hbbp2">До ИК по Nadler</string>
+    <string name="hbap1">На ИК по Allen</string>
+    <string name="hbap2">На ИК по Nadler</string>
     <string name="gpl">г/л</string>
 
     <!--GFR Names-->

@@ -84,11 +84,11 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:hint="@string/age"
-            app:helperText="В годах">
+            android:hint="@string/spo2"
+            app:helperText="В %">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_age"
+                android:id="@+id/et_spo2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="number" />
@@ -104,19 +104,29 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tw_p_f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                tools:text="P/F 300 мм.рт.ст."/>
+
+            <TextView
+                android:id="@+id/tw_sf_ratio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                tools:text="S/F Ratio 100 мм рт ст"/>
+
+            <TextView
                 android:id="@+id/tw_a_a_gradient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textSize="20sp"
                 tools:text="A - a градиент 100 мм. рт. ст."/>
-            <TextView
-                android:id="@+id/tw_estimated_a_a_gradient"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="20sp"
-                tools:text="Норма A - a градиента 100 мм. рт. ст."/>
+
             <TextView
                 android:id="@+id/tw_ri"
                 android:layout_width="wrap_content"
@@ -124,13 +134,7 @@
                 android:layout_margin="10dp"
                 android:textSize="20sp"
                 tools:text="Respiratory Index 120"/>
-            <TextView
-                android:id="@+id/tw_p_f"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="20sp"
-                tools:text="P/F 300 мм.рт.ст."/>
+
 
         </LinearLayout>
 

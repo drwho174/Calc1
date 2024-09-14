@@ -44,10 +44,10 @@ class RespiratoryCalc : Fragment(), HasCustomTitle, HasCustomAction {
             return (fio2.toDouble() / 100 * (ATMOSPHERE_PRESSURE - WATER_STEAM_PRESSURE) - (paco2.toDouble() / 0.8)) - pao2.toDouble()
         }
 
-        fun estimatedGradient (): Double {
-            val age = etAge.text.toString()
-            return 4 + age.toDouble() / 4
-        }
+//        fun estimatedGradient (): Double {
+//            val age = etAge.text.toString()
+//            return 4 + age.toDouble() / 4
+//        }
 
         fun ri(): Double {
             val po2 = etPao2.text.toString()
@@ -60,6 +60,12 @@ class RespiratoryCalc : Fragment(), HasCustomTitle, HasCustomAction {
             return pao2.toDouble() * 100 / fio2.toDouble()
         }
 
+        fun spo2Fio2Ratio (): Double {
+            val fio2 = etFio2.text.toString()
+            val spo2 = etSpo2.text.toString()
+            return spo2.toDouble() * 100 / fio2.toDouble()
+        }
+
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -70,24 +76,25 @@ class RespiratoryCalc : Fragment(), HasCustomTitle, HasCustomAction {
             override fun afterTextChanged(s: Editable?) {
                 if (etFio2.text?.isNotEmpty() == true &&
                     etPaco2.text?.isNotEmpty() == true &&
-                    etPao2.text?.isNotEmpty() == true ){
+                    etPao2.text?.isNotEmpty() == true){
 
                     twAAGradient.text = String.format("A-a градиент: %.1f мм.рт.ст.", gradient())
                     twRi.text = String.format("Респираторный индекс: %.1f", ri())
-                    twPF.text = String.format("P/F %.0f", pfRatio())
+                    twPF.text = String.format("P/F Ratio %.0f", pfRatio())
                 } else if(etFio2.text?.isNotEmpty() == true &&
                     etPao2.text?.isNotEmpty() == true){
                     twPF.text = String.format("P/F %.0f", pfRatio())
                 }
-                if (etAge.text?.isNotEmpty() == true){
-                    twEstimatedAAGradient.text = String.format("Нормальный pO2(A-a) %.1f", estimatedGradient())
+                if (etSpo2.text?.isNotEmpty() == true&&
+                    etFio2.text?.isNotEmpty() == true){
+                    twSfRatio.text = String.format("S/F Ratio  %.1f", spo2Fio2Ratio())
                 }
             }
         }
         etFio2.addTextChangedListener(textWatcher)
         etPao2.addTextChangedListener(textWatcher)
         etPaco2.addTextChangedListener(textWatcher)
-        etAge.addTextChangedListener(textWatcher)
+        etSpo2.addTextChangedListener(textWatcher)
     }
     }
 
