@@ -3,6 +3,7 @@ package com.drwho174.calc1.ui.calc.respiratory
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -24,14 +25,15 @@ import com.drwho174.calc1.domain.respiratoryIndex
 import com.drwho174.calc1.domain.sfRatio
 import com.drwho174.calc1.ui.common.format
 import com.drwho174.calc1.ui.components.NumberField
-import com.drwho174.calc1.ui.components.ResultCard
+import com.drwho174.calc1.ui.components.ResultGrid
+import com.drwho174.calc1.ui.components.ResultItem
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 /**
  * Показатели оксигенации.
  *
- * Результаты появляются по мере заполнения: P/F нужен только FiO2 + PaO2,
- * S/F — FiO2 + SpO2, а A-a градиент и респираторный индекс — все три газа.
+ * Поля ввода — в две колонки по два поля, результаты — в две колонки.
+ * P/F считается при FiO2 + PaO2, S/F — при FiO2 + SpO2, A-a и RI — при трёх газах.
  */
 @Composable
 fun RespiratoryScreen(modifier: Modifier = Modifier) {
@@ -46,6 +48,33 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
     val spo2Value = spo2.toDoubleOrNull()
 
     val mmhg = stringResource(R.string.unit_mmhg)
+    val pfTitle = stringResource(R.string.pf_ratio)
+    val sfTitle = stringResource(R.string.sf_ratio)
+    val aaTitle = stringResource(R.string.aa_gradient)
+    val riTitle = stringResource(R.string.respiratory_index)
+
+    val results = buildList {
+        if (fio2Value != null && pao2Value != null) {
+            add(ResultItem(pfTitle, pfRatio(fio2Value, pao2Value).format(0)))
+        }
+        if (fio2Value != null && spo2Value != null) {
+            add(ResultItem(sfTitle, sfRatio(fio2Value, spo2Value).format(1)))
+        }
+        if (fio2Value != null && pao2Value != null && paco2Value != null) {
+            add(
+                ResultItem(
+                    aaTitle,
+                    "${aaGradient(fio2Value, pao2Value, paco2Value).format(1)} $mmhg",
+                )
+            )
+            add(
+                ResultItem(
+                    riTitle,
+                    respiratoryIndex(fio2Value, pao2Value, paco2Value).format(1),
+                )
+            )
+        }
+    }
 
     Column(
         modifier = modifier
@@ -55,52 +84,41 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        NumberField(
-            value = pao2,
-            onValueChange = { pao2 = it },
-            label = stringResource(R.string.pao2),
-            suffix = mmhg,
-        )
-        NumberField(
-            value = paco2,
-            onValueChange = { paco2 = it },
-            label = stringResource(R.string.paco2),
-            suffix = mmhg,
-        )
-        NumberField(
-            value = fio2,
-            onValueChange = { fio2 = it },
-            label = stringResource(R.string.fio2),
-            suffix = "%",
-        )
-        NumberField(
-            value = spo2,
-            onValueChange = { spo2 = it },
-            label = stringResource(R.string.spo2),
-            suffix = "%",
-        )
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            NumberField(
+                value = pao2,
+                onValueChange = { pao2 = it },
+                label = stringResource(R.string.pao2),
+                suffix = mmhg,
+                modifier = Modifier.weight(1f),
+            )
+            NumberField(
+                value = paco2,
+                onValueChange = { paco2 = it },
+                label = stringResource(R.string.paco2),
+                suffix = mmhg,
+                modifier = Modifier.weight(1f),
+            )
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            NumberField(
+                value = fio2,
+                onValueChange = { fio2 = it },
+                label = stringResource(R.string.fio2),
+                suffix = "%",
+                modifier = Modifier.weight(1f),
+            )
+            NumberField(
+                value = spo2,
+                onValueChange = { spo2 = it },
+                label = stringResource(R.string.spo2),
+                suffix = "%",
+                modifier = Modifier.weight(1f),
+            )
+        }
 
-        if (fio2Value != null && pao2Value != null) {
-            ResultCard(
-                title = stringResource(R.string.pf_ratio),
-                value = pfRatio(fio2Value, pao2Value).format(0),
-            )
-        }
-        if (fio2Value != null && spo2Value != null) {
-            ResultCard(
-                title = stringResource(R.string.sf_ratio),
-                value = sfRatio(fio2Value, spo2Value).format(1),
-            )
-        }
-        if (fio2Value != null && pao2Value != null && paco2Value != null) {
-            ResultCard(
-                title = stringResource(R.string.aa_gradient),
-                value = "${aaGradient(fio2Value, pao2Value, paco2Value).format(1)} $mmhg",
-            )
-            ResultCard(
-                title = stringResource(R.string.respiratory_index),
-                value = respiratoryIndex(fio2Value, pao2Value, paco2Value).format(1),
-            )
+        if (results.isNotEmpty()) {
+            ResultGrid(results = results)
         }
     }
 }

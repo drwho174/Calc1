@@ -28,9 +28,9 @@ import com.drwho174.calc1.ui.theme.Calc1Theme
 /**
  * Идеальная масса тела.
  *
+ * Переключатель пола — в горизонтальной строке, как в исходном RadioGroup.
  * Пол по умолчанию — мужской: раньше при невыбранном поле результат считался
- * с коэффициентом 0, то есть был неверным ровно до того, как пользователь
- * тронет переключатель.
+ * с коэффициентом 0, то есть был неверным до первого касания переключателя.
  */
 @Composable
 fun IdealBodyMassScreen(modifier: Modifier = Modifier) {
@@ -55,6 +55,7 @@ fun IdealBodyMassScreen(modifier: Modifier = Modifier) {
             selected = isFemale,
             onSelect = { isFemale = it },
             label = { female -> if (female) femaleLabel else maleLabel },
+            horizontal = true,
         )
 
         NumberField(

@@ -3,6 +3,7 @@ package com.drwho174.calc1.ui.calc.bsa
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -27,8 +28,7 @@ import com.drwho174.calc1.ui.theme.Calc1Theme
 /**
  * Площадь поверхности тела: три формулы считаются «на лету».
  *
- * Раньше результат открывался в bottom sheet по кнопке; здесь он виден сразу —
- * формулы те же, меняется только способ показа.
+ * Рост и вес стоят в одной горизонтали, как в исходной разметке.
  */
 @Composable
 fun BsaScreen(modifier: Modifier = Modifier) {
@@ -47,18 +47,22 @@ fun BsaScreen(modifier: Modifier = Modifier) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        NumberField(
-            value = height,
-            onValueChange = { height = it },
-            label = stringResource(R.string.name_Height),
-            suffix = stringResource(R.string.unit_cm),
-        )
-        NumberField(
-            value = weight,
-            onValueChange = { weight = it },
-            label = stringResource(R.string.name_Weight),
-            suffix = stringResource(R.string.unit_kg),
-        )
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            NumberField(
+                value = height,
+                onValueChange = { height = it },
+                label = stringResource(R.string.name_Height),
+                suffix = stringResource(R.string.unit_cm),
+                modifier = Modifier.weight(1f),
+            )
+            NumberField(
+                value = weight,
+                onValueChange = { weight = it },
+                label = stringResource(R.string.name_Weight),
+                suffix = stringResource(R.string.unit_kg),
+                modifier = Modifier.weight(1f),
+            )
+        }
 
         if (heightCm != null && weightKg != null) {
             ResultCard(

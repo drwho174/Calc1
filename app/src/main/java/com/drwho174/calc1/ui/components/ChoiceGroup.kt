@@ -1,5 +1,6 @@
 package com.drwho174.calc1.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,9 @@ import androidx.compose.ui.unit.dp
 
 /**
  * Группа взаимоисключающего выбора — замена `RadioGroup` из XML.
+ *
+ * @param horizontal true — варианты в строку (как `android:orientation="horizontal"`
+ * в прежнем `RadioGroup`), false — в столбец.
  */
 @Composable
 fun <T> ChoiceGroup(
@@ -26,6 +30,7 @@ fun <T> ChoiceGroup(
     onSelect: (T) -> Unit,
     label: (T) -> String,
     modifier: Modifier = Modifier,
+    horizontal: Boolean = false,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
@@ -34,33 +39,61 @@ fun <T> ChoiceGroup(
             modifier = Modifier.padding(bottom = 4.dp),
         )
 
-        Column(Modifier.selectableGroup()) {
-            options.forEach { option ->
-                val isSelected = option == selected
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
-                            selected = isSelected,
-                            onClick = { onSelect(option) },
-                            role = Role.RadioButton,
-                        )
-                        .padding(vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    RadioButton(
-                        selected = isSelected,
-                        // Клик обрабатывает строка целиком — так строка остаётся
-                        // доступной для TalkBack как единый элемент.
-                        onClick = null,
+        if (horizontal) {
+            Row(
+                modifier = Modifier.selectableGroup(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                options.forEach { option ->
+                    ChoiceOption(
+                        label = label(option),
+                        isSelected = option == selected,
+                        onSelect = { onSelect(option) },
                     )
-                    Text(
-                        text = label(option),
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(start = 12.dp),
+                }
+            }
+        } else {
+            Column(Modifier.selectableGroup()) {
+                options.forEach { option ->
+                    ChoiceOption(
+                        label = label(option),
+                        isSelected = option == selected,
+                        onSelect = { onSelect(option) },
+                        modifier = Modifier.fillMaxWidth(),
                     )
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ChoiceOption(
+    label: String,
+    isSelected: Boolean,
+    onSelect: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .selectable(
+                selected = isSelected,
+                onClick = onSelect,
+                role = Role.RadioButton,
+            )
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        RadioButton(
+            selected = isSelected,
+            // Клик обрабатывает строка целиком — так строка остаётся
+            // доступной для TalkBack как единый элемент.
+            onClick = null,
+        )
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(start = 12.dp),
+        )
     }
 }
