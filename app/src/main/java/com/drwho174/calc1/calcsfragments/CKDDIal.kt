@@ -44,12 +44,11 @@ class CKDDial: DialogFragment(){
             }
 
             fun sexCoefficient(): Double {
-                val sexCoefficient = when(rgSex.checkedRadioButtonId){
-                    R.id.male -> 1.012
-                    R.id.female -> 1.0
+                return when (rgSex.checkedRadioButtonId) {
+                    R.id.female -> 1.012
+                    R.id.male -> 1.0
                     else -> 0.0
                 }
-                return sexCoefficient
             }
 
             fun calcCKD(): Double {
@@ -58,10 +57,11 @@ class CKDDial: DialogFragment(){
 
                 val ageDouble = ageString.toDouble()
                 val creatinineDouble = creatinineString.toDouble() / 88.4055
+                val isFemale = rgSex.checkedRadioButtonId == R.id.female
                 val a: Double
                 val b: Double
 
-                if (sexCoefficient() == 1.0) {
+                if (isFemale) {
                     a = 0.7
                     b = if (creatinineDouble <= 0.7) {
                         -0.241

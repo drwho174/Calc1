@@ -32,13 +32,12 @@ class GFR : Fragment(), HasCustomTitle, HasCustomAction {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        fun sexCoefivient(): Double {
-            val sexCoeficient = when(binding.rgSex.checkedRadioButtonId){
-                R.id.male -> 1.012
-                R.id.female -> 1.0
+        fun sexCoefficient(): Double {
+            return when (binding.rgSex.checkedRadioButtonId) {
+                R.id.female -> 1.012
+                R.id.male -> 1.0
                 else -> 0.0
             }
-            return sexCoeficient
         }
 
         fun calcCKD(): Double {
@@ -46,10 +45,11 @@ class GFR : Fragment(), HasCustomTitle, HasCustomAction {
             val creatinine = binding.etCreatinineFieldGfrFragment.text.toString()
 
             val creatinineDouble = creatinine.toDouble() / 88.4055
+            val isFemale = binding.rgSex.checkedRadioButtonId == R.id.female
             val a: Double
             val b: Double
 
-            if (sexCoefivient() == 1.0) {
+            if (isFemale) {
                 a = 0.7
                 b = if (creatinineDouble <= 0.7) {
                     -0.241
@@ -64,7 +64,7 @@ class GFR : Fragment(), HasCustomTitle, HasCustomAction {
                     -1.2
                 }
             }
-            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(age.toDouble())) * sexCoefivient()
+            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(age.toDouble())) * sexCoefficient()
         }
 
         val generalTextWatcher: TextWatcher = object : TextWatcher {

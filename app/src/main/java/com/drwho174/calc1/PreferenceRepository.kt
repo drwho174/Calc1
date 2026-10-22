@@ -12,7 +12,7 @@ class PreferenceRepository(context: Context) {
 
 
         fun getThemeSetting(): Boolean{
-            return settings.getBoolean("THEME_SET", true)
+            return settings.getBoolean("THEME_SET", false)
         }
 
         fun setThemeSetting(value : Boolean) {

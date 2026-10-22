@@ -1,6 +1,5 @@
 package com.drwho174.calc1.textandsettings
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
@@ -15,30 +14,24 @@ class SettingsOnMainMenu : PreferenceFragmentCompat() , HasCustomTitle{
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
         setPreferencesFromResource(R.xml.preference_settings,rootKey)
-                val themeselector : SwitchPreferenceCompat? = findPreference("themeselector")
+        val themeSelector : SwitchPreferenceCompat? = findPreference("THEME_SET")
 
         val prefRepository = PreferenceRepository(context?.applicationContext ?: return)
 
+        // SwitchPreferenceCompat automatically shows the persisted value,
+        // so there is no need to call setDefaultValue() here.
 
-        when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK){
-            Configuration.UI_MODE_NIGHT_YES -> themeselector?.setDefaultValue(true)
-            Configuration.UI_MODE_NIGHT_NO -> themeselector?.setDefaultValue(false)
-        }
+        themeSelector?.setOnPreferenceChangeListener { _, newValue ->
+            val darkTheme = newValue == true
 
-        themeselector?.setOnPreferenceChangeListener { _, newValue ->
-
-            if (newValue == false){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                prefRepository.setThemeSetting(false)
-
-                true
-
-            }else{
+            if (darkTheme) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                prefRepository.setThemeSetting(true)
-
-                true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
+            prefRepository.setThemeSetting(darkTheme)
+
+            true
         }
 
     }

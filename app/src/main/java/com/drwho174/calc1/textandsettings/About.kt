@@ -1,11 +1,13 @@
 package com.drwho174.calc1.textandsettings
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.drwho174.calc1.databinding.FragmentAboutBinding
 import com.drwho174.calc1.BuildConfig
@@ -32,12 +34,20 @@ class About : Fragment() , HasCustomTitle{
 
         binding.twVersionNumber.text = BuildConfig.VERSION_NAME
         binding.twAuthorsEmail.setOnClickListener {
-            val sendEmail = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto: " + getString(R.string.authors_email)))
-            startActivity(sendEmail)
+            try {
+                val sendEmail = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + getString(R.string.authors_email)))
+                startActivity(sendEmail)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(requireContext(), R.string.no_app_to_handle_action, Toast.LENGTH_SHORT).show()
+            }
         }
         binding.twAuthorsTelegram.setOnClickListener {
-            val openTelegram = Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=drwho174"))
-            startActivity(openTelegram)
+            try {
+                val openTelegram = Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=drwho174"))
+                startActivity(openTelegram)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(requireContext(), R.string.no_app_to_handle_action, Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

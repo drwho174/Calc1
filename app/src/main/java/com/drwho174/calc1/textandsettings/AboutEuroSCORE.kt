@@ -51,4 +51,9 @@ class AboutEuroSCORE : Fragment(), HasCustomTitle {
 
     override fun getTitleRes(): Int = R.string.about_calculator
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
