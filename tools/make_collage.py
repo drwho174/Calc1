@@ -19,6 +19,7 @@ ITEMS = [
     ("calc_bsa.png", "Площадь поверхности тела"),
     ("calc_ibm.png", "Идеальная масса тела"),
     ("calc_respiratory.png", "Показатели оксигенации"),
+    ("calc_gfr.png", "СКФ — CKD-EPI 2021"),
     ("about_gfr_light.png", "Справка СКФ — markdown"),
     ("about_mehran_light.png", "Справка Mehran — таблицы"),
     ("about_app_light.png", "О программе"),

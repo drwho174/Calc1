@@ -38,8 +38,8 @@ class SimpleCalculatorsTest {
         compose.onAllNodes(hasSetTextAction())[1].performTextInput("70")
         compose.waitForIdle()
 
-        // 1.8217 / 1.8097 / 1.8257 — все три округляются до 1.8 м².
-        compose.onAllNodesWithText("1.8 м²").assertCountEquals(3)
+        // 1.8217 / 1.8097 / 1.8257 — все три округляются до 1.8 (м² теперь в подписи).
+        compose.onAllNodesWithText("1.8").assertCountEquals(3)
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_bsa.png")
     }
 
@@ -53,7 +53,7 @@ class SimpleCalculatorsTest {
         compose.onNodeWithText("Женщина").performClick()
         compose.waitForIdle()
 
-        compose.onNodeWithText("70.6 кг").assertExists()
+        compose.onNodeWithText("70.6").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_ibm.png")
     }
 
@@ -72,7 +72,7 @@ class SimpleCalculatorsTest {
 
         compose.onNodeWithText("167").assertExists()
         compose.onNodeWithText("163.3").assertExists()
-        compose.onNodeWithText("277.8 мм рт.ст.").assertExists()
+        compose.onNodeWithText("277.8").assertExists()
         compose.onNodeWithText("2.8").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_respiratory.png")
     }

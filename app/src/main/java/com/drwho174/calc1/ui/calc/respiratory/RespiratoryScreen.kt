@@ -50,7 +50,11 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
     val mmhg = stringResource(R.string.unit_mmhg)
     val pfTitle = stringResource(R.string.pf_ratio)
     val sfTitle = stringResource(R.string.sf_ratio)
-    val aaTitle = stringResource(R.string.aa_gradient)
+    val aaTitle = stringResource(
+        R.string.result_with_unit,
+        stringResource(R.string.aa_gradient),
+        mmhg,
+    )
     val riTitle = stringResource(R.string.respiratory_index)
 
     val results = buildList {
@@ -64,7 +68,7 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
             add(
                 ResultItem(
                     aaTitle,
-                    "${aaGradient(fio2Value, pao2Value, paco2Value).format(1)} $mmhg",
+                    aaGradient(fio2Value, pao2Value, paco2Value).format(1),
                 )
             )
             add(

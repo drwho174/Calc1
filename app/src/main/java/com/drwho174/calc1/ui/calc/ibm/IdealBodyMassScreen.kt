@@ -67,8 +67,12 @@ fun IdealBodyMassScreen(modifier: Modifier = Modifier) {
 
         if (heightCm != null) {
             ResultCard(
-                title = stringResource(R.string.name_ideal_body_mass),
-                value = "${idealBodyMassKg(heightCm, isFemale).format(1)} ${stringResource(R.string.unit_kg)}",
+                title = stringResource(
+                    R.string.result_with_unit,
+                    stringResource(R.string.name_ideal_body_mass),
+                    stringResource(R.string.unit_kg),
+                ),
+                value = idealBodyMassKg(heightCm, isFemale).format(1),
             )
         }
     }

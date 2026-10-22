@@ -1,8 +1,6 @@
 package com.drwho174.calc1.calcsfragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,105 +9,32 @@ import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
-import com.drwho174.calc1.databinding.FragmentGfrBinding
 import com.drwho174.calc1.ui.about.AboutFragment
-import kotlin.math.pow
+import com.drwho174.calc1.ui.calc.gfr.GfrScreen
+import com.drwho174.calc1.ui.host.composeScreen
 
 class GFR : Fragment(), HasCustomTitle, HasCustomAction {
 
-    private var _binding: FragmentGfrBinding? = null
-    private val binding
-    get() = _binding?: throw java.lang.IllegalStateException("_binding in GFRFragment must not be null")
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentGfrBinding.inflate(inflater,container,false)
-        return binding.root
-
-
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        fun sexCoefficient(): Double {
-            return when (binding.rgSex.checkedRadioButtonId) {
-                R.id.female -> 1.012
-                R.id.male -> 1.0
-                else -> 0.0
-            }
-        }
-
-        fun calcCKD(): Double {
-            val age = binding.etAgeField.text.toString()
-            val creatinine = binding.etCreatinineFieldGfrFragment.text.toString()
-
-            val creatinineDouble = creatinine.toDouble() / 88.4055
-            val isFemale = binding.rgSex.checkedRadioButtonId == R.id.female
-            val a: Double
-            val b: Double
-
-            if (isFemale) {
-                a = 0.7
-                b = if (creatinineDouble <= 0.7) {
-                    -0.241
-                } else {
-                    -1.2
-                }
-            } else {
-                a = 0.9
-                b = if (creatinineDouble <= 0.9) {
-                    -0.302
-                } else {
-                    -1.2
-                }
-            }
-            return 142 * ((creatinineDouble / a).pow(b)) * (0.9938.pow(age.toDouble())) * sexCoefficient()
-        }
-
-        val generalTextWatcher: TextWatcher = object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                    if (binding.etAgeField.text?.isNotEmpty() == true
-                        && binding.etCreatinineFieldGfrFragment.text?.isNotEmpty() == true){
-
-                        binding.twResultGfr.text = String.format("%.2f ml/min/1.73m2", calcCKD())
-                    }
-            }
-        }
-
-        binding.etAgeField.addTextChangedListener(generalTextWatcher)
-        binding.etCreatinineFieldGfrFragment.addTextChangedListener(generalTextWatcher)
-
-    }
+    ): View = composeScreen { GfrScreen() }
 
     override fun getTitleRes(): Int = R.string.name_glomerular_filtration_rate
-    override fun getCustomAction(): CustomAction {
-        return CustomAction(
-            iconRes = R.drawable.ic_info,
-            onCustomAction = {
-                launchFragment(AboutFragment.newInstance("GFR_about.md"))
-            }
-        )
-    }
-    //start yours fragment
-    private fun launchFragment(fragment: Fragment){
+
+    override fun getCustomAction(): CustomAction = CustomAction(
+        iconRes = R.drawable.ic_info,
+        onCustomAction = Runnable {
+            launchFragment(AboutFragment.newInstance("GFR_about.md"))
+        },
+    )
+
+    private fun launchFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }
-

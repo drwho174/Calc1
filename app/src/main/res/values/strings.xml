@@ -141,6 +141,11 @@
     <string name="unit_kg">кг</string>
     <string name="unit_m2">м²</string>
     <string name="unit_mmhg">мм рт.ст.</string>
+    <string name="unit_years">лет</string>
+    <string name="unit_umol_l">мкмоль/л</string>
+    <string name="gfr_unit">мл/мин/1,73 м²</string>
+    <!-- Подпись карточки с единицами измерения: "%1$s, %2$s" -->
+    <string name="result_with_unit">%1$s, %2$s</string>
     <!-- BSA -->
     <string name="bsa_mosteller">По Мостлеру</string>
     <string name="bsa_dubois">По Дюбуа</string>

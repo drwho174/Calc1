@@ -38,6 +38,21 @@ fun BsaScreen(modifier: Modifier = Modifier) {
     val heightCm = height.toDoubleOrNull()
     val weightKg = weight.toDoubleOrNull()
     val unitM2 = stringResource(R.string.unit_m2)
+    val mostellerTitle = stringResource(
+        R.string.result_with_unit,
+        stringResource(R.string.bsa_mosteller),
+        unitM2,
+    )
+    val duboisTitle = stringResource(
+        R.string.result_with_unit,
+        stringResource(R.string.bsa_dubois),
+        unitM2,
+    )
+    val haycockTitle = stringResource(
+        R.string.result_with_unit,
+        stringResource(R.string.bsa_haycock),
+        unitM2,
+    )
 
     Column(
         modifier = modifier
@@ -66,16 +81,16 @@ fun BsaScreen(modifier: Modifier = Modifier) {
 
         if (heightCm != null && weightKg != null) {
             ResultCard(
-                title = stringResource(R.string.bsa_mosteller),
-                value = "${Bsa.mosteller(heightCm, weightKg).format(1)} $unitM2",
+                title = mostellerTitle,
+                value = Bsa.mosteller(heightCm, weightKg).format(1),
             )
             ResultCard(
-                title = stringResource(R.string.bsa_dubois),
-                value = "${Bsa.dubois(heightCm, weightKg).format(1)} $unitM2",
+                title = duboisTitle,
+                value = Bsa.dubois(heightCm, weightKg).format(1),
             )
             ResultCard(
-                title = stringResource(R.string.bsa_haycock),
-                value = "${Bsa.haycock(heightCm, weightKg).format(1)} $unitM2",
+                title = haycockTitle,
+                value = Bsa.haycock(heightCm, weightKg).format(1),
             )
         }
     }
