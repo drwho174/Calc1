@@ -1,6 +1,7 @@
 package com.drwho174.calc1.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -19,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
 
 /**
- * Каркас экрана: топ-бар с заголовком, опциональной кнопкой «назад» и кнопкой
- * справки. Используется в фазе B, когда навигацию и заголовки заменит Compose.
+ * Каркас экрана: топ-бар с заголовком, опциональной кнопкой «назад»
+ * и произвольными действиями справа.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,7 +29,7 @@ fun CalcScaffold(
     title: String,
     modifier: Modifier = Modifier,
     onBack: (() -> Unit)? = null,
-    onInfo: (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -53,19 +54,21 @@ fun CalcScaffold(
                         }
                     }
                 },
-                actions = {
-                    if (onInfo != null) {
-                        IconButton(onClick = onInfo) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_info),
-                                contentDescription = stringResource(R.string.action_about_calculator),
-                                modifier = Modifier.size(24.dp),
-                            )
-                        }
-                    }
-                },
+                actions = actions,
             )
         },
         content = content,
     )
+}
+
+/** Кнопка «О калькуляторе» в топ-баре. */
+@Composable
+fun InfoAction(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        Icon(
+            painter = painterResource(R.drawable.ic_info),
+            contentDescription = stringResource(R.string.action_about_calculator),
+            modifier = Modifier.size(24.dp),
+        )
+    }
 }

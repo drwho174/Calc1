@@ -15,6 +15,7 @@ OUT = ROOT / "docs" / "ui-collage.png"
 
 ITEMS = [
     ("main_menu_light.png", "Главное меню — светлая"),
+    ("nav_menu.png", "Меню — каркас Navigation 3"),
     ("main_menu_dark.png", "Главное меню — тёмная"),
     ("calc_bsa.png", "Площадь поверхности тела"),
     ("calc_ibm.png", "Идеальная масса тела"),
