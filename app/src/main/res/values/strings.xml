@@ -130,7 +130,5 @@
     <string name="do2i">DO2i</string>
     <string name="vco2i">VCO2i</string>
     <string name="do2i_vco2i">DO2i/VCO2i</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
