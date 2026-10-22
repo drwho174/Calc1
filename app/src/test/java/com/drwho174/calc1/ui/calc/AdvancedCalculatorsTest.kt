@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import com.drwho174.calc1.ui.calc.euroscore.EuroScoreScreen
 import com.drwho174.calc1.ui.calc.hb.HbPerfusionScreen
@@ -100,7 +101,7 @@ class AdvancedCalculatorsTest {
     @Test
     fun euroScore_70YearsMaleDefaultRisk() {
         compose.setContent {
-            Calc1Theme { EuroScoreScreen() }
+            Calc1Theme(darkTheme = false) { EuroScoreScreen() }
         }
 
         compose.onAllNodes(hasSetTextAction())[0].performTextInput("70")
@@ -108,5 +109,35 @@ class AdvancedCalculatorsTest {
 
         compose.onNodeWithText("0.66").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_euroscore.png")
+    }
+
+    @Test
+    fun euroScore_darkTheme_pinnedResultBar() {
+        compose.setContent {
+            Calc1Theme(darkTheme = true) { EuroScoreScreen() }
+        }
+
+        compose.onAllNodes(hasSetTextAction())[0].performTextInput("70")
+        compose.waitForIdle()
+
+        compose.onNodeWithText("0.66").assertExists()
+        compose.onRoot().captureRoboImage("src/test/screenshots/calc_euroscore_dark.png")
+    }
+
+    @Test
+    fun euroScore_scrolled_panelStaysPinned() {
+        compose.setContent {
+            Calc1Theme(darkTheme = false) { EuroScoreScreen() }
+        }
+
+        compose.onAllNodes(hasSetTextAction())[0].performTextInput("70")
+        compose.waitForIdle()
+
+        // Прокручиваем к последнему фактору: панель результата должна остаться на месте.
+        compose.onNodeWithText("Вмешательство на грудной аорте").performScrollTo()
+        compose.waitForIdle()
+
+        compose.onNodeWithText("0.66").assertExists()
+        compose.onRoot().captureRoboImage("src/test/screenshots/calc_euroscore_scrolled.png")
     }
 }

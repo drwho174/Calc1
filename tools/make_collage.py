@@ -25,6 +25,8 @@ ITEMS = [
     ("calc_perfusiologist.png", "Калькулятор перфузиолога"),
     ("calc_mehran.png", "Mehran Score"),
     ("calc_euroscore.png", "EuroSCORE II"),
+    ("calc_euroscore_dark.png", "EuroSCORE II — тёмная"),
+    ("calc_euroscore_scrolled.png", "EuroSCORE II — прокрутка"),
     ("about_gfr_light.png", "Справка СКФ — markdown"),
     ("about_mehran_light.png", "Справка Mehran — таблицы"),
     ("about_app_light.png", "О программе"),

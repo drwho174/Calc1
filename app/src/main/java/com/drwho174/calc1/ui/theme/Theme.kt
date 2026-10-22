@@ -1,10 +1,13 @@
 package com.drwho174.calc1.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -78,6 +81,14 @@ fun Calc1Theme(
     MaterialTheme(
         colorScheme = if (darkTheme) DarkColors else LightColors,
         typography = Calc1Typography,
-        content = content,
-    )
+    ) {
+        // Surface задаёт и фон, и LocalContentColor: без него обычный Text
+        // в тёмной теме остаётся чёрным на тёмном фоне.
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background,
+        ) {
+            content()
+        }
+    }
 }
