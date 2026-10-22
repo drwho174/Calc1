@@ -16,6 +16,9 @@ OUT = ROOT / "docs" / "ui-collage.png"
 ITEMS = [
     ("main_menu_light.png", "Главное меню — светлая"),
     ("main_menu_dark.png", "Главное меню — тёмная"),
+    ("calc_bsa.png", "Площадь поверхности тела"),
+    ("calc_ibm.png", "Идеальная масса тела"),
+    ("calc_respiratory.png", "Показатели оксигенации"),
     ("about_gfr_light.png", "Справка СКФ — markdown"),
     ("about_mehran_light.png", "Справка Mehran — таблицы"),
     ("about_app_light.png", "О программе"),

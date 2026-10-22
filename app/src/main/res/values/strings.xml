@@ -136,5 +136,21 @@
     <string name="author_name">Гладких Филипп Андреевич</string>
     <string name="author_email_label">email:</string>
     <string name="author_telegram_label">Telegram</string>
+    <!-- Units -->
+    <string name="unit_cm">см</string>
+    <string name="unit_kg">кг</string>
+    <string name="unit_m2">м²</string>
+    <string name="unit_mmhg">мм рт.ст.</string>
+    <!-- BSA -->
+    <string name="bsa_mosteller">По Мостлеру</string>
+    <string name="bsa_dubois">По Дюбуа</string>
+    <string name="bsa_haycock">По Хайкоку</string>
+    <!-- Respiratory -->
+    <string name="fio2">FiO2</string>
+    <string name="paco2">PaCO2</string>
+    <string name="aa_gradient">A-a градиент</string>
+    <string name="respiratory_index">Респираторный индекс</string>
+    <string name="pf_ratio">P/F ratio</string>
+    <string name="sf_ratio">S/F ratio</string>
 
 </resources>
