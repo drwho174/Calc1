@@ -9,6 +9,13 @@ fragmentKtx = "1.8.8"
 recyclerview = "1.4.0"
 markwon = "4.6.2"
 composeBom = "2025.06.01"
+activityCompose = "1.10.1"
+navigationCompose = "2.9.0"
+lifecycle = "2.9.1"
+kotlinxSerialization = "1.8.1"
+datastore = "1.1.7"
+junit = "4.13.2"
+androidxJunit = "1.2.1"
 
 [libraries]
 # --- core / ui ---
@@ -31,13 +38,28 @@ compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeB
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+
+# --- data ---
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
+# --- test ---
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidxJunit" }
 
 [bundles]
 markdown = ["markwon-core", "markwon-ext-latex", "markwon-ext-tables", "markwon-html", "markwon-inline-parser"]
-compose = ["compose-material3", "compose-ui-tooling-preview", "compose-ui-tooling"]
+compose = ["compose-material3", "compose-ui-tooling-preview"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
