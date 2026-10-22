@@ -2,9 +2,11 @@ package com.drwho174.calc1.ui.components
 
 import android.widget.TextView
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.sp
@@ -44,6 +46,11 @@ fun MarkdownText(
             .build()
     }
 
+    // Цвета читаем в композиции: TextView не знает о Compose-теме и иначе
+    // в тёмной теме берёт тёмный цвет из XML-темы активити.
+    val contentColor = MaterialTheme.colorScheme.onBackground
+    val linkColor = MaterialTheme.colorScheme.primary
+
     AndroidView(
         modifier = modifier.fillMaxWidth(),
         factory = { ctx ->
@@ -53,6 +60,8 @@ fun MarkdownText(
             }
         },
         update = { textView ->
+            textView.setTextColor(contentColor.toArgb())
+            textView.setLinkTextColor(linkColor.toArgb())
             markwon.setMarkdown(textView, markdown)
         },
     )
