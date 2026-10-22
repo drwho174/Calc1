@@ -63,6 +63,8 @@ internal val md_theme_dark_inversePrimary = Color(0xFF006B5B)
 internal val md_theme_dark_scrim = Color(0xFF000000)
 
 // Сигнальные цвета для порогов (OxygenDelivery, Mehran и т.п.).
-internal val signalGreen = Color(0xFF43A047)
-internal val signalRed = Color(0xFFFF2717)
+// Тона затемнены относительно исходных #43A047/#FF2717: на белом тексте
+// контраст должен быть не ниже 4.5:1, исходные давали ~3.0 и ~3.5.
+internal val signalGreen = Color(0xFF2E7D32)
+internal val signalRed = Color(0xFFC62828)
 internal val signalYellow = Color(0xFFFDD835)
