@@ -7,7 +7,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.MenuProvider
@@ -18,21 +17,6 @@ import com.drwho174.calc1.ui.menu.MainMenuScreen
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 class MainMenu : Fragment(), HasCustomTitle {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Тема по-прежнему применяется через AppCompatDelegate: экраны на
-        // фрагментах читают ночные ресурсы, а Calc1Theme следует uiMode.
-        val prefRepository = PreferenceRepository(requireContext().applicationContext)
-        AppCompatDelegate.setDefaultNightMode(
-            if (prefRepository.getThemeSetting()) {
-                AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                AppCompatDelegate.MODE_NIGHT_NO
-            }
-        )
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

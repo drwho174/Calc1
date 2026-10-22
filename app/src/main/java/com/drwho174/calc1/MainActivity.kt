@@ -17,12 +17,21 @@ import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.ActivityMainBinding
 import com.drwho174.calc1.ui.about.AppAboutFragment
 import com.drwho174.calc1.textandsettings.SettingsOnMainMenu
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
+import com.drwho174.calc1.data.SettingsRepository
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity(), Navigator {
 
 
     private lateinit var binding: ActivityMainBinding
+
+    private val settingsRepository: SettingsRepository by lazy {
+        SettingsRepository(applicationContext)
+    }
 
     private val currentFragment: Fragment
         get() = supportFragmentManager.findFragmentById(R.id.fragmentContainer)!!
@@ -45,6 +54,20 @@ class MainActivity : AppCompatActivity(), Navigator {
 
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.mainToolbar)
+
+        // Тема хранится в DataStore; применяем сохранённое значение при старте,
+        // но только если оно отличается — иначе Activity пересоздастся зря.
+        lifecycleScope.launch {
+            val darkTheme = settingsRepository.darkTheme.first()
+            val targetMode = if (darkTheme) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+            if (AppCompatDelegate.getDefaultNightMode() != targetMode) {
+                AppCompatDelegate.setDefaultNightMode(targetMode)
+            }
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager
