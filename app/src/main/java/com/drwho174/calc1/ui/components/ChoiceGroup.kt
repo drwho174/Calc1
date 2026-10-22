@@ -24,20 +24,22 @@ import androidx.compose.ui.unit.dp
  */
 @Composable
 fun <T> ChoiceGroup(
-    title: String,
     options: List<T>,
     selected: T?,
     onSelect: (T) -> Unit,
     label: (T) -> String,
     modifier: Modifier = Modifier,
+    title: String? = null,
     horizontal: Boolean = false,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(bottom = 4.dp),
-        )
+        if (title != null) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(bottom = 4.dp),
+            )
+        }
 
         if (horizontal) {
             Row(

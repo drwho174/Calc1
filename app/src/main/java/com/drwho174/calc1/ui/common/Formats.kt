@@ -5,3 +5,6 @@ package com.drwho174.calc1.ui.common
  * поэтому на русской локали разделитель остаётся запятой.
  */
 fun Double.format(decimals: Int): String = String.format("%.${decimals}f", this)
+
+/** То же для значений слайдеров, которые приходят как Float. */
+fun Float.format(decimals: Int): String = toDouble().format(decimals)

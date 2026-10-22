@@ -143,9 +143,23 @@
     <string name="unit_mmhg">мм рт.ст.</string>
     <string name="unit_years">лет</string>
     <string name="unit_umol_l">мкмоль/л</string>
+    <string name="unit_l_min">л\u2060/\u2060мин</string>
+    <string name="unit_ml">мл</string>
+    <string name="unit_ml_dl">мл/дл</string>
+    <string name="unit_ml_min">мл/мин</string>
+    <string name="unit_ml_min_m2">мл/мин/м²</string>
     <string name="gfr_unit">мл/мин/1,73 м²</string>
     <!-- Подпись карточки с единицами измерения: "%1$s, %2$s" -->
     <string name="result_with_unit">%1$s, %2$s</string>
+    <!-- eGFR categories -->
+    <string name="egfr_above_60">более 60</string>
+    <string name="egfr_60_40">60–40</string>
+    <string name="egfr_40_20">40–20</string>
+    <string name="egfr_below_20">менее 20</string>
+    <string name="cin_risk">Риск нефропатии</string>
+    <string name="dialysis_risk">Риск диализа</string>
+    <string name="ckd_epi_title">СКФ по CKD-EPI 2021</string>
+    <string name="calculate_gfr">Рассчитать СКФ</string>
     <!-- BSA -->
     <string name="bsa_mosteller">По Мостлеру</string>
     <string name="bsa_dubois">По Дюбуа</string>
