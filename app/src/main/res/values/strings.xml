@@ -130,5 +130,8 @@
     <string name="do2i">DO2i</string>
     <string name="vco2i">VCO2i</string>
     <string name="do2i_vco2i">DO2i/VCO2i</string>
+    <!-- Compose UI -->
+    <string name="action_back">Назад</string>
+    <string name="action_about_calculator">О калькуляторе</string>
 
 </resources>
