@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import java.io.IOException
 import kotlinx.coroutines.flow.Flow
@@ -19,36 +20,55 @@ private val Context.settingsDataStore: DataStore<Preferences> by preferencesData
 /**
  * Настройки приложения на DataStore.
  *
- * При первом чтении, если в DataStore ещё нет значения, берётся старый ключ
- * `THEME_SET` из SharedPreferences — так настройки не теряются после перехода
- * с `PreferenceFragmentCompat`.
+ * Тема хранится как [ThemeMode]. Для обратной совместимости читаются оба
+ * прежних источника: булев ключ `THEME_SET` в DataStore (промежуточная версия)
+ * и тот же ключ в SharedPreferences (версия на PreferenceFragmentCompat).
+ * Если настроек нет вообще — используется [ThemeMode.SYSTEM].
  */
 class SettingsRepository(context: Context) {
 
     private val appContext = context.applicationContext
-    private val themeKey = booleanPreferencesKey(KEY_THEME)
+    private val modeKey = stringPreferencesKey(KEY_MODE)
+    private val legacyDataStoreKey = booleanPreferencesKey(LEGACY_KEY)
 
-    val darkTheme: Flow<Boolean> = appContext.settingsDataStore.data
+    val themeMode: Flow<ThemeMode> = appContext.settingsDataStore.data
         .catch { error ->
             if (error is IOException) emit(emptyPreferences()) else throw error
         }
-        .map { preferences -> preferences[themeKey] ?: legacyTheme() }
+        .map { preferences -> resolveMode(preferences) }
 
-    suspend fun setDarkTheme(enabled: Boolean) {
+    suspend fun setThemeMode(mode: ThemeMode) {
         appContext.settingsDataStore.edit { preferences ->
-            preferences[themeKey] = enabled
+            preferences[modeKey] = mode.name
+            preferences.remove(legacyDataStoreKey)
         }
-        // Старый ключ больше не нужен: единственный источник — DataStore.
-        legacyPreferences().edit().remove(KEY_THEME).apply()
+        legacyPreferences().edit().remove(LEGACY_KEY).apply()
+    }
+
+    private fun resolveMode(preferences: Preferences): ThemeMode {
+        preferences[modeKey]?.let { stored ->
+            runCatching { ThemeMode.valueOf(stored) }.getOrNull()?.let { return it }
+        }
+        preferences[legacyDataStoreKey]?.let { dark ->
+            return if (dark) ThemeMode.DARK else ThemeMode.LIGHT
+        }
+        val legacyPreferences = legacyPreferences()
+        if (legacyPreferences.contains(LEGACY_KEY)) {
+            return if (legacyPreferences.getBoolean(LEGACY_KEY, false)) {
+                ThemeMode.DARK
+            } else {
+                ThemeMode.LIGHT
+            }
+        }
+        return ThemeMode.SYSTEM
     }
 
     private fun legacyPreferences() =
         appContext.getSharedPreferences(LEGACY_STORE, Context.MODE_PRIVATE)
 
-    private fun legacyTheme(): Boolean = legacyPreferences().getBoolean(KEY_THEME, false)
-
     private companion object {
-        const val KEY_THEME = "THEME_SET"
+        const val KEY_MODE = "THEME_MODE"
+        const val LEGACY_KEY = "THEME_SET"
         const val LEGACY_STORE = "settings"
     }
 }

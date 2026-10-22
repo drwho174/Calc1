@@ -17,6 +17,7 @@ import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.ActivityMainBinding
 import com.drwho174.calc1.ui.about.AppAboutFragment
 import com.drwho174.calc1.textandsettings.SettingsOnMainMenu
+import com.drwho174.calc1.textandsettings.toNightMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.drwho174.calc1.data.SettingsRepository
@@ -58,12 +59,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         // Тема хранится в DataStore; применяем сохранённое значение при старте,
         // но только если оно отличается — иначе Activity пересоздастся зря.
         lifecycleScope.launch {
-            val darkTheme = settingsRepository.darkTheme.first()
-            val targetMode = if (darkTheme) {
-                AppCompatDelegate.MODE_NIGHT_YES
-            } else {
-                AppCompatDelegate.MODE_NIGHT_NO
-            }
+            val targetMode = settingsRepository.themeMode.first().toNightMode()
             if (AppCompatDelegate.getDefaultNightMode() != targetMode) {
                 AppCompatDelegate.setDefaultNightMode(targetMode)
             }

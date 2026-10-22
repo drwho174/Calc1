@@ -4,6 +4,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import com.drwho174.calc1.data.ThemeMode
 import com.drwho174.calc1.ui.theme.Calc1Theme
 import com.github.takahirom.roborazzi.captureRoboImage
 import org.junit.Assert.assertEquals
@@ -23,39 +24,72 @@ class SettingsScreenTest {
     val compose = createComposeRule()
 
     @Test
-    fun settings_lightTheme_switchOff() {
+    fun settings_systemMode_selectedByDefault() {
         compose.setContent {
             Calc1Theme(darkTheme = false) {
-                SettingsScreen(darkTheme = false, onDarkThemeChange = {})
+                SettingsScreen(themeMode = ThemeMode.SYSTEM, onThemeModeChange = {})
             }
         }
 
-        compose.onNodeWithText("Тёмная тема").assertExists()
+        compose.onNodeWithText("Как на устройстве").assertExists()
+        compose.onNodeWithText("Светлая").assertExists()
+        compose.onNodeWithText("Тёмная").assertExists()
+        compose.onRoot().captureRoboImage("src/test/screenshots/settings_system.png")
+    }
+
+    @Test
+    fun settings_lightMode() {
+        compose.setContent {
+            Calc1Theme(darkTheme = false) {
+                SettingsScreen(themeMode = ThemeMode.LIGHT, onThemeModeChange = {})
+            }
+        }
+
+        compose.onNodeWithText("Тема оформления").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/settings_light.png")
     }
 
     @Test
-    fun settings_darkTheme_switchOn() {
+    fun settings_darkMode() {
         compose.setContent {
             Calc1Theme(darkTheme = true) {
-                SettingsScreen(darkTheme = true, onDarkThemeChange = {})
+                SettingsScreen(themeMode = ThemeMode.DARK, onThemeModeChange = {})
             }
         }
 
-        compose.onNodeWithText("Тёмная тема").assertExists()
+        compose.onNodeWithText("Тема оформления").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/settings_dark.png")
     }
 
     @Test
-    fun tappingRowInvokesCallback() {
-        var value: Boolean? = null
+    fun tappingSystemOptionInvokesCallbackWithSystemMode() {
+        var selected: ThemeMode? = null
         compose.setContent {
             Calc1Theme {
-                SettingsScreen(darkTheme = false, onDarkThemeChange = { value = it })
+                SettingsScreen(
+                    themeMode = ThemeMode.LIGHT,
+                    onThemeModeChange = { selected = it },
+                )
             }
         }
 
-        compose.onNodeWithText("Тёмная тема").performClick()
-        assertEquals(true, value)
+        compose.onNodeWithText("Как на устройстве").performClick()
+        assertEquals(ThemeMode.SYSTEM, selected)
+    }
+
+    @Test
+    fun tappingDarkOptionInvokesCallbackWithDarkMode() {
+        var selected: ThemeMode? = null
+        compose.setContent {
+            Calc1Theme {
+                SettingsScreen(
+                    themeMode = ThemeMode.SYSTEM,
+                    onThemeModeChange = { selected = it },
+                )
+            }
+        }
+
+        compose.onNodeWithText("Тёмная").performClick()
+        assertEquals(ThemeMode.DARK, selected)
     }
 }

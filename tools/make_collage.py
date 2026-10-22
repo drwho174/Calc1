@@ -27,6 +27,7 @@ ITEMS = [
     ("calc_euroscore.png", "EuroSCORE II"),
     ("calc_euroscore_dark.png", "EuroSCORE II — тёмная"),
     ("calc_euroscore_scrolled.png", "EuroSCORE II — прокрутка"),
+    ("settings_system.png", "Настройки — как на устройстве"),
     ("settings_light.png", "Настройки — светлая"),
     ("settings_dark.png", "Настройки — тёмная"),
     ("about_gfr_light.png", "Справка СКФ — markdown"),

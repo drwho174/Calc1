@@ -12,6 +12,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.drwho174.calc1.R
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.data.SettingsRepository
+import com.drwho174.calc1.data.ThemeMode
 import com.drwho174.calc1.ui.host.composeScreen
 import com.drwho174.calc1.ui.settings.SettingsScreen
 import kotlinx.coroutines.launch
@@ -33,25 +34,25 @@ class SettingsOnMainMenu : Fragment(), HasCustomTitle {
         savedInstanceState: Bundle?
     ): View = composeScreen {
         val scope = rememberCoroutineScope()
-        val darkTheme by settingsRepository.darkTheme
-            .collectAsStateWithLifecycle(initialValue = false)
+        val themeMode by settingsRepository.themeMode
+            .collectAsStateWithLifecycle(initialValue = ThemeMode.SYSTEM)
 
         SettingsScreen(
-            darkTheme = darkTheme,
-            onDarkThemeChange = { enabled ->
+            themeMode = themeMode,
+            onThemeModeChange = { mode ->
                 scope.launch {
-                    settingsRepository.setDarkTheme(enabled)
-                    AppCompatDelegate.setDefaultNightMode(
-                        if (enabled) {
-                            AppCompatDelegate.MODE_NIGHT_YES
-                        } else {
-                            AppCompatDelegate.MODE_NIGHT_NO
-                        }
-                    )
+                    settingsRepository.setThemeMode(mode)
+                    AppCompatDelegate.setDefaultNightMode(mode.toNightMode())
                 }
             },
         )
     }
 
     override fun getTitleRes(): Int = R.string.name_settings
+}
+
+internal fun ThemeMode.toNightMode(): Int = when (this) {
+    ThemeMode.SYSTEM -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+    ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+    ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
 }

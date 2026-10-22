@@ -159,8 +159,11 @@
     <string name="cin_risk">Риск нефропатии</string>
     <string name="dialysis_risk">Риск диализа</string>
     <string name="predicted_mortality">Прогнозируемая летальность</string>
-    <string name="settings_theme">Тёмная тема</string>
+    <string name="settings_theme">Тема оформления</string>
     <string name="settings_theme_hint">Применяется сразу ко всем экранам</string>
+    <string name="settings_theme_system">Как на устройстве</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_theme_dark">Тёмная</string>
     <string name="ckd_epi_title">СКФ по CKD-EPI 2021</string>
     <string name="calculate_gfr">Рассчитать СКФ</string>
     <!-- BSA -->
