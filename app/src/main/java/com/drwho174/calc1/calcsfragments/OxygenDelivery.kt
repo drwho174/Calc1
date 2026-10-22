@@ -15,7 +15,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentOxyBinding
-import com.drwho174.calc1.textandsettings.AboutOxygenDelivery
+import com.drwho174.calc1.ui.about.AboutFragment
 
 class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
 
@@ -147,7 +147,7 @@ class OxygenDelivery : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutOxygenDelivery())
+                launchFragment(AboutFragment.newInstance("Oxygen_Delivery.md"))
             }
         )
     }

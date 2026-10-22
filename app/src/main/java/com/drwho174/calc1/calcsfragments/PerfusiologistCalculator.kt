@@ -13,7 +13,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentPerfusiologistCalcBinding
-import com.drwho174.calc1.textandsettings.AboutPerfusiologistCalc
+import com.drwho174.calc1.ui.about.AboutFragment
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -147,7 +147,7 @@ class PerfusiologistCalculator : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutPerfusiologistCalc())
+                launchFragment(AboutFragment.newInstance("PerfusiologistCalc.md"))
             }
         )
     }

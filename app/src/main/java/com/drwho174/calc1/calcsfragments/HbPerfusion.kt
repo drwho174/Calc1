@@ -13,7 +13,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentHbPerfBinding
-import com.drwho174.calc1.textandsettings.AboutHbPerfision
+import com.drwho174.calc1.ui.about.AboutFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 
@@ -181,7 +181,7 @@ class HbPerfusion : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutHbPerfision())
+                launchFragment(AboutFragment.newInstance("Hb_On_Perfusion.md"))
             }
         )
     }

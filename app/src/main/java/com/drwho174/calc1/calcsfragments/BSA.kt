@@ -13,7 +13,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentBsaBinding
-import com.drwho174.calc1.textandsettings.AboutBSA
+import com.drwho174.calc1.ui.about.AboutFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.pow
 import android.content.Context as Context
@@ -102,7 +102,7 @@ class BSA : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutBSA())
+                launchFragment(AboutFragment.newInstance("Body_Surface_Area.md"))
             }
         )
     }

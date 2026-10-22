@@ -133,5 +133,8 @@
     <!-- Compose UI -->
     <string name="action_back">Назад</string>
     <string name="action_about_calculator">О калькуляторе</string>
+    <string name="author_name">Гладких Филипп Андреевич</string>
+    <string name="author_email_label">email:</string>
+    <string name="author_telegram_label">Telegram</string>
 
 </resources>

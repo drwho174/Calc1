@@ -13,7 +13,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentMehranScoreBinding
-import com.drwho174.calc1.textandsettings.AboutMehraneScore
+import com.drwho174.calc1.ui.about.AboutFragment
 import kotlin.math.roundToInt
 
 
@@ -198,7 +198,7 @@ class MehranScore : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutMehraneScore())
+                launchFragment(AboutFragment.newInstance("MehraneScore.md"))
             }
         )
     }

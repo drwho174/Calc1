@@ -14,7 +14,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentEuroscoreBinding
-import com.drwho174.calc1.textandsettings.AboutEuroSCORE
+import com.drwho174.calc1.ui.about.AboutFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlin.math.E
 import kotlin.math.pow
@@ -281,7 +281,7 @@ val otherFactors = factorAge + factorSex + factorDiabetes + factorPulmonaryDisfu
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutEuroSCORE())
+                launchFragment(AboutFragment.newInstance("EUROSCORE_2.md"))
             }
         )
     }

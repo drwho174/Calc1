@@ -13,7 +13,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentIdealBodyMassBinding
-import com.drwho174.calc1.textandsettings.AboutIdealBodyMass
+import com.drwho174.calc1.ui.about.AboutFragment
 
 class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
 
@@ -86,7 +86,7 @@ class IdealBodyMass : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutIdealBodyMass())
+                launchFragment(AboutFragment.newInstance("Ideal_Body_Mass.md"))
             }
         )
     }

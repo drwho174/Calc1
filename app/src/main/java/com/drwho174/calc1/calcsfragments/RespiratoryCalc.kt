@@ -12,7 +12,7 @@ import com.drwho174.calc1.contract.CustomAction
 import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.databinding.FragmentRespiratoryCalcBinding
-import com.drwho174.calc1.textandsettings.AboutRespiratoryIndex
+import com.drwho174.calc1.ui.about.AboutFragment
 
 const val ATMOSPHERE_PRESSURE = 760.0
 const val WATER_STEAM_PRESSURE = 47.0
@@ -102,7 +102,7 @@ class RespiratoryCalc : Fragment(), HasCustomTitle, HasCustomAction {
         return CustomAction(
             iconRes = R.drawable.ic_info,
             onCustomAction = {
-                launchFragment(AboutRespiratoryIndex())
+                launchFragment(AboutFragment.newInstance("RespiratoryIndex.md"))
             }
         )
     }

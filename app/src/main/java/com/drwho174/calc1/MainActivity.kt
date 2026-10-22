@@ -15,7 +15,7 @@ import com.drwho174.calc1.contract.HasCustomAction
 import com.drwho174.calc1.contract.HasCustomTitle
 import com.drwho174.calc1.contract.Navigator
 import com.drwho174.calc1.databinding.ActivityMainBinding
-import com.drwho174.calc1.textandsettings.About
+import com.drwho174.calc1.ui.about.AppAboutFragment
 import com.drwho174.calc1.textandsettings.SettingsOnMainMenu
 
 
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showAbout() {
-        launchFragment(About())
+        launchFragment(AppAboutFragment())
     }
 
     private fun launchFragment(fragment: Fragment) {
