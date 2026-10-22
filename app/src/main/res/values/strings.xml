@@ -158,6 +158,7 @@
     <string name="egfr_below_20">менее 20</string>
     <string name="cin_risk">Риск нефропатии</string>
     <string name="dialysis_risk">Риск диализа</string>
+    <string name="predicted_mortality">Прогнозируемая летальность</string>
     <string name="ckd_epi_title">СКФ по CKD-EPI 2021</string>
     <string name="calculate_gfr">Рассчитать СКФ</string>
     <!-- BSA -->

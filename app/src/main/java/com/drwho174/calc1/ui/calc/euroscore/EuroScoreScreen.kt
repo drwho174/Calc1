@@ -2,9 +2,12 @@ package com.drwho174.calc1.ui.calc.euroscore
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -17,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,10 +36,10 @@ import com.drwho174.calc1.domain.Urgency
 import com.drwho174.calc1.domain.euroScore2PredictedMortality
 import com.drwho174.calc1.domain.renalDiseaseFor
 import com.drwho174.calc1.ui.common.format
+import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ChoiceGroup
 import com.drwho174.calc1.ui.components.CkdEpiSheet
 import com.drwho174.calc1.ui.components.NumberField
-import com.drwho174.calc1.ui.components.ResultCard
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 /** EuroSCORE II: 17 факторов риска и прогноз летальности. */
@@ -130,14 +134,18 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
         ProcedureWeight.THREE_PROCEDURES to stringResource(R.string.threeProcedures),
     )
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+            .background(MaterialTheme.colorScheme.background),
     ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
         NumberField(
             value = age,
             onValueChange = { age = it },
@@ -153,17 +161,6 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
             label = { female -> if (female) femaleLabel else maleLabel },
             horizontal = true,
         )
-
-        if (mortality != null) {
-            ResultCard(
-                title = stringResource(
-                    R.string.result_with_unit,
-                    stringResource(R.string.name_euroscore_2),
-                    "%",
-                ),
-                value = mortality.format(2),
-            )
-        }
 
         ChoiceGroup(
             title = stringResource(R.string.renalDisfunction),
@@ -272,6 +269,22 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
             title = stringResource(R.string.aortaSurgery),
             checked = aortaSurgery,
             onCheckedChange = { aortaSurgery = it },
+        )
+
+            // Место под закреплённую панель результата, чтобы последние поля
+            // не прятались за ней при прокрутке.
+            Spacer(Modifier.height(150.dp))
+        }
+
+        BottomResultBar(
+            title = stringResource(R.string.name_euroscore_2),
+            value = mortality?.format(2) ?: "—",
+            caption = stringResource(
+                R.string.result_with_unit,
+                stringResource(R.string.predicted_mortality),
+                "%",
+            ),
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
 
