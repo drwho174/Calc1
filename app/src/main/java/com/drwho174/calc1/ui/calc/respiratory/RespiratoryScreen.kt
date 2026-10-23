@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.aaGradient
 import com.drwho174.calc1.domain.pfRatio
 import com.drwho174.calc1.domain.respiratoryIndex
@@ -42,10 +43,10 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
     var fio2 by rememberSaveable { mutableStateOf("") }
     var spo2 by rememberSaveable { mutableStateOf("") }
 
-    val pao2Value = pao2.toDoubleOrNull()
-    val paco2Value = paco2.toDoubleOrNull()
-    val fio2Value = fio2.toDoubleOrNull()
-    val spo2Value = spo2.toDoubleOrNull()
+    val pao2Value = pao2.toNumberOrNull()
+    val paco2Value = paco2.toNumberOrNull()
+    val fio2Value = fio2.toNumberOrNull()
+    val spo2Value = spo2.toNumberOrNull()
 
     val mmhg = stringResource(R.string.unit_mmhg)
     val pfTitle = stringResource(R.string.pf_ratio)

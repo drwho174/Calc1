@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.EgfrCategory
 import com.drwho174.calc1.domain.MehranScoreInput
 import com.drwho174.calc1.domain.egfrCategoryFor
@@ -51,7 +52,7 @@ fun MehranScoreScreen(modifier: Modifier = Modifier) {
     var measuredGfr by remember { mutableStateOf<Double?>(null) }
     var showCkdSheet by rememberSaveable { mutableStateOf(false) }
 
-    val contrastValue = contrastVolume.toDoubleOrNull()
+    val contrastValue = contrastVolume.toNumberOrNull()
 
     val points = if (contrastValue != null) {
         mehranPoints(

@@ -33,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.EjectionFraction
 import com.drwho174.calc1.domain.EuroScore2Input
 import com.drwho174.calc1.domain.NyhaClass
@@ -81,7 +82,7 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
     var urgency by remember { mutableStateOf(Urgency.ELECTIVE) }
     var procedureWeight by remember { mutableStateOf(ProcedureWeight.CABG) }
 
-    val ageYears = age.toDoubleOrNull()
+    val ageYears = age.toNumberOrNull()
 
     val mortality = if (ageYears != null) {
         euroScore2PredictedMortality(

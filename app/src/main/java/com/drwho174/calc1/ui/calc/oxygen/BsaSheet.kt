@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.Bsa
 import com.drwho174.calc1.ui.common.format
 import com.drwho174.calc1.ui.components.NumberField
@@ -39,8 +40,8 @@ fun BsaSheet(
     var height by rememberSaveable { mutableStateOf("") }
     var weight by rememberSaveable { mutableStateOf("") }
 
-    val heightCm = height.toDoubleOrNull()
-    val weightKg = weight.toDoubleOrNull()
+    val heightCm = height.toNumberOrNull()
+    val weightKg = weight.toNumberOrNull()
     val bsa = if (heightCm != null && weightKg != null) {
         Bsa.dubois(heightCm, weightKg)
     } else {

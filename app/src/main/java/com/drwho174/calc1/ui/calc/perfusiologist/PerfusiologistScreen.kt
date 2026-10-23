@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.Perfusiologist
 import com.drwho174.calc1.ui.common.format
 import com.drwho174.calc1.ui.components.NumberField
@@ -42,8 +43,8 @@ fun PerfusiologistScreen(modifier: Modifier = Modifier) {
     var rate by rememberSaveable { mutableStateOf(2.4f) }
     var percent by rememberSaveable { mutableStateOf(100f) }
 
-    val heightCm = height.toDoubleOrNull()
-    val weightKg = weight.toDoubleOrNull()
+    val heightCm = height.toNumberOrNull()
+    val weightKg = weight.toNumberOrNull()
 
     val bsa = if (heightCm != null && weightKg != null) {
         Perfusiologist.bodySurfaceArea(heightCm, weightKg)

@@ -8,3 +8,9 @@ fun Double.format(decimals: Int): String = String.format("%.${decimals}f", this)
 
 /** То же для значений слайдеров, которые приходят как Float. */
 fun Float.format(decimals: Int): String = toDouble().format(decimals)
+
+/**
+ * Разбор введённого числа с учётом русской раскладки: клавиатура даёт запятую,
+ * а [String.toDoubleOrNull] понимает только точку.
+ */
+fun String.toNumberOrNull(): Double? = trim().replace(',', '.').toDoubleOrNull()

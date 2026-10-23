@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.HbPerfusionInput
 import com.drwho174.calc1.domain.calculateHbPerfusion
 import com.drwho174.calc1.ui.common.format
@@ -41,14 +42,14 @@ fun HbPerfusionScreen(modifier: Modifier = Modifier) {
     var cpbExfusion by rememberSaveable { mutableStateOf("") }
     var prime by rememberSaveable { mutableStateOf("") }
 
-    val heightValue = height.toDoubleOrNull()
-    val weightValue = weight.toDoubleOrNull()
-    val hbValue = initialHb.toDoubleOrNull()
-    val infusionValue = infusion.toDoubleOrNull()
-    val exfusionValue = exfusion.toDoubleOrNull()
-    val diuresisValue = diuresis.toDoubleOrNull()
-    val cpbExfusionValue = cpbExfusion.toDoubleOrNull()
-    val primeValue = prime.toDoubleOrNull()
+    val heightValue = height.toNumberOrNull()
+    val weightValue = weight.toNumberOrNull()
+    val hbValue = initialHb.toNumberOrNull()
+    val infusionValue = infusion.toNumberOrNull()
+    val exfusionValue = exfusion.toNumberOrNull()
+    val diuresisValue = diuresis.toNumberOrNull()
+    val cpbExfusionValue = cpbExfusion.toNumberOrNull()
+    val primeValue = prime.toNumberOrNull()
 
     val result = if (
         heightValue != null && weightValue != null && hbValue != null &&

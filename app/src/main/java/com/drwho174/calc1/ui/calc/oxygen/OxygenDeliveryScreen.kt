@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.OxygenDeliveryInput
 import com.drwho174.calc1.domain.calculateOxygenDelivery
 import com.drwho174.calc1.ui.common.format
@@ -49,13 +50,13 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
     var freshGasFlow by rememberSaveable { mutableStateOf("") }
     var showBsaSheet by rememberSaveable { mutableStateOf(false) }
 
-    val bsaValue = bsa.toDoubleOrNull()
-    val cardiacOutputValue = cardiacOutput.toDoubleOrNull()
-    val hemoglobinValue = hemoglobin.toDoubleOrNull()
-    val spo2Value = spo2.toDoubleOrNull()
-    val pao2Value = pao2.toDoubleOrNull()
-    val etco2Value = etco2.toDoubleOrNull()
-    val freshGasFlowValue = freshGasFlow.toDoubleOrNull()
+    val bsaValue = bsa.toNumberOrNull()
+    val cardiacOutputValue = cardiacOutput.toNumberOrNull()
+    val hemoglobinValue = hemoglobin.toNumberOrNull()
+    val spo2Value = spo2.toNumberOrNull()
+    val pao2Value = pao2.toNumberOrNull()
+    val etco2Value = etco2.toNumberOrNull()
+    val freshGasFlowValue = freshGasFlow.toNumberOrNull()
 
     val result = if (
         bsaValue != null && cardiacOutputValue != null && hemoglobinValue != null &&
@@ -141,7 +142,7 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
                 value = etco2,
                 onValueChange = { etco2 = it },
                 label = stringResource(R.string.etco2),
-                suffix = "%",
+                suffix = stringResource(R.string.unit_mmhg),
                 modifier = Modifier.weight(1f),
             )
         }

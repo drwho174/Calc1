@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.Bsa
 import com.drwho174.calc1.ui.common.format
 import com.drwho174.calc1.ui.components.NumberField
@@ -35,8 +36,8 @@ fun BsaScreen(modifier: Modifier = Modifier) {
     var height by rememberSaveable { mutableStateOf("") }
     var weight by rememberSaveable { mutableStateOf("") }
 
-    val heightCm = height.toDoubleOrNull()
-    val weightKg = weight.toDoubleOrNull()
+    val heightCm = height.toNumberOrNull()
+    val weightKg = weight.toNumberOrNull()
     val unitM2 = stringResource(R.string.unit_m2)
     val mostellerTitle = stringResource(
         R.string.result_with_unit,

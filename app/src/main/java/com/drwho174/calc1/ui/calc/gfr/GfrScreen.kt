@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.toNumberOrNull
 import com.drwho174.calc1.domain.estimateCkdEpi2021
 import com.drwho174.calc1.ui.common.format
 import com.drwho174.calc1.ui.components.ChoiceGroup
@@ -38,8 +39,8 @@ fun GfrScreen(modifier: Modifier = Modifier) {
     var creatinine by rememberSaveable { mutableStateOf("") }
     var isFemale by rememberSaveable { mutableStateOf(false) }
 
-    val ageYears = age.toDoubleOrNull()
-    val creatinineUmol = creatinine.toDoubleOrNull()
+    val ageYears = age.toNumberOrNull()
+    val creatinineUmol = creatinine.toNumberOrNull()
 
     val maleLabel = stringResource(R.string.Male)
     val femaleLabel = stringResource(R.string.Female)

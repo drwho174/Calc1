@@ -33,19 +33,20 @@ class AdvancedCalculatorsTest {
     val compose = createComposeRule()
 
     @Test
-    fun oxygenDelivery_referenceScenario() {
+    fun oxygenDelivery_commaDecimals_produceResults() {
         compose.setContent {
             Calc1Theme { OxygenDeliveryScreen() }
         }
 
-        // BSA, сердечный выброс, Hb, SpO2, PaO2, EtCO2, поток свежего газа.
-        listOf("1.8", "5", "120", "98", "100", "35", "2").forEachIndexed { index, value ->
+        // Значения из реального сценария: ППТ введена с запятой.
+        listOf("1,97", "5", "100", "100", "200", "50", "5").forEachIndexed { index, value ->
             compose.onAllNodes(hasSetTextAction())[index].performTextInput(value)
         }
         compose.waitForIdle()
 
-        compose.onNodeWithText("446.1").assertExists()
-        compose.onNodeWithText("8.7").assertExists()
+        compose.onNodeWithText("14.0").assertExists()
+        compose.onNodeWithText("355.3").assertExists()
+        compose.onNodeWithText("2.1").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_oxygen.png")
     }
 
