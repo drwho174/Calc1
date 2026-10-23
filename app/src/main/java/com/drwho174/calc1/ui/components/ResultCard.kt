@@ -28,8 +28,9 @@ fun ResultCard(
     val content: Color
     when (tone) {
         ResultTone.Neutral -> {
-            container = MaterialTheme.colorScheme.surfaceVariant
-            content = MaterialTheme.colorScheme.onSurfaceVariant
+            // Как в прежней версии: карточки результата на secondaryContainer.
+            container = MaterialTheme.colorScheme.secondaryContainer
+            content = MaterialTheme.colorScheme.onSecondaryContainer
         }
         ResultTone.Positive -> {
             container = signalGreen

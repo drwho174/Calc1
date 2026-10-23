@@ -4,6 +4,7 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
@@ -96,6 +97,32 @@ class AdvancedCalculatorsTest {
         compose.onNodeWithText("26.1").assertExists()
         compose.onNodeWithText("1.1").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_mehran.png")
+    }
+
+    @Test
+    fun oxygenBsaDialogFillsBsaField() {
+        compose.setContent {
+            Calc1Theme { OxygenDeliveryScreen() }
+        }
+
+        compose.onNodeWithContentDescription("Площадь поверхности тела").performClick()
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+
+        // Два поля диалога идут после семи полей экрана.
+        compose.onAllNodes(hasSetTextAction())[7].performTextInput("170")
+        compose.onAllNodes(hasSetTextAction())[8].performTextInput("70")
+        compose.waitForIdle()
+
+        compose.onNodeWithText("1.81").assertExists()
+        compose.onNodeWithText("Применить").performClick()
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+
+        // Значение подставлено в поле «ППТ».
+        compose.onNodeWithText("1.81").assertExists()
     }
 
     @Test

@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,6 +46,7 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
     var pao2 by rememberSaveable { mutableStateOf("") }
     var etco2 by rememberSaveable { mutableStateOf("") }
     var freshGasFlow by rememberSaveable { mutableStateOf("") }
+    var showBsaSheet by rememberSaveable { mutableStateOf(false) }
 
     val bsaValue = bsa.toDoubleOrNull()
     val cardiacOutputValue = cardiacOutput.toDoubleOrNull()
@@ -89,6 +93,14 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
                 label = stringResource(R.string.bsa),
                 suffix = stringResource(R.string.unit_m2),
                 modifier = Modifier.weight(1f),
+                trailingIcon = {
+                    IconButton(onClick = { showBsaSheet = true }) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_calculate),
+                            contentDescription = stringResource(R.string.name_body_surface_area),
+                        )
+                    }
+                },
             )
             NumberField(
                 value = cardiacOutput,
@@ -96,6 +108,7 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
                 label = stringResource(R.string.cardiac_output),
                 suffix = stringResource(R.string.unit_l_min),
                 modifier = Modifier.weight(1f),
+                labelAbove = true,
             )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -188,6 +201,13 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
             )
             ResultGrid(results = results)
         }
+    }
+
+    if (showBsaSheet) {
+        BsaSheet(
+            onDismiss = { showBsaSheet = false },
+            onResult = { value -> bsa = value.format(2) },
+        )
     }
 }
 

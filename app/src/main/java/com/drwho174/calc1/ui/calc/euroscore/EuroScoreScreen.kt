@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,9 +12,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,9 +41,18 @@ import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ChoiceGroup
 import com.drwho174.calc1.ui.components.CkdEpiSheet
 import com.drwho174.calc1.ui.components.NumberField
+import com.drwho174.calc1.ui.components.SectionCard
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
-/** EuroSCORE II: 17 факторов риска и прогноз летальности. */
+/**
+ * EuroSCORE II.
+ *
+ * Порядок и цветовые блоки повторяют прежнюю версию: возраст, пол, диабет,
+ * лёгкие, мобильность, почечная дисфункция (с кнопкой СКФ внутри блока),
+ * критическое состояние, NYHA, стенокардия, поражение артерий, повторность,
+ * эндокардит, фракция выброса, ИМ, давление в лёгочной артерии, срочность,
+ * сложность вмешательства, аорта.
+ */
 @Composable
 fun EuroScoreScreen(modifier: Modifier = Modifier) {
     var age by rememberSaveable { mutableStateOf("") }
@@ -146,130 +156,148 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-        NumberField(
-            value = age,
-            onValueChange = { age = it },
-            label = stringResource(R.string.age),
-            suffix = stringResource(R.string.unit_years),
-        )
+            NumberField(
+                value = age,
+                onValueChange = { age = it },
+                label = stringResource(R.string.age),
+                suffix = stringResource(R.string.unit_years),
+            )
 
-        ChoiceGroup(
-            title = stringResource(R.string.Sex),
-            options = listOf(false, true),
-            selected = isFemale,
-            onSelect = { isFemale = it },
-            label = { female -> if (female) femaleLabel else maleLabel },
-            horizontal = true,
-        )
+            ChoiceGroup(
+                title = stringResource(R.string.Sex),
+                options = listOf(false, true),
+                selected = isFemale,
+                onSelect = { isFemale = it },
+                label = { female -> if (female) femaleLabel else maleLabel },
+                horizontal = true,
+            )
 
-        ChoiceGroup(
-            title = stringResource(R.string.renalDisfunction),
-            options = RenalDisease.entries,
-            selected = renalDisease,
-            onSelect = { renalDisease = it },
-            label = { disease -> renalLabels.getValue(disease) },
-        )
+            YesNoGroup(
+                title = stringResource(R.string.insulin_dependent_diabetis_melitus),
+                checked = diabetes,
+                onCheckedChange = { diabetes = it },
+            )
+            YesNoGroup(
+                title = stringResource(R.string.pulmonaryDisfunction),
+                checked = pulmonaryDysfunction,
+                onCheckedChange = { pulmonaryDysfunction = it },
+            )
+            YesNoGroup(
+                title = stringResource(R.string.poorMobility),
+                checked = poorMobility,
+                onCheckedChange = { poorMobility = it },
+            )
 
-        Button(
-            onClick = { showCkdSheet = true },
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(stringResource(R.string.calculate_gfr))
-        }
+            SectionCard {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = stringResource(R.string.renalDisfunction),
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    TextButton(onClick = { showCkdSheet = true }) {
+                        Text(stringResource(R.string.creatinineClearance))
+                    }
+                }
+                ChoiceGroup(
+                    options = RenalDisease.entries,
+                    selected = renalDisease,
+                    onSelect = { renalDisease = it },
+                    label = { disease -> renalLabels.getValue(disease) },
+                )
+            }
 
-        YesNoGroup(
-            title = stringResource(R.string.insulin_dependent_diabetis_melitus),
-            checked = diabetes,
-            onCheckedChange = { diabetes = it },
-        )
-        YesNoGroup(
-            title = stringResource(R.string.pulmonaryDisfunction),
-            checked = pulmonaryDysfunction,
-            onCheckedChange = { pulmonaryDysfunction = it },
-        )
-        YesNoGroup(
-            title = stringResource(R.string.poorMobility),
-            checked = poorMobility,
-            onCheckedChange = { poorMobility = it },
-        )
-        YesNoGroup(
-            title = stringResource(R.string.criticalPreopState),
-            checked = criticalState,
-            onCheckedChange = { criticalState = it },
-        )
+            YesNoGroup(
+                title = stringResource(R.string.criticalPreopState),
+                checked = criticalState,
+                onCheckedChange = { criticalState = it },
+            )
 
-        ChoiceGroup(
-            title = stringResource(R.string.NYHAclass),
-            options = NyhaClass.entries,
-            selected = nyha,
-            onSelect = { nyha = it },
-            label = { value -> nyhaLabels.getValue(value) },
-        )
+            SectionCard {
+                ChoiceGroup(
+                    title = stringResource(R.string.NYHAclass),
+                    options = NyhaClass.entries,
+                    selected = nyha,
+                    onSelect = { nyha = it },
+                    label = { value -> nyhaLabels.getValue(value) },
+                )
+            }
 
-        YesNoGroup(
-            title = stringResource(R.string.anginaClass4),
-            checked = anginaClass4,
-            onCheckedChange = { anginaClass4 = it },
-        )
-        YesNoGroup(
-            title = stringResource(R.string.extracardiacArtheriopatia),
-            checked = extracardiacArteriopathy,
-            onCheckedChange = { extracardiacArteriopathy = it },
-        )
-        YesNoGroup(
-            title = stringResource(R.string.previousCardiacSurgery),
-            checked = previousCardiacSurgery,
-            onCheckedChange = { previousCardiacSurgery = it },
-        )
-        YesNoGroup(
-            title = stringResource(R.string.activeEndocarditis),
-            checked = activeEndocarditis,
-            onCheckedChange = { activeEndocarditis = it },
-        )
+            YesNoGroup(
+                title = stringResource(R.string.anginaClass4),
+                checked = anginaClass4,
+                onCheckedChange = { anginaClass4 = it },
+            )
+            YesNoGroup(
+                title = stringResource(R.string.extracardiacArtheriopatia),
+                checked = extracardiacArteriopathy,
+                onCheckedChange = { extracardiacArteriopathy = it },
+            )
+            YesNoGroup(
+                title = stringResource(R.string.previousCardiacSurgery),
+                checked = previousCardiacSurgery,
+                onCheckedChange = { previousCardiacSurgery = it },
+            )
+            YesNoGroup(
+                title = stringResource(R.string.activeEndocarditis),
+                checked = activeEndocarditis,
+                onCheckedChange = { activeEndocarditis = it },
+            )
 
-        ChoiceGroup(
-            title = stringResource(R.string.ejectionFraction),
-            options = EjectionFraction.entries,
-            selected = ejectionFraction,
-            onSelect = { ejectionFraction = it },
-            label = { value -> ejectionLabels.getValue(value) },
-        )
+            SectionCard {
+                ChoiceGroup(
+                    title = stringResource(R.string.ejectionFraction),
+                    options = EjectionFraction.entries,
+                    selected = ejectionFraction,
+                    onSelect = { ejectionFraction = it },
+                    label = { value -> ejectionLabels.getValue(value) },
+                )
+            }
 
-        YesNoGroup(
-            title = stringResource(R.string.recentMI),
-            checked = recentMyocardialInfarction,
-            onCheckedChange = { recentMyocardialInfarction = it },
-        )
+            YesNoGroup(
+                title = stringResource(R.string.recentMI),
+                checked = recentMyocardialInfarction,
+                onCheckedChange = { recentMyocardialInfarction = it },
+            )
 
-        ChoiceGroup(
-            title = stringResource(R.string.pulmonaryArteryPressure),
-            options = PulmonaryArteryPressure.entries,
-            selected = pulmonaryPressure,
-            onSelect = { pulmonaryPressure = it },
-            label = { value -> pressureLabels.getValue(value) },
-        )
+            SectionCard {
+                ChoiceGroup(
+                    title = stringResource(R.string.pulmonaryArteryPressure),
+                    options = PulmonaryArteryPressure.entries,
+                    selected = pulmonaryPressure,
+                    onSelect = { pulmonaryPressure = it },
+                    label = { value -> pressureLabels.getValue(value) },
+                )
+            }
 
-        ChoiceGroup(
-            title = stringResource(R.string.urgency),
-            options = Urgency.entries,
-            selected = urgency,
-            onSelect = { urgency = it },
-            label = { value -> urgencyLabels.getValue(value) },
-        )
+            SectionCard {
+                ChoiceGroup(
+                    title = stringResource(R.string.urgency),
+                    options = Urgency.entries,
+                    selected = urgency,
+                    onSelect = { urgency = it },
+                    label = { value -> urgencyLabels.getValue(value) },
+                )
+            }
 
-        ChoiceGroup(
-            title = stringResource(R.string.procedureWeight),
-            options = ProcedureWeight.entries,
-            selected = procedureWeight,
-            onSelect = { procedureWeight = it },
-            label = { value -> procedureLabels.getValue(value) },
-        )
+            SectionCard {
+                ChoiceGroup(
+                    title = stringResource(R.string.procedureWeight),
+                    options = ProcedureWeight.entries,
+                    selected = procedureWeight,
+                    onSelect = { procedureWeight = it },
+                    label = { value -> procedureLabels.getValue(value) },
+                )
+            }
 
-        YesNoGroup(
-            title = stringResource(R.string.aortaSurgery),
-            checked = aortaSurgery,
-            onCheckedChange = { aortaSurgery = it },
-        )
+            YesNoGroup(
+                title = stringResource(R.string.aortaSurgery),
+                checked = aortaSurgery,
+                onCheckedChange = { aortaSurgery = it },
+            )
 
             // Место под закреплённую панель результата, чтобы последние поля
             // не прятались за ней при прокрутке.

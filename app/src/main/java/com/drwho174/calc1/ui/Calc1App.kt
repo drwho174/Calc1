@@ -1,5 +1,6 @@
 package com.drwho174.calc1.ui
 
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -101,7 +102,7 @@ fun Calc1App(
                         onMehranScore = {
                             backStack.add(CalculatorRoute(CalculatorId.MEHRAN))
                         },
-                        modifier = Modifier.padding(padding),
+                        modifier = Modifier.padding(padding).imePadding(),
                     )
                 }
             }
@@ -115,7 +116,7 @@ fun Calc1App(
                         InfoAction { backStack.add(AboutRoute(destination.aboutAsset)) }
                     },
                 ) { padding ->
-                    val screenModifier = Modifier.padding(padding)
+                    val screenModifier = Modifier.padding(padding).imePadding()
                     when (route.id) {
                         CalculatorId.EUROSCORE -> EuroScoreScreen(screenModifier)
                         CalculatorId.HB_PERFUSION -> HbPerfusionScreen(screenModifier)
@@ -137,7 +138,7 @@ fun Calc1App(
                 ) { padding ->
                     AboutScreen(
                         assetPath = route.assetName,
-                        modifier = Modifier.padding(padding),
+                        modifier = Modifier.padding(padding).imePadding(),
                     )
                 }
             }
@@ -153,7 +154,7 @@ fun Calc1App(
                         telegram = telegram,
                         onEmailClick = { context.openAuthorEmail(email) },
                         onTelegramClick = { context.openAuthorTelegram(telegram) },
-                        modifier = Modifier.padding(padding),
+                        modifier = Modifier.padding(padding).imePadding(),
                     )
                 }
             }
@@ -166,7 +167,7 @@ fun Calc1App(
                     SettingsScreen(
                         themeMode = themeMode,
                         onThemeModeChange = onThemeModeChange,
-                        modifier = Modifier.padding(padding),
+                        modifier = Modifier.padding(padding).imePadding(),
                     )
                 }
             }
