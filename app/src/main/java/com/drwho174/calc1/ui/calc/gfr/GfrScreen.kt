@@ -84,16 +84,19 @@ fun GfrScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        if (ageYears != null && creatinineUmol != null) {
-            ResultCard(
-                title = gfrTitle,
-                value = estimateCkdEpi2021(
+        // Карточка видна всегда: до ввода в ней стоит прочерк.
+        ResultCard(
+            title = gfrTitle,
+            value = if (ageYears != null && creatinineUmol != null) {
+                estimateCkdEpi2021(
                     creatinineUmolPerL = creatinineUmol,
                     ageYears = ageYears,
                     isFemale = isFemale,
-                ).format(2),
-            )
-        }
+                ).format(2)
+            } else {
+                "—"
+            },
+        )
     }
 }
 

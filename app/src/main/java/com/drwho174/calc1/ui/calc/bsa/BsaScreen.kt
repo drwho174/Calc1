@@ -54,6 +54,7 @@ fun BsaScreen(modifier: Modifier = Modifier) {
         stringResource(R.string.bsa_haycock),
         unitM2,
     )
+    val dash = "—"
 
     Column(
         modifier = modifier
@@ -80,20 +81,31 @@ fun BsaScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        if (heightCm != null && weightKg != null) {
-            ResultCard(
-                title = mostellerTitle,
-                value = Bsa.mosteller(heightCm, weightKg).format(1),
-            )
-            ResultCard(
-                title = duboisTitle,
-                value = Bsa.dubois(heightCm, weightKg).format(1),
-            )
-            ResultCard(
-                title = haycockTitle,
-                value = Bsa.haycock(heightCm, weightKg).format(1),
-            )
-        }
+        // Карточки видны всегда: до ввода в них стоит прочерк.
+        ResultCard(
+            title = mostellerTitle,
+            value = if (heightCm != null && weightKg != null) {
+                Bsa.mosteller(heightCm, weightKg).format(1)
+            } else {
+                dash
+            },
+        )
+        ResultCard(
+            title = duboisTitle,
+            value = if (heightCm != null && weightKg != null) {
+                Bsa.dubois(heightCm, weightKg).format(1)
+            } else {
+                dash
+            },
+        )
+        ResultCard(
+            title = haycockTitle,
+            value = if (heightCm != null && weightKg != null) {
+                Bsa.haycock(heightCm, weightKg).format(1)
+            } else {
+                dash
+            },
+        )
     }
 }
 

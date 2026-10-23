@@ -76,4 +76,18 @@ class SimpleCalculatorsTest {
         compose.onNodeWithText("2.8").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_respiratory.png")
     }
+
+    @Test
+    fun respiratory_cardsVisibleBeforeInputWithUnits() {
+        compose.setContent {
+            Calc1Theme { RespiratoryScreen() }
+        }
+
+        // Карточки результатов видны сразу, единицы — в подписях.
+        compose.onNodeWithText("P/F ratio").assertExists()
+        compose.onNodeWithText("S/F ratio").assertExists()
+        compose.onNodeWithText("A-a градиент, мм рт.ст.").assertExists()
+        compose.onNodeWithText("Респираторный индекс").assertExists()
+        compose.onAllNodesWithText("—").assertCountEquals(4)
+    }
 }

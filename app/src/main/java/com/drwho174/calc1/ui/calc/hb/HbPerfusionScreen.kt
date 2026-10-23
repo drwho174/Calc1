@@ -159,46 +159,47 @@ fun HbPerfusionScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        if (result != null) {
-            val gpl = stringResource(R.string.gpl)
+        // Карточки видны всегда: до ввода в них стоит прочерк.
+        val gpl = stringResource(R.string.gpl)
+        val dash = "—"
 
-            ResultGrid(
-                results = listOf(                    ResultItem(
-                        stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.hbbp1),
-                            gpl,
-                        ),
-                        result.beforeCpbAllen.format(2),
+        ResultGrid(
+            results = listOf(
+                ResultItem(
+                    stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.hbbp1),
+                        gpl,
                     ),
-                    ResultItem(
-                        stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.hbap1),
-                            gpl,
-                        ),
-                        result.afterCpbAllen.format(2),
-                    ),
-                    ResultItem(
-                        stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.hbbp2),
-                            gpl,
-                        ),
-                        result.beforeCpbNadler.format(2),
-                    ),
-                    ResultItem(
-                        stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.hbap2),
-                            gpl,
-                        ),
-                        result.afterCpbNadler.format(2),
-                    ),
+                    result?.beforeCpbAllen?.format(2) ?: dash,
                 ),
-                columns = 1,
-            )
-        }
+                ResultItem(
+                    stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.hbap1),
+                        gpl,
+                    ),
+                    result?.afterCpbAllen?.format(2) ?: dash,
+                ),
+                ResultItem(
+                    stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.hbbp2),
+                        gpl,
+                    ),
+                    result?.beforeCpbNadler?.format(2) ?: dash,
+                ),
+                ResultItem(
+                    stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.hbap2),
+                        gpl,
+                    ),
+                    result?.afterCpbNadler?.format(2) ?: dash,
+                ),
+            ),
+            columns = 1,
+        )
     }
 }
 

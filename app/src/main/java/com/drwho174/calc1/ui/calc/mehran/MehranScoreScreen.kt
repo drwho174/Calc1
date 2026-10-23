@@ -142,45 +142,43 @@ fun MehranScoreScreen(modifier: Modifier = Modifier) {
             Text(stringResource(R.string.calculate_gfr))
         }
 
-        if (measuredGfr != null) {
-            ResultGrid(
-                results = listOf(
-                    ResultItem(
-                        title = stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.creatinineClearance),
-                            stringResource(R.string.gfr_unit),
-                        ),
-                        value = measuredGfr!!.format(2),
-                    )
-                ),
-                columns = 1,
-            )
-        }
+        // Карточки видны всегда: до расчёта в них стоит прочерк.
+        val dash = "—"
+        ResultGrid(
+            results = listOf(
+                ResultItem(
+                    title = stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.creatinineClearance),
+                        stringResource(R.string.gfr_unit),
+                    ),
+                    value = measuredGfr?.format(2) ?: dash,
+                )
+            ),
+            columns = 1,
+        )
 
-        if (points != null) {
-            ResultGrid(
-                results = listOf(
-                    ResultItem(
-                        title = stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.cin_risk),
-                            "%",
-                        ),
-                        value = mehranCinRiskPercent(points).format(1),
+        ResultGrid(
+            results = listOf(
+                ResultItem(
+                    title = stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.cin_risk),
+                        "%",
                     ),
-                    ResultItem(
-                        title = stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.dialysis_risk),
-                            "%",
-                        ),
-                        value = mehranDialysisRiskPercent(points).format(1),
-                    ),
+                    value = points?.let { mehranCinRiskPercent(it).format(1) } ?: dash,
                 ),
-                columns = 1,
-            )
-        }
+                ResultItem(
+                    title = stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.dialysis_risk),
+                        "%",
+                    ),
+                    value = points?.let { mehranDialysisRiskPercent(it).format(1) } ?: dash,
+                ),
+            ),
+            columns = 1,
+        )
     }
 
     if (showCkdSheet) {

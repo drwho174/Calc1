@@ -153,60 +153,60 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
             suffix = stringResource(R.string.unit_l_min),
         )
 
-        if (result != null) {
-            // Как в прежней версии: содержание O2 — во всю ширину,
-            // ниже четыре компактных результата в две колонки.
-            ResultCard(
-                title = stringResource(
-                    R.string.result_with_unit,
-                    stringResource(R.string.arterial_oxygen_content),
-                    unitMlDl,
+        // Карточки видны всегда: до ввода в них стоит прочерк.
+        val dash = "—"
+        // Как в прежней версии: содержание O2 — во всю ширину,
+        // ниже четыре компактных результата в две колонки.
+        ResultCard(
+            title = stringResource(
+                R.string.result_with_unit,
+                stringResource(R.string.arterial_oxygen_content),
+                unitMlDl,
+            ),
+            value = result?.arterialOxygenContent?.format(1) ?: dash,
+        )
+        ResultGrid(
+            results = listOf(
+                ResultItem(
+                    title = stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.do2),
+                        unitMlMin,
+                    ),
+                    value = result?.oxygenDelivery?.format(1) ?: dash,
                 ),
-                value = result.arterialOxygenContent.format(1),
-            )
-            ResultGrid(
-                results = listOf(
-                    ResultItem(
-                        title = stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.do2),
-                            unitMlMin,
-                        ),
-                        value = result.oxygenDelivery.format(1),
+                ResultItem(
+                    title = stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.vco2i),
+                        unitMlMin,
                     ),
-                    ResultItem(
-                        title = stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.vco2i),
-                            unitMlMin,
-                        ),
-                        value = result.co2ProductionIndex.format(1),
-                    ),
-                    ResultItem(
-                        title = stringResource(
-                            R.string.result_with_unit,
-                            stringResource(R.string.do2i),
-                            stringResource(R.string.unit_ml_min_m2),
-                        ),
-                        value = result.oxygenDeliveryIndex.format(1),
-                        tone = if (result.oxygenDeliveryIsAdequate) {
-                            ResultTone.Positive
-                        } else {
-                            ResultTone.Negative
-                        },
-                    ),
-                    ResultItem(
-                        title = stringResource(R.string.do2i_vco2i),
-                        value = result.do2ToVco2Ratio.format(1),
-                        tone = if (result.ratioIsAdequate) {
-                            ResultTone.Positive
-                        } else {
-                            ResultTone.Negative
-                        },
-                    ),
+                    value = result?.co2ProductionIndex?.format(1) ?: dash,
                 ),
-            )
-        }
+                ResultItem(
+                    title = stringResource(
+                        R.string.result_with_unit,
+                        stringResource(R.string.do2i),
+                        stringResource(R.string.unit_ml_min_m2),
+                    ),
+                    value = result?.oxygenDeliveryIndex?.format(1) ?: dash,
+                    tone = when {
+                        result == null -> ResultTone.Neutral
+                        result.oxygenDeliveryIsAdequate -> ResultTone.Positive
+                        else -> ResultTone.Negative
+                    },
+                ),
+                ResultItem(
+                    title = stringResource(R.string.do2i_vco2i),
+                    value = result?.do2ToVco2Ratio?.format(1) ?: dash,
+                    tone = when {
+                        result == null -> ResultTone.Neutral
+                        result.ratioIsAdequate -> ResultTone.Positive
+                        else -> ResultTone.Negative
+                    },
+                ),
+            ),
+        )
     }
 
     if (showBsaSheet) {

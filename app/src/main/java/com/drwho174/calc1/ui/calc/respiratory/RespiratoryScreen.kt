@@ -33,7 +33,7 @@ import com.drwho174.calc1.ui.theme.Calc1Theme
 /**
  * Показатели оксигенации.
  *
- * Поля ввода — в две колонки по два поля, результаты — в две колонки.
+ * Поля ввода — в две колонки по два поля, результаты — в одну колонку.
  * P/F считается при FiO2 + PaO2, S/F — при FiO2 + SpO2, A-a и RI — при трёх газах.
  */
 @Composable
@@ -58,28 +58,41 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
     )
     val riTitle = stringResource(R.string.respiratory_index)
 
-    val results = buildList {
-        if (fio2Value != null && pao2Value != null) {
-            add(ResultItem(pfTitle, pfRatio(fio2Value, pao2Value).format(0)))
-        }
-        if (fio2Value != null && spo2Value != null) {
-            add(ResultItem(sfTitle, sfRatio(fio2Value, spo2Value).format(1)))
-        }
-        if (fio2Value != null && pao2Value != null && paco2Value != null) {
-            add(
-                ResultItem(
-                    aaTitle,
-                    aaGradient(fio2Value, pao2Value, paco2Value).format(1),
-                )
-            )
-            add(
-                ResultItem(
-                    riTitle,
-                    respiratoryIndex(fio2Value, pao2Value, paco2Value).format(1),
-                )
-            )
-        }
-    }
+    val dash = "—"
+    val results = listOf(
+        ResultItem(
+            title = pfTitle,
+            value = if (fio2Value != null && pao2Value != null) {
+                pfRatio(fio2Value, pao2Value).format(0)
+            } else {
+                dash
+            },
+        ),
+        ResultItem(
+            title = sfTitle,
+            value = if (fio2Value != null && spo2Value != null) {
+                sfRatio(fio2Value, spo2Value).format(1)
+            } else {
+                dash
+            },
+        ),
+        ResultItem(
+            title = aaTitle,
+            value = if (fio2Value != null && pao2Value != null && paco2Value != null) {
+                aaGradient(fio2Value, pao2Value, paco2Value).format(1)
+            } else {
+                dash
+            },
+        ),
+        ResultItem(
+            title = riTitle,
+            value = if (fio2Value != null && pao2Value != null && paco2Value != null) {
+                respiratoryIndex(fio2Value, pao2Value, paco2Value).format(1)
+            } else {
+                dash
+            },
+        ),
+    )
 
     Column(
         modifier = modifier
@@ -122,9 +135,8 @@ fun RespiratoryScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        if (results.isNotEmpty()) {
-            ResultGrid(results = results)
-        }
+        // �������� ����� ������: �� ����� � ��� ����� �������.
+        ResultGrid(results = results, columns = 1)
     }
 }
 

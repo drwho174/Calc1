@@ -41,6 +41,7 @@ fun IdealBodyMassScreen(modifier: Modifier = Modifier) {
     val heightCm = height.toNumberOrNull()
     val maleLabel = stringResource(R.string.Male)
     val femaleLabel = stringResource(R.string.Female)
+    val dash = "—"
 
     Column(
         modifier = modifier
@@ -66,16 +67,19 @@ fun IdealBodyMassScreen(modifier: Modifier = Modifier) {
             suffix = stringResource(R.string.unit_cm),
         )
 
-        if (heightCm != null) {
-            ResultCard(
-                title = stringResource(
-                    R.string.result_with_unit,
-                    stringResource(R.string.name_ideal_body_mass),
-                    stringResource(R.string.unit_kg),
-                ),
-                value = idealBodyMassKg(heightCm, isFemale).format(1),
-            )
-        }
+        // Карточка видна всегда: до ввода в ней стоит прочерк.
+        ResultCard(
+            title = stringResource(
+                R.string.result_with_unit,
+                stringResource(R.string.name_ideal_body_mass),
+                stringResource(R.string.unit_kg),
+            ),
+            value = if (heightCm != null) {
+                idealBodyMassKg(heightCm, isFemale).format(1)
+            } else {
+                dash
+            },
+        )
     }
 }
 

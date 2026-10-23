@@ -78,16 +78,14 @@ fun BsaSheet(
                 )
             }
 
-            if (bsa != null) {
-                ResultCard(
-                    title = stringResource(
-                        R.string.result_with_unit,
-                        stringResource(R.string.bsa_dubois),
-                        stringResource(R.string.unit_m2),
-                    ),
-                    value = bsa.format(2),
-                )
-            }
+            ResultCard(
+                title = stringResource(
+                    R.string.result_with_unit,
+                    stringResource(R.string.bsa_dubois),
+                    stringResource(R.string.unit_m2),
+                ),
+                value = bsa?.format(2) ?: "—",
+            )
 
             Button(
                 onClick = {
