@@ -50,8 +50,6 @@ dependencies {
     // debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
 
     // markdown
     implementation(libs.bundles.markdown)

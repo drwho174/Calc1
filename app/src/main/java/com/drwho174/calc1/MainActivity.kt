@@ -1,8 +1,9 @@
 package com.drwho174.calc1
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -18,16 +19,16 @@ import kotlinx.coroutines.launch
 /**
  * Единственная Activity приложения.
  *
- * Больше нет ни тулбара из XML, ни контейнера фрагментов: вся навигация —
- * Navigation 3 внутри Compose, а тема читается из DataStore и передаётся
- * в композицию.
+ * Наследуется от [ComponentActivity]: AppCompat и Material Components больше
+ * не нужны — тему рисует Compose, окно использует платформенную тему.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     private val settingsRepository by lazy { SettingsRepository(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         setContent {
             val themeMode by settingsRepository.themeMode
@@ -39,10 +40,12 @@ class MainActivity : AppCompatActivity() {
                 ThemeMode.DARK -> true
             }
 
-            // Иконки статус-бара должны контрастировать с фоном Compose-темы.
+            // Иконки системных панелей должны контрастировать с фоном Compose-темы.
             LaunchedEffect(darkTheme) {
-                WindowCompat.getInsetsController(window, window.decorView)
-                    .isAppearanceLightStatusBars = !darkTheme
+                WindowCompat.getInsetsController(window, window.decorView).apply {
+                    isAppearanceLightStatusBars = !darkTheme
+                    isAppearanceLightNavigationBars = !darkTheme
+                }
             }
 
             Calc1Theme(darkTheme = darkTheme) {
