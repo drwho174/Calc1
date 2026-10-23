@@ -4,17 +4,23 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,17 +47,16 @@ import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ChoiceGroup
 import com.drwho174.calc1.ui.components.CkdEpiSheet
 import com.drwho174.calc1.ui.components.NumberField
-import com.drwho174.calc1.ui.components.SectionCard
+import com.drwho174.calc1.ui.components.YesNoBar
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 /**
  * EuroSCORE II.
  *
- * Порядок и цветовые блоки повторяют прежнюю версию: возраст, пол, диабет,
- * лёгкие, мобильность, почечная дисфункция (с кнопкой СКФ внутри блока),
- * критическое состояние, NYHA, стенокардия, поражение артерий, повторность,
- * эндокардит, фракция выброса, ИМ, давление в лёгочной артерии, срочность,
- * сложность вмешательства, аорта.
+ * Внешний вид повторяет прежнюю версию: «Да/Нет» — цветные полосы во всю
+ * ширину, группы с несколькими вариантами — серые карточки, где подпись
+ * слева, варианты справа, а кнопка «СКФ» — крупная кнопка внутри блока
+ * почечной дисфункции.
  */
 @Composable
 fun EuroScoreScreen(modifier: Modifier = Modifier) {
@@ -172,53 +177,70 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 horizontal = true,
             )
 
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.insulin_dependent_diabetis_melitus),
                 checked = diabetes,
                 onCheckedChange = { diabetes = it },
             )
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.pulmonaryDisfunction),
                 checked = pulmonaryDysfunction,
                 onCheckedChange = { pulmonaryDysfunction = it },
             )
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.poorMobility),
                 checked = poorMobility,
                 onCheckedChange = { poorMobility = it },
             )
 
-            SectionCard {
+            OptionSection {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp),
                 ) {
-                    Text(
-                        text = stringResource(R.string.renalDisfunction),
-                        style = MaterialTheme.typography.titleMedium,
+                    Column(
                         modifier = Modifier.weight(1f),
-                    )
-                    TextButton(onClick = { showCkdSheet = true }) {
-                        Text(stringResource(R.string.creatinineClearance))
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.renalDisfunction),
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.padding(top = 8.dp),
+                        )
+                        Button(
+                            onClick = { showCkdSheet = true },
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(0.dp),
+                            modifier = Modifier
+                                .width(104.dp)
+                                .height(96.dp),
+                        ) {
+                            Text(
+                                text = stringResource(R.string.creatinineClearance),
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                        }
+                    }
+                    Column(modifier = Modifier.weight(1.2f)) {
+                        ChoiceGroup(
+                            options = RenalDisease.entries,
+                            selected = renalDisease,
+                            onSelect = { renalDisease = it },
+                            label = { disease -> renalLabels.getValue(disease) },
+                        )
                     }
                 }
-                ChoiceGroup(
-                    options = RenalDisease.entries,
-                    selected = renalDisease,
-                    onSelect = { renalDisease = it },
-                    label = { disease -> renalLabels.getValue(disease) },
-                )
             }
 
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.criticalPreopState),
                 checked = criticalState,
                 onCheckedChange = { criticalState = it },
             )
 
-            SectionCard {
+            OptionSection(title = stringResource(R.string.NYHAclass)) {
                 ChoiceGroup(
-                    title = stringResource(R.string.NYHAclass),
                     options = NyhaClass.entries,
                     selected = nyha,
                     onSelect = { nyha = it },
@@ -226,30 +248,29 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.anginaClass4),
                 checked = anginaClass4,
                 onCheckedChange = { anginaClass4 = it },
             )
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.extracardiacArtheriopatia),
                 checked = extracardiacArteriopathy,
                 onCheckedChange = { extracardiacArteriopathy = it },
             )
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.previousCardiacSurgery),
                 checked = previousCardiacSurgery,
                 onCheckedChange = { previousCardiacSurgery = it },
             )
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.activeEndocarditis),
                 checked = activeEndocarditis,
                 onCheckedChange = { activeEndocarditis = it },
             )
 
-            SectionCard {
+            OptionSection(title = stringResource(R.string.ejectionFraction)) {
                 ChoiceGroup(
-                    title = stringResource(R.string.ejectionFraction),
                     options = EjectionFraction.entries,
                     selected = ejectionFraction,
                     onSelect = { ejectionFraction = it },
@@ -257,15 +278,14 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.recentMI),
                 checked = recentMyocardialInfarction,
                 onCheckedChange = { recentMyocardialInfarction = it },
             )
 
-            SectionCard {
+            OptionSection(title = stringResource(R.string.pulmonaryArteryPressure)) {
                 ChoiceGroup(
-                    title = stringResource(R.string.pulmonaryArteryPressure),
                     options = PulmonaryArteryPressure.entries,
                     selected = pulmonaryPressure,
                     onSelect = { pulmonaryPressure = it },
@@ -273,9 +293,8 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            SectionCard {
+            OptionSection(title = stringResource(R.string.urgency)) {
                 ChoiceGroup(
-                    title = stringResource(R.string.urgency),
                     options = Urgency.entries,
                     selected = urgency,
                     onSelect = { urgency = it },
@@ -283,9 +302,8 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            SectionCard {
+            OptionSection(title = stringResource(R.string.procedureWeight)) {
                 ChoiceGroup(
-                    title = stringResource(R.string.procedureWeight),
                     options = ProcedureWeight.entries,
                     selected = procedureWeight,
                     onSelect = { procedureWeight = it },
@@ -293,14 +311,13 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            YesNoGroup(
+            YesNoBar(
                 title = stringResource(R.string.aortaSurgery),
                 checked = aortaSurgery,
                 onCheckedChange = { aortaSurgery = it },
             )
 
-            // Место под закреплённую панель результата, чтобы последние поля
-            // не прятались за ней при прокрутке.
+            // Место под закреплённую панель результата.
             Spacer(Modifier.height(150.dp))
         }
 
@@ -326,23 +343,42 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
     }
 }
 
+/** Серая карточка: подпись слева, варианты справа. */
 @Composable
-private fun YesNoGroup(
-    title: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+private fun OptionSection(
+    title: String? = null,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-    val yesLabel = stringResource(R.string.positive)
-    val noLabel = stringResource(R.string.negative)
-
-    ChoiceGroup(
-        title = title,
-        options = listOf(true, false),
-        selected = checked,
-        onSelect = onCheckedChange,
-        label = { value -> if (value) yesLabel else noLabel },
-        horizontal = true,
-    )
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        ),
+    ) {
+        if (title == null) {
+            content(this)
+        } else {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.Top,
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(top = 12.dp),
+                )
+                Column(modifier = Modifier.weight(1.3f)) {
+                    content()
+                }
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)

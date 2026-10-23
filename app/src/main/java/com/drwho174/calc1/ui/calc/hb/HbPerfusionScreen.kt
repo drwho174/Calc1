@@ -162,8 +162,7 @@ fun HbPerfusionScreen(modifier: Modifier = Modifier) {
             val gpl = stringResource(R.string.gpl)
 
             ResultGrid(
-                results = listOf(
-                    ResultItem(
+                results = listOf(                    ResultItem(
                         stringResource(
                             R.string.result_with_unit,
                             stringResource(R.string.hbbp1),
@@ -196,6 +195,7 @@ fun HbPerfusionScreen(modifier: Modifier = Modifier) {
                         result.afterCpbNadler.format(2),
                     ),
                 ),
+                columns = 1,
             )
         }
     }

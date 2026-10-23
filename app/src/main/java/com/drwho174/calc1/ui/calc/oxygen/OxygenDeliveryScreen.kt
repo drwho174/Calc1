@@ -26,6 +26,7 @@ import com.drwho174.calc1.domain.OxygenDeliveryInput
 import com.drwho174.calc1.domain.calculateOxygenDelivery
 import com.drwho174.calc1.ui.common.format
 import com.drwho174.calc1.ui.components.NumberField
+import com.drwho174.calc1.ui.components.ResultCard
 import com.drwho174.calc1.ui.components.ResultGrid
 import com.drwho174.calc1.ui.components.ResultItem
 import com.drwho174.calc1.ui.components.ResultTone
@@ -152,55 +153,58 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
         )
 
         if (result != null) {
-            val results = listOf(
-                ResultItem(
-                    title = stringResource(
-                        R.string.result_with_unit,
-                        stringResource(R.string.arterial_oxygen_content),
-                        unitMlDl,
-                    ),
-                    value = result.arterialOxygenContent.format(1),
+            // Как в прежней версии: содержание O2 — во всю ширину,
+            // ниже четыре компактных результата в две колонки.
+            ResultCard(
+                title = stringResource(
+                    R.string.result_with_unit,
+                    stringResource(R.string.arterial_oxygen_content),
+                    unitMlDl,
                 ),
-                ResultItem(
-                    title = stringResource(
-                        R.string.result_with_unit,
-                        stringResource(R.string.do2),
-                        unitMlMin,
+                value = result.arterialOxygenContent.format(1),
+            )
+            ResultGrid(
+                results = listOf(
+                    ResultItem(
+                        title = stringResource(
+                            R.string.result_with_unit,
+                            stringResource(R.string.do2),
+                            unitMlMin,
+                        ),
+                        value = result.oxygenDelivery.format(1),
                     ),
-                    value = result.oxygenDelivery.format(1),
-                ),
-                ResultItem(
-                    title = stringResource(
-                        R.string.result_with_unit,
-                        stringResource(R.string.do2i),
-                        stringResource(R.string.unit_ml_min_m2),
+                    ResultItem(
+                        title = stringResource(
+                            R.string.result_with_unit,
+                            stringResource(R.string.vco2i),
+                            unitMlMin,
+                        ),
+                        value = result.co2ProductionIndex.format(1),
                     ),
-                    value = result.oxygenDeliveryIndex.format(1),
-                    tone = if (result.oxygenDeliveryIsAdequate) {
-                        ResultTone.Positive
-                    } else {
-                        ResultTone.Negative
-                    },
-                ),
-                ResultItem(
-                    title = stringResource(
-                        R.string.result_with_unit,
-                        stringResource(R.string.vco2i),
-                        unitMlMin,
+                    ResultItem(
+                        title = stringResource(
+                            R.string.result_with_unit,
+                            stringResource(R.string.do2i),
+                            stringResource(R.string.unit_ml_min_m2),
+                        ),
+                        value = result.oxygenDeliveryIndex.format(1),
+                        tone = if (result.oxygenDeliveryIsAdequate) {
+                            ResultTone.Positive
+                        } else {
+                            ResultTone.Negative
+                        },
                     ),
-                    value = result.co2ProductionIndex.format(1),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.do2i_vco2i),
-                    value = result.do2ToVco2Ratio.format(1),
-                    tone = if (result.ratioIsAdequate) {
-                        ResultTone.Positive
-                    } else {
-                        ResultTone.Negative
-                    },
+                    ResultItem(
+                        title = stringResource(R.string.do2i_vco2i),
+                        value = result.do2ToVco2Ratio.format(1),
+                        tone = if (result.ratioIsAdequate) {
+                            ResultTone.Positive
+                        } else {
+                            ResultTone.Negative
+                        },
+                    ),
                 ),
             )
-            ResultGrid(results = results)
         }
     }
 

@@ -153,6 +153,7 @@ fun MehranScoreScreen(modifier: Modifier = Modifier) {
                         value = measuredGfr!!.format(2),
                     )
                 ),
+                columns = 1,
             )
         }
 
@@ -176,6 +177,7 @@ fun MehranScoreScreen(modifier: Modifier = Modifier) {
                         value = mehranDialysisRiskPercent(points).format(1),
                     ),
                 ),
+                columns = 1,
             )
         }
     }

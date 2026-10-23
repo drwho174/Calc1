@@ -107,6 +107,7 @@ fun PerfusiologistScreen(modifier: Modifier = Modifier) {
                     value = percent.roundToInt().toString(),
                 ),
             ),
+            columns = 1,
         )
 
         SliderField(
