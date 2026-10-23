@@ -5,6 +5,10 @@
 /.idea/
 /app/google-services.json
 /app/release/
+/keystore.properties
+/keystore/
+/dist/
+*.jks
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
