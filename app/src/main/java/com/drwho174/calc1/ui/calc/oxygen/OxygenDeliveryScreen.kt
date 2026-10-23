@@ -92,6 +92,7 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
                 onValueChange = { bsa = it },
                 label = stringResource(R.string.bsa),
                 suffix = stringResource(R.string.unit_m2),
+                hintText = stringResource(R.string.name_body_surface_area),
                 modifier = Modifier.weight(1f),
                 trailingIcon = {
                     IconButton(onClick = { showBsaSheet = true }) {
@@ -105,10 +106,10 @@ fun OxygenDeliveryScreen(modifier: Modifier = Modifier) {
             NumberField(
                 value = cardiacOutput,
                 onValueChange = { cardiacOutput = it },
-                label = stringResource(R.string.cardiac_output),
+                label = stringResource(R.string.cardiac_output_short),
                 suffix = stringResource(R.string.unit_l_min),
+                hintText = stringResource(R.string.cardiac_output),
                 modifier = Modifier.weight(1f),
-                labelAbove = true,
             )
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {

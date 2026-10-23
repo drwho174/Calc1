@@ -120,6 +120,7 @@
     <string name="milliliters">миллилитры</string>
     <string name="bsa">ППТ</string>
     <string name="cardiac_output">Сердечный выброс</string>
+    <string name="cardiac_output_short">СВ</string>
     <string name="haemoglobin">Гемоглобин</string>
     <string name="spo2">SpO2</string>
     <string name="pao2">PaO2</string>

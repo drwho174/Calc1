@@ -39,6 +39,7 @@ fun NumberField(
     errorText: String? = null,
     imeAction: ImeAction = ImeAction.Next,
     labelAbove: Boolean = false,
+    hintText: String? = null,
     trailingIcon: (@Composable () -> Unit)? = null,
 ) {
     val focusManager = LocalFocusManager.current
@@ -75,6 +76,7 @@ fun NumberField(
                 suffix = suffix,
                 isError = isError,
                 errorText = errorText,
+                hintText = hintText,
                 imeAction = imeAction,
                 trailingIcon = trailingIcon,
                 keyboardActions = keyboardActions,
@@ -89,6 +91,7 @@ fun NumberField(
             suffix = suffix,
             isError = isError,
             errorText = errorText,
+            hintText = hintText,
             imeAction = imeAction,
             trailingIcon = trailingIcon,
             keyboardActions = keyboardActions,
@@ -105,6 +108,7 @@ private fun FieldContent(
     suffix: String?,
     isError: Boolean,
     errorText: String?,
+    hintText: String?,
     imeAction: ImeAction,
     trailingIcon: (@Composable () -> Unit)?,
     keyboardActions: KeyboardActions,
@@ -122,10 +126,10 @@ private fun FieldContent(
         trailingIcon = trailingIcon,
         singleLine = true,
         isError = isError,
-        supportingText = if (isError && errorText != null) {
-            { Text(errorText) }
-        } else {
-            null
+        supportingText = when {
+            isError && errorText != null -> { { Text(errorText) } }
+            hintText != null -> { { Text(hintText) } }
+            else -> null
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Decimal,
