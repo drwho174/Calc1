@@ -1,6 +1,6 @@
 package com.drwho174.calc1.ui.about
 
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onRoot
 import com.drwho174.calc1.ui.theme.Calc1Theme
 import com.github.takahirom.roborazzi.captureRoboImage
@@ -64,7 +64,7 @@ class AboutScreensTest {
         compose.setContent {
             Calc1Theme(darkTheme = false) {
                 AboutAppScreen(
-                    versionName = "1.1",
+                    versionName = "1.2",
                     email = "filipphome@mail.ru",
                     telegram = "drwho174",
                     onEmailClick = {},

@@ -42,7 +42,7 @@ fun AboutAppScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Image(
-            painter = painterResource(R.drawable.ic_launcher_icon),
+            painter = painterResource(R.mipmap.ic_launcher_icon),
             contentDescription = null,
             modifier = Modifier
                 .padding(top = 24.dp, bottom = 8.dp)

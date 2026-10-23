@@ -3,14 +3,14 @@ package com.drwho174.calc1.ui.about
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.drwho174.calc1.R
 
 /** Открывает почтовый клиент; при отсутствии обработчика показывает Toast. */
 fun Context.openAuthorEmail(email: String) {
     try {
-        startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$email")))
+        startActivity(Intent(Intent.ACTION_SENDTO, "mailto:$email".toUri()))
     } catch (e: ActivityNotFoundException) {
         showNoHandlerToast()
     }
@@ -19,7 +19,7 @@ fun Context.openAuthorEmail(email: String) {
 /** Открывает Telegram по схеме `tg://`. */
 fun Context.openAuthorTelegram(user: String) {
     try {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=$user")))
+        startActivity(Intent(Intent.ACTION_VIEW, "tg://resolve?domain=$user".toUri()))
     } catch (e: ActivityNotFoundException) {
         showNoHandlerToast()
     }

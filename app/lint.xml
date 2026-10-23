@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!--
+      Иконка лаунчера — обычный PNG без адаптивных слоёв. Это дизайн-задача,
+      а не дефект сборки; вернёмся к ней вместе с редизайном иконки.
+    -->
+    <issue id="IconLauncherShape" severity="ignore" />
+
+    <!--
+      targetSdk 36 при compileSdk 37 выбран сознательно: compileSdk нужен для
+      Compose 1.12, а поведение Android 37 ещё не проверялось на устройстве.
+    -->
+    <issue id="OldTargetApi" severity="ignore" />
+</lint>

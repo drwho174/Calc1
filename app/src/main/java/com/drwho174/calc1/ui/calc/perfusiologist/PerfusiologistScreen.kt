@@ -11,6 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -40,8 +41,8 @@ import kotlin.math.roundToInt
 fun PerfusiologistScreen(modifier: Modifier = Modifier) {
     var height by rememberSaveable { mutableStateOf("") }
     var weight by rememberSaveable { mutableStateOf("") }
-    var rate by rememberSaveable { mutableStateOf(2.4f) }
-    var percent by rememberSaveable { mutableStateOf(100f) }
+    var rate by rememberSaveable { mutableFloatStateOf(2.4f) }
+    var percent by rememberSaveable { mutableFloatStateOf(100f) }
 
     val heightCm = height.toNumberOrNull()
     val weightKg = weight.toNumberOrNull()

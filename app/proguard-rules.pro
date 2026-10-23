@@ -1,21 +1,22 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.kts.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Правила R8 для release-сборки.
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Markwon и LaTeX-рендерер используют отражение и ServiceLoader-подобные
+# механизмы внутри плагинов, поэтому их классы не обфусцируем.
+-keep class io.noties.markwon.** { *; }
+-keep class ru.noties.jlatexmath.** { *; }
+-keep class org.scilab.forge.jlatexmath.** { *; }
+-dontwarn io.noties.markwon.**
+-dontwarn ru.noties.**
+-dontwarn org.scilab.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Сохраняем имена ключей навигации для kotlinx.serialization.
+-keepclassmembers class com.drwho174.calc1.navigation.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.drwho174.calc1.navigation.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Полезно для читаемых стектрейсов из release-сборки.
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
