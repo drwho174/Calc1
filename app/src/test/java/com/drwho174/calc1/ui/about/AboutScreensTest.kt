@@ -64,7 +64,7 @@ class AboutScreensTest {
         compose.setContent {
             Calc1Theme(darkTheme = false) {
                 AboutAppScreen(
-                    versionName = "1.2",
+                    versionName = "1.3",
                     email = "filipphome@mail.ru",
                     telegram = "drwho174",
                     onEmailClick = {},

@@ -34,10 +34,14 @@ import com.drwho174.calc1.ui.common.format
 fun CkdEpiSheet(
     onDismiss: () -> Unit,
     onResult: (Double) -> Unit,
+    initialAge: String = "",
+    initialIsFemale: Boolean = false,
 ) {
-    var age by rememberSaveable { mutableStateOf("") }
+    // Возраст и пол подставляются с экрана-владельца (EuroSCORE), чтобы
+    // не вводить их повторно.
+    var age by rememberSaveable { mutableStateOf(initialAge) }
     var creatinine by rememberSaveable { mutableStateOf("") }
-    var isFemale by rememberSaveable { mutableStateOf(false) }
+    var isFemale by rememberSaveable { mutableStateOf(initialIsFemale) }
 
     val ageYears = age.toNumberOrNull()
     val creatinineUmol = creatinine.toNumberOrNull()

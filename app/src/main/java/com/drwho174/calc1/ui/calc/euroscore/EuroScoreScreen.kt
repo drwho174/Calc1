@@ -340,6 +340,8 @@ fun EuroScoreScreen(modifier: Modifier = Modifier) {
             onResult = { gfr ->
                 renalDisease = renalDiseaseFor(gfr, dialysis = false)
             },
+            initialAge = age,
+            initialIsFemale = isFemale,
         )
     }
 }

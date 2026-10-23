@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import java.io.IOException
@@ -30,6 +31,7 @@ class SettingsRepository(context: Context) {
     private val appContext = context.applicationContext
     private val modeKey = stringPreferencesKey(KEY_MODE)
     private val legacyDataStoreKey = booleanPreferencesKey(LEGACY_KEY)
+    private val perfusionRateKey = floatPreferencesKey(KEY_PERFUSION_RATE)
 
     val themeMode: Flow<ThemeMode> = appContext.settingsDataStore.data
         .catch { error ->
@@ -37,12 +39,25 @@ class SettingsRepository(context: Context) {
         }
         .map { preferences -> resolveMode(preferences) }
 
+    /** Последний выбранный индекс перфузии (скорость на м²). */
+    val perfusionRate: Flow<Float> = appContext.settingsDataStore.data
+        .catch { error ->
+            if (error is IOException) emit(emptyPreferences()) else throw error
+        }
+        .map { preferences -> preferences[perfusionRateKey] ?: DEFAULT_PERFUSION_RATE }
+
     suspend fun setThemeMode(mode: ThemeMode) {
         appContext.settingsDataStore.edit { preferences ->
             preferences[modeKey] = mode.name
             preferences.remove(legacyDataStoreKey)
         }
         legacyPreferences().edit().remove(LEGACY_KEY).apply()
+    }
+
+    suspend fun setPerfusionRate(rate: Float) {
+        appContext.settingsDataStore.edit { preferences ->
+            preferences[perfusionRateKey] = rate
+        }
     }
 
     private fun resolveMode(preferences: Preferences): ThemeMode {
@@ -68,7 +83,9 @@ class SettingsRepository(context: Context) {
 
     private companion object {
         const val KEY_MODE = "THEME_MODE"
+        const val KEY_PERFUSION_RATE = "PERFUSION_RATE"
         const val LEGACY_KEY = "THEME_SET"
         const val LEGACY_STORE = "settings"
+        const val DEFAULT_PERFUSION_RATE = 2.4f
     }
 }
