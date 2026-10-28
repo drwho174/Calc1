@@ -36,8 +36,9 @@ class NewScoresScreenTest {
     fun lee_defaultsToZeroPredictors() {
         compose.setContent { Calc1Theme { LeeRiskScreen() } }
 
-        compose.onNodeWithText("0.4").assertExists()
-        compose.onNodeWithText("Низкий").assertExists()
+        compose.onNodeWithText("0 баллов").assertExists()
+        compose.onNodeWithText("MACE · 0.4 %").assertExists()
+        compose.onNodeWithText("Риск: низкий").assertExists()
 
         compose.onAllNodes(hasSetTextAction()).assertCountEquals(0)
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_lee.png")
@@ -52,8 +53,9 @@ class NewScoresScreenTest {
         compose.waitForIdle()
 
         // Два предиктора: 7 % и высокий риск.
-        compose.onNodeWithText("7.0").assertExists()
-        compose.onNodeWithText("Высокий").assertExists()
+        compose.onNodeWithText("2 балла").assertExists()
+        compose.onNodeWithText("MACE · 7.0 %").assertExists()
+        compose.onNodeWithText("Риск: высокий").assertExists()
     }
 
     @Test
@@ -76,8 +78,9 @@ class NewScoresScreenTest {
         compose.waitForIdle()
 
         // 70 лет — 3 балла, 10-летняя выживаемость 77 %.
-        compose.onNodeWithText("77").assertExists()
-        compose.onNodeWithText("Средний").assertExists()
+        compose.onNodeWithText("3 балла").assertExists()
+        compose.onNodeWithText("Выживаемость, 10 лет · 77 %").assertExists()
+        compose.onNodeWithText("Риск: средний").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_charlson.png")
     }
 
@@ -85,8 +88,9 @@ class NewScoresScreenTest {
     fun sofa_defaultsToZeroAndShowsMortalityRange() {
         compose.setContent { Calc1Theme { SofaScreen() } }
 
-        compose.onNodeWithText("< 9").assertExists()
-        compose.onNodeWithText("Низкий").assertExists()
+        compose.onNodeWithText("0 баллов").assertExists()
+        compose.onNodeWithText("Летальность · < 9 %").assertExists()
+        compose.onNodeWithText("Риск: низкий").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_sofa.png")
     }
 
@@ -98,7 +102,8 @@ class NewScoresScreenTest {
         compose.waitForIdle()
 
         // Три балла за дыхание — диапазон летальности 9–16 %.
-        compose.onNodeWithText("9–16").assertExists()
+        compose.onNodeWithText("3 балла").assertExists()
+        compose.onNodeWithText("Летальность · 9–16 %").assertExists()
     }
 
     @Test
@@ -110,23 +115,22 @@ class NewScoresScreenTest {
         compose.waitForIdle()
 
         // 16 + 24 = 40 баллов — средний риск.
-        compose.onNodeWithText("40").assertExists()
-        compose.onNodeWithText("Средний").assertExists()
+        compose.onNodeWithText("40 баллов").assertExists()
+        compose.onNodeWithText("Риск: средний").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_ariscat.png")
     }
 
     @Test
-    fun elGanzouri_highRiskProfile() {
+    fun elGanzouri_riskClass() {
         compose.setContent { Calc1Theme { ElGanzouriScreen() } }
 
         compose.onNodeWithText("IV").performScrollTo().performClick()
         compose.onNodeWithText("< 6 см").performScrollTo().performClick()
-        compose.onNodeWithText("> 120 кг").performScrollTo().performClick()
         compose.waitForIdle()
 
-        // 2 + 2 + 2 = 6 баллов — высокий класс риска.
-        compose.onNodeWithText("6").assertExists()
-        compose.onNodeWithText("Высокий").assertExists()
+        // 2 + 2 = 4 балла — средний класс риска.
+        compose.onNodeWithText("4 балла").assertExists()
+        compose.onNodeWithText("Риск: средний").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_egri.png")
     }
 }

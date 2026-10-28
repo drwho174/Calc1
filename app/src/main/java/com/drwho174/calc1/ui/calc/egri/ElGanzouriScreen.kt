@@ -2,8 +2,11 @@ package com.drwho174.calc1.ui.calc.egri
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,11 +16,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.pointsLabel
 import com.drwho174.calc1.domain.AirwayRiskClass
 import com.drwho174.calc1.domain.BodyWeightBand
 import com.drwho174.calc1.domain.DifficultIntubationHistory
@@ -29,10 +34,10 @@ import com.drwho174.calc1.domain.Prognathia
 import com.drwho174.calc1.domain.ThyromentalDistance
 import com.drwho174.calc1.domain.elGanzouriRiskClass
 import com.drwho174.calc1.domain.elGanzouriScore
+import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ChoiceGroup
-import com.drwho174.calc1.ui.components.ResultGrid
-import com.drwho174.calc1.ui.components.ResultItem
 import com.drwho174.calc1.ui.components.ResultTone
+import com.drwho174.calc1.ui.components.RiskBadge
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 private fun mallampatiLabel(value: MallampatiClass): Int = when (value) {
@@ -97,92 +102,97 @@ fun ElGanzouriScreen(modifier: Modifier = Modifier) {
         )
     )
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+            .background(MaterialTheme.colorScheme.background),
     ) {
-        ChoiceGroup(
-            title = stringResource(R.string.egri_mallampati),
-            explanation = stringResource(R.string.egri_mallampati_info),
-            options = MallampatiClass.entries,
-            selected = mallampati,
-            onSelect = { mallampati = it },
-            label = { stringResource(mallampatiLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.egri_thyromental),
-            explanation = stringResource(R.string.egri_thyromental_info),
-            options = ThyromentalDistance.entries,
-            selected = thyromental,
-            onSelect = { thyromental = it },
-            label = { stringResource(thyromentalLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.egri_mouth),
-            explanation = stringResource(R.string.egri_mouth_info),
-            options = MouthOpening.entries,
-            selected = mouthOpening,
-            onSelect = { mouthOpening = it },
-            label = { stringResource(mouthOpeningLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.egri_neck),
-            explanation = stringResource(R.string.egri_neck_info),
-            options = NeckMovement.entries,
-            selected = neckMovement,
-            onSelect = { neckMovement = it },
-            label = { stringResource(neckMovementLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.egri_prognathia),
-            explanation = stringResource(R.string.egri_prognathia_info),
-            options = Prognathia.entries,
-            selected = prognathia,
-            onSelect = { prognathia = it },
-            label = { stringResource(prognathiaLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.egri_weight),
-            explanation = stringResource(R.string.egri_weight_info),
-            options = BodyWeightBand.entries,
-            selected = weight,
-            onSelect = { weight = it },
-            label = { stringResource(weightLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.egri_history),
-            explanation = stringResource(R.string.egri_history_info),
-            options = DifficultIntubationHistory.entries,
-            selected = history,
-            onSelect = { history = it },
-            label = { stringResource(historyLabel(it)) },
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            ChoiceGroup(
+                title = stringResource(R.string.egri_mallampati),
+                explanation = stringResource(R.string.egri_mallampati_info),
+                options = MallampatiClass.entries,
+                selected = mallampati,
+                onSelect = { mallampati = it },
+                label = { stringResource(mallampatiLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.egri_thyromental),
+                explanation = stringResource(R.string.egri_thyromental_info),
+                options = ThyromentalDistance.entries,
+                selected = thyromental,
+                onSelect = { thyromental = it },
+                label = { stringResource(thyromentalLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.egri_mouth),
+                explanation = stringResource(R.string.egri_mouth_info),
+                options = MouthOpening.entries,
+                selected = mouthOpening,
+                onSelect = { mouthOpening = it },
+                label = { stringResource(mouthOpeningLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.egri_neck),
+                explanation = stringResource(R.string.egri_neck_info),
+                options = NeckMovement.entries,
+                selected = neckMovement,
+                onSelect = { neckMovement = it },
+                label = { stringResource(neckMovementLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.egri_prognathia),
+                explanation = stringResource(R.string.egri_prognathia_info),
+                options = Prognathia.entries,
+                selected = prognathia,
+                onSelect = { prognathia = it },
+                label = { stringResource(prognathiaLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.egri_weight),
+                explanation = stringResource(R.string.egri_weight_info),
+                options = BodyWeightBand.entries,
+                selected = weight,
+                onSelect = { weight = it },
+                label = { stringResource(weightLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.egri_history),
+                explanation = stringResource(R.string.egri_history_info),
+                options = DifficultIntubationHistory.entries,
+                selected = history,
+                onSelect = { history = it },
+                label = { stringResource(historyLabel(it)) },
+            )
 
-        ResultGrid(
-            results = listOf(
-                ResultItem(
-                    title = stringResource(R.string.result_score),
-                    value = score.toString(),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.result_risk),
-                    value = stringResource(airwayRiskLabel(elGanzouriRiskClass(score))),
-                    tone = airwayRiskTone(elGanzouriRiskClass(score)),
-                ),
+            // Место под закреплённую панель результата.
+            Spacer(Modifier.height(160.dp))
+        }
+
+        val riskClass = elGanzouriRiskClass(score)
+        BottomResultBar(
+            title = stringResource(R.string.name_el_ganzouri),
+            value = pointsLabel(score),
+            secondary = stringResource(R.string.bar_airway_risk),
+            risk = RiskBadge(
+                label = stringResource(airwayRiskBadge(riskClass)),
+                tone = airwayRiskTone(riskClass),
             ),
-            columns = 1,
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
 }
 
-private fun airwayRiskLabel(risk: AirwayRiskClass): Int = when (risk) {
-    AirwayRiskClass.LOW -> R.string.risk_low
-    AirwayRiskClass.MODERATE -> R.string.risk_moderate
-    AirwayRiskClass.HIGH -> R.string.risk_high
+private fun airwayRiskBadge(risk: AirwayRiskClass): Int = when (risk) {
+    AirwayRiskClass.LOW -> R.string.risk_badge_low
+    AirwayRiskClass.MODERATE -> R.string.risk_badge_moderate
+    AirwayRiskClass.HIGH -> R.string.risk_badge_high
 }
 
 private fun airwayRiskTone(risk: AirwayRiskClass): ResultTone = when (risk) {

@@ -146,8 +146,8 @@ class AdvancedCalculatorsTest {
         compose.waitForIdle()
 
         // 3 балла контраста + 5 за СН + 4 за СКФ = 12 → 26.1 % и 1.09 %.
-        compose.onNodeWithText("26.1").assertExists()
-        compose.onNodeWithText("1.1").assertExists()
+        compose.onNodeWithText("26.1 %").assertExists()
+        compose.onNodeWithText("Риск диализа · 1.1 %").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_mehran.png")
     }
 

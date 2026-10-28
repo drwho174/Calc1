@@ -2,8 +2,11 @@ package com.drwho174.calc1.ui.calc.lee
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,16 +28,18 @@ import com.drwho174.calc1.domain.leeMaceRiskPercent
 import com.drwho174.calc1.domain.leeRiskClass
 import com.drwho174.calc1.domain.leeRiskScore
 import com.drwho174.calc1.ui.common.format
+import com.drwho174.calc1.ui.common.pointsLabel
+import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ExplainedCheckboxRow
-import com.drwho174.calc1.ui.components.ResultGrid
-import com.drwho174.calc1.ui.components.ResultItem
 import com.drwho174.calc1.ui.components.ResultTone
+import com.drwho174.calc1.ui.components.RiskBadge
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 /**
  * Индекс Lee (RCRI): шесть предикторов и риск крупных кардиальных осложнений.
  *
  * Все критерии бинарные, поэтому сумма известна сразу и прочерка нет.
+ * Результат показан закреплённой панелью, как в EuroSCORE.
  */
 @Composable
 fun LeeRiskScreen(modifier: Modifier = Modifier) {
@@ -54,78 +60,80 @@ fun LeeRiskScreen(modifier: Modifier = Modifier) {
             creatinineAbove177 = creatinineAbove177,
         )
     )
+    val riskClass = leeRiskClass(score)
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+            .background(MaterialTheme.colorScheme.background),
     ) {
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.lee_high_risk_surgery),
-            explanation = stringResource(R.string.lee_high_risk_surgery_info),
-            checked = highRiskSurgery,
-            onCheckedChange = { highRiskSurgery = it },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.lee_ischemic_heart_disease),
-            explanation = stringResource(R.string.lee_ischemic_heart_disease_info),
-            checked = ischemicHeartDisease,
-            onCheckedChange = { ischemicHeartDisease = it },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.lee_heart_failure),
-            explanation = stringResource(R.string.lee_heart_failure_info),
-            checked = heartFailure,
-            onCheckedChange = { heartFailure = it },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.lee_cerebrovascular_disease),
-            explanation = stringResource(R.string.lee_cerebrovascular_disease_info),
-            checked = cerebrovascularDisease,
-            onCheckedChange = { cerebrovascularDisease = it },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.lee_insulin_therapy),
-            explanation = stringResource(R.string.lee_insulin_therapy_info),
-            checked = insulinTherapy,
-            onCheckedChange = { insulinTherapy = it },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.lee_creatinine_above_177),
-            explanation = stringResource(R.string.lee_creatinine_above_177_info),
-            checked = creatinineAbove177,
-            onCheckedChange = { creatinineAbove177 = it },
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.lee_high_risk_surgery),
+                explanation = stringResource(R.string.lee_high_risk_surgery_info),
+                checked = highRiskSurgery,
+                onCheckedChange = { highRiskSurgery = it },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.lee_ischemic_heart_disease),
+                explanation = stringResource(R.string.lee_ischemic_heart_disease_info),
+                checked = ischemicHeartDisease,
+                onCheckedChange = { ischemicHeartDisease = it },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.lee_heart_failure),
+                explanation = stringResource(R.string.lee_heart_failure_info),
+                checked = heartFailure,
+                onCheckedChange = { heartFailure = it },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.lee_cerebrovascular_disease),
+                explanation = stringResource(R.string.lee_cerebrovascular_disease_info),
+                checked = cerebrovascularDisease,
+                onCheckedChange = { cerebrovascularDisease = it },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.lee_insulin_therapy),
+                explanation = stringResource(R.string.lee_insulin_therapy_info),
+                checked = insulinTherapy,
+                onCheckedChange = { insulinTherapy = it },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.lee_creatinine_above_177),
+                explanation = stringResource(R.string.lee_creatinine_above_177_info),
+                checked = creatinineAbove177,
+                onCheckedChange = { creatinineAbove177 = it },
+            )
 
-        ResultGrid(
-            results = listOf(
-                ResultItem(
-                    title = stringResource(R.string.result_score),
-                    value = score.toString(),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.result_mace),
-                    value = leeMaceRiskPercent(score).format(1),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.result_risk),
-                    value = stringResource(leeRiskLabel(leeRiskClass(score))),
-                    tone = leeRiskTone(leeRiskClass(score)),
-                ),
+            // Место под закреплённую панель результата.
+            Spacer(Modifier.height(160.dp))
+        }
+
+        BottomResultBar(
+            title = stringResource(R.string.name_lee_rcri),
+            value = pointsLabel(score),
+            secondary = stringResource(R.string.bar_mace) +
+                " · " + leeMaceRiskPercent(score).format(1) + " %",
+            risk = RiskBadge(
+                label = stringResource(leeRiskBadge(riskClass)),
+                tone = leeRiskTone(riskClass),
             ),
-            columns = 1,
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
 }
 
-private fun leeRiskLabel(riskClass: LeeRiskClass): Int = when (riskClass) {
-    LeeRiskClass.LOW -> R.string.risk_low
-    LeeRiskClass.MODERATE -> R.string.risk_moderate
-    LeeRiskClass.HIGH -> R.string.risk_high
-    LeeRiskClass.VERY_HIGH -> R.string.risk_very_high
+private fun leeRiskBadge(riskClass: LeeRiskClass): Int = when (riskClass) {
+    LeeRiskClass.LOW -> R.string.risk_badge_low
+    LeeRiskClass.MODERATE -> R.string.risk_badge_moderate
+    LeeRiskClass.HIGH -> R.string.risk_badge_high
+    LeeRiskClass.VERY_HIGH -> R.string.risk_badge_very_high
 }
 
 private fun leeRiskTone(riskClass: LeeRiskClass): ResultTone = when (riskClass) {

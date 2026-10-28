@@ -2,8 +2,11 @@ package com.drwho174.calc1.ui.calc.ariscat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,11 +16,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.pointsLabel
 import com.drwho174.calc1.domain.AriscatAge
 import com.drwho174.calc1.domain.AriscatDuration
 import com.drwho174.calc1.domain.AriscatIncision
@@ -26,11 +31,11 @@ import com.drwho174.calc1.domain.AriscatRisk
 import com.drwho174.calc1.domain.AriscatSaturation
 import com.drwho174.calc1.domain.ariscatRisk
 import com.drwho174.calc1.domain.ariscatScore
+import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ChoiceGroup
 import com.drwho174.calc1.ui.components.ExplainedCheckboxRow
-import com.drwho174.calc1.ui.components.ResultGrid
-import com.drwho174.calc1.ui.components.ResultItem
 import com.drwho174.calc1.ui.components.ResultTone
+import com.drwho174.calc1.ui.components.RiskBadge
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 private fun ageLabel(value: AriscatAge): Int = when (value) {
@@ -80,86 +85,91 @@ fun AriscatScreen(modifier: Modifier = Modifier) {
         )
     )
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+            .background(MaterialTheme.colorScheme.background),
     ) {
-        ChoiceGroup(
-            title = stringResource(R.string.ariscat_age),
-            explanation = stringResource(R.string.ariscat_age_info),
-            options = AriscatAge.entries,
-            selected = age,
-            onSelect = { age = it },
-            label = { stringResource(ageLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.ariscat_saturation),
-            explanation = stringResource(R.string.ariscat_saturation_info),
-            options = AriscatSaturation.entries,
-            selected = saturation,
-            onSelect = { saturation = it },
-            label = { stringResource(saturationLabel(it)) },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.ariscat_infection),
-            explanation = stringResource(R.string.ariscat_infection_info),
-            checked = respiratoryInfection,
-            onCheckedChange = { respiratoryInfection = it },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.ariscat_anemia),
-            explanation = stringResource(R.string.ariscat_anemia_info),
-            checked = anemia,
-            onCheckedChange = { anemia = it },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.ariscat_incision),
-            explanation = stringResource(R.string.ariscat_incision_info),
-            options = AriscatIncision.entries,
-            selected = incision,
-            onSelect = { incision = it },
-            label = { stringResource(incisionLabel(it)) },
-        )
-        ChoiceGroup(
-            title = stringResource(R.string.ariscat_duration),
-            explanation = stringResource(R.string.ariscat_duration_info),
-            options = AriscatDuration.entries,
-            selected = duration,
-            onSelect = { duration = it },
-            label = { stringResource(durationLabel(it)) },
-        )
-        ExplainedCheckboxRow(
-            label = stringResource(R.string.ariscat_emergency),
-            explanation = stringResource(R.string.ariscat_emergency_info),
-            checked = emergency,
-            onCheckedChange = { emergency = it },
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            ChoiceGroup(
+                title = stringResource(R.string.ariscat_age),
+                explanation = stringResource(R.string.ariscat_age_info),
+                options = AriscatAge.entries,
+                selected = age,
+                onSelect = { age = it },
+                label = { stringResource(ageLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.ariscat_saturation),
+                explanation = stringResource(R.string.ariscat_saturation_info),
+                options = AriscatSaturation.entries,
+                selected = saturation,
+                onSelect = { saturation = it },
+                label = { stringResource(saturationLabel(it)) },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.ariscat_infection),
+                explanation = stringResource(R.string.ariscat_infection_info),
+                checked = respiratoryInfection,
+                onCheckedChange = { respiratoryInfection = it },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.ariscat_anemia),
+                explanation = stringResource(R.string.ariscat_anemia_info),
+                checked = anemia,
+                onCheckedChange = { anemia = it },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.ariscat_incision),
+                explanation = stringResource(R.string.ariscat_incision_info),
+                options = AriscatIncision.entries,
+                selected = incision,
+                onSelect = { incision = it },
+                label = { stringResource(incisionLabel(it)) },
+            )
+            ChoiceGroup(
+                title = stringResource(R.string.ariscat_duration),
+                explanation = stringResource(R.string.ariscat_duration_info),
+                options = AriscatDuration.entries,
+                selected = duration,
+                onSelect = { duration = it },
+                label = { stringResource(durationLabel(it)) },
+            )
+            ExplainedCheckboxRow(
+                label = stringResource(R.string.ariscat_emergency),
+                explanation = stringResource(R.string.ariscat_emergency_info),
+                checked = emergency,
+                onCheckedChange = { emergency = it },
+            )
 
-        ResultGrid(
-            results = listOf(
-                ResultItem(
-                    title = stringResource(R.string.result_score),
-                    value = score.toString(),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.result_risk),
-                    value = stringResource(ariscatRiskLabel(ariscatRisk(score))),
-                    tone = ariscatRiskTone(ariscatRisk(score)),
-                ),
+            // Место под закреплённую панель результата.
+            Spacer(Modifier.height(160.dp))
+        }
+
+        val risk = ariscatRisk(score)
+        BottomResultBar(
+            title = stringResource(R.string.name_ariscat),
+            value = pointsLabel(score),
+            secondary = stringResource(R.string.bar_pulmonary_risk),
+            risk = RiskBadge(
+                label = stringResource(ariscatRiskBadge(risk)),
+                tone = ariscatRiskTone(risk),
             ),
-            columns = 1,
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
 }
 
-private fun ariscatRiskLabel(risk: AriscatRisk): Int = when (risk) {
-    AriscatRisk.LOW -> R.string.risk_low
-    AriscatRisk.MODERATE -> R.string.risk_moderate
-    AriscatRisk.HIGH -> R.string.risk_high
+private fun ariscatRiskBadge(risk: AriscatRisk): Int = when (risk) {
+    AriscatRisk.LOW -> R.string.risk_badge_low
+    AriscatRisk.MODERATE -> R.string.risk_badge_moderate
+    AriscatRisk.HIGH -> R.string.risk_badge_high
 }
 
 private fun ariscatRiskTone(risk: AriscatRisk): ResultTone = when (risk) {

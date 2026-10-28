@@ -2,8 +2,11 @@ package com.drwho174.calc1.ui.calc.sofa
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,20 +16,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.drwho174.calc1.R
+import com.drwho174.calc1.ui.common.pointsLabel
 import com.drwho174.calc1.domain.SofaOrgan
 import com.drwho174.calc1.domain.SofaSeverity
 import com.drwho174.calc1.domain.sofaMortalityRange
 import com.drwho174.calc1.domain.sofaScore
 import com.drwho174.calc1.domain.sofaSeverity
+import com.drwho174.calc1.ui.components.BottomResultBar
 import com.drwho174.calc1.ui.components.ChoiceGroup
-import com.drwho174.calc1.ui.components.ResultGrid
-import com.drwho174.calc1.ui.components.ResultItem
 import com.drwho174.calc1.ui.components.ResultTone
+import com.drwho174.calc1.ui.components.RiskBadge
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
 /** Баллы по органу: 0–4. */
@@ -124,60 +129,61 @@ fun SofaScreen(modifier: Modifier = Modifier) {
     )
     val score = sofaScore(selectedByOrgan)
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+            .background(MaterialTheme.colorScheme.background),
     ) {
-        SofaOrgan.entries.forEach { organ ->
-            ChoiceGroup(
-                title = stringResource(sofaTitle(organ)),
-                explanation = stringResource(sofaInfo(organ)),
-                options = sofaPoints,
-                selected = selectedByOrgan.getValue(organ),
-                onSelect = { value ->
-                    when (organ) {
-                        SofaOrgan.RESPIRATION -> respiration = value
-                        SofaOrgan.COAGULATION -> coagulation = value
-                        SofaOrgan.LIVER -> liver = value
-                        SofaOrgan.CARDIOVASCULAR -> cardiovascular = value
-                        SofaOrgan.CENTRAL_NERVOUS -> centralNervous = value
-                        SofaOrgan.RENAL -> renal = value
-                    }
-                },
-                label = { value -> stringResource(sofaOptionLabel(organ, value)) },
-            )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            SofaOrgan.entries.forEach { organ ->
+                ChoiceGroup(
+                    title = stringResource(sofaTitle(organ)),
+                    explanation = stringResource(sofaInfo(organ)),
+                    options = sofaPoints,
+                    selected = selectedByOrgan.getValue(organ),
+                    onSelect = { value ->
+                        when (organ) {
+                            SofaOrgan.RESPIRATION -> respiration = value
+                            SofaOrgan.COAGULATION -> coagulation = value
+                            SofaOrgan.LIVER -> liver = value
+                            SofaOrgan.CARDIOVASCULAR -> cardiovascular = value
+                            SofaOrgan.CENTRAL_NERVOUS -> centralNervous = value
+                            SofaOrgan.RENAL -> renal = value
+                        }
+                    },
+                    label = { value -> stringResource(sofaOptionLabel(organ, value)) },
+                )
+            }
+
+            // Место под закреплённую панель результата.
+            Spacer(Modifier.height(160.dp))
         }
 
-        ResultGrid(
-            results = listOf(
-                ResultItem(
-                    title = stringResource(R.string.result_score),
-                    value = score.toString(),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.result_mortality),
-                    value = sofaMortalityRange(score),
-                ),
-                ResultItem(
-                    title = stringResource(R.string.result_risk),
-                    value = stringResource(sofaRiskLabel(sofaSeverity(score))),
-                    tone = sofaRiskTone(sofaSeverity(score)),
-                ),
+        BottomResultBar(
+            title = stringResource(R.string.name_sofa_score),
+            value = pointsLabel(score),
+            secondary = stringResource(R.string.bar_mortality) +
+                " · " + sofaMortalityRange(score) + " %",
+            risk = RiskBadge(
+                label = stringResource(sofaRiskBadge(sofaSeverity(score))),
+                tone = sofaRiskTone(sofaSeverity(score)),
             ),
-            columns = 1,
+            modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
 }
 
-private fun sofaRiskLabel(severity: SofaSeverity): Int = when (severity) {
-    SofaSeverity.LOW -> R.string.risk_low
-    SofaSeverity.MODERATE -> R.string.risk_moderate
-    SofaSeverity.HIGH -> R.string.risk_high
-    SofaSeverity.VERY_HIGH -> R.string.risk_very_high
+private fun sofaRiskBadge(severity: SofaSeverity): Int = when (severity) {
+    SofaSeverity.LOW -> R.string.risk_badge_low
+    SofaSeverity.MODERATE -> R.string.risk_badge_moderate
+    SofaSeverity.HIGH -> R.string.risk_badge_high
+    SofaSeverity.VERY_HIGH -> R.string.risk_badge_very_high
 }
 
 private fun sofaRiskTone(severity: SofaSeverity): ResultTone = when (severity) {

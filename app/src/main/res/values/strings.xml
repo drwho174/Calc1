@@ -195,6 +195,23 @@
     <string name="risk_high">Высокий</string>
     <string name="risk_very_high">Очень высокий</string>
 
+    <!-- Result bar: units and risk badges -->
+    <string name="point_one">балл</string>
+    <string name="point_few">балла</string>
+    <string name="point_many">баллов</string>
+    <string name="bar_ten_year_survival">Выживаемость, 10 лет</string>
+    <string name="bar_mortality">Летальность</string>
+    <string name="bar_mace">MACE</string>
+    <string name="bar_cin_risk">Риск нефропатии</string>
+    <string name="bar_dialysis_risk">Риск диализа</string>
+    <string name="bar_pulmonary_risk">Риск лёгочных осложнений</string>
+    <string name="bar_airway_risk">Класс риска</string>
+    <string name="bar_patient_name">Пациент</string>
+    <string name="risk_badge_low">Риск: низкий</string>
+    <string name="risk_badge_moderate">Риск: средний</string>
+    <string name="risk_badge_high">Риск: высокий</string>
+    <string name="risk_badge_very_high">Риск: очень высокий</string>
+
     <!-- Charlson comorbidity index -->
     <string name="name_charlson_score">Шкала Чарлсона</string>
     <string name="subtitle_charlson_score">Индекс коморбидности и 10-летняя выживаемость</string>
