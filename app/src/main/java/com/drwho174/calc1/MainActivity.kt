@@ -12,8 +12,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.drwho174.calc1.data.SettingsRepository
 import com.drwho174.calc1.data.ThemeMode
+import com.drwho174.calc1.navigation.CalculatorId
+import com.drwho174.calc1.navigation.calculatorIdsOf
+import com.drwho174.calc1.navigation.storageKey
 import com.drwho174.calc1.ui.Calc1App
 import com.drwho174.calc1.ui.theme.Calc1Theme
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /**
@@ -34,6 +38,13 @@ class MainActivity : ComponentActivity() {
             val themeMode by settingsRepository.themeMode
                 .collectAsStateWithLifecycle(initialValue = ThemeMode.SYSTEM)
 
+            // null — избранное ещё не прочитано из DataStore. Главный экран
+            // фиксирует стартовую вкладку по первому значению, поэтому «пусто»
+            // и «не загружено» должны различаться.
+            val favoriteIds by settingsRepository.favoriteCalculators
+                .map<Set<String>, Set<CalculatorId>?> { stored -> calculatorIdsOf(stored) }
+                .collectAsStateWithLifecycle(initialValue = null)
+
             val darkTheme = when (themeMode) {
                 ThemeMode.SYSTEM -> isSystemInDarkTheme()
                 ThemeMode.LIGHT -> false
@@ -53,6 +64,10 @@ class MainActivity : ComponentActivity() {
                     themeMode = themeMode,
                     onThemeModeChange = { mode ->
                         lifecycleScope.launch { settingsRepository.setThemeMode(mode) }
+                    },
+                    favoriteIds = favoriteIds,
+                    onToggleFavorite = { id ->
+                        lifecycleScope.launch { settingsRepository.toggleFavorite(id.storageKey) }
                     },
                 )
             }

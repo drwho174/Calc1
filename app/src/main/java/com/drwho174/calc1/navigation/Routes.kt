@@ -46,57 +46,80 @@ enum class CalculatorId {
 data class CalculatorDestination(
     val id: CalculatorId,
     @StringRes val titleRes: Int,
+    @StringRes val subtitleRes: Int,
     val aboutAsset: String,
 )
 
-/** Порядок совпадает с порядком кнопок в главном меню. */
+/**
+ * Единственный источник главного меню: и вкладка «Все», и «Избранное»
+ * строятся из этого списка, поэтому новый калькулятор добавляется одной
+ * записью — правки в UI не нужны.
+ *
+ * Порядок записей — порядок карточек на вкладке «Все».
+ */
 val calculatorDestinations: List<CalculatorDestination> = listOf(
     CalculatorDestination(
         CalculatorId.EUROSCORE,
         R.string.name_euroscore_2,
+        R.string.subtitle_euroscore_2,
         "EUROSCORE_2.md",
     ),
     CalculatorDestination(
         CalculatorId.HB_PERFUSION,
         R.string.name_hb_on_perfusion,
+        R.string.subtitle_hb_on_perfusion,
         "Hb_On_Perfusion.md",
     ),
     CalculatorDestination(
         CalculatorId.PERFUSIOLOGIST,
         R.string.name_perfusion_calculator,
+        R.string.subtitle_perfusion_calculator,
         "PerfusiologistCalc.md",
     ),
     CalculatorDestination(
         CalculatorId.OXYGEN,
         R.string.name_oxygen_delivery,
+        R.string.subtitle_oxygen_delivery,
         "Oxygen_Delivery.md",
     ),
     CalculatorDestination(
         CalculatorId.GFR,
         R.string.name_glomerular_filtration_rate,
+        R.string.subtitle_glomerular_filtration_rate,
         "GFR_about.md",
     ),
     CalculatorDestination(
         CalculatorId.IDEAL_BODY_MASS,
         R.string.name_ideal_body_mass,
+        R.string.subtitle_ideal_body_mass,
         "Ideal_Body_Mass.md",
     ),
     CalculatorDestination(
         CalculatorId.BSA,
         R.string.name_body_surface_area,
+        R.string.subtitle_body_surface_area,
         "Body_Surface_Area.md",
     ),
     CalculatorDestination(
         CalculatorId.RESPIRATORY,
         R.string.name_oxygenation_params,
+        R.string.subtitle_oxygenation_params,
         "RespiratoryIndex.md",
     ),
     CalculatorDestination(
         CalculatorId.MEHRAN,
         R.string.name_mehran_score,
+        R.string.subtitle_mehran_score,
         "MehraneScore.md",
     ),
 )
 
 fun CalculatorId.destination(): CalculatorDestination =
     calculatorDestinations.first { it.id == this }
+
+/** Ключ калькулятора в настройках: имя константы переживает перестановки в enum. */
+val CalculatorId.storageKey: String get() = name
+
+/** Обратное преобразование сохранённого набора: неизвестные ключи отбрасываются. */
+fun calculatorIdsOf(stored: Set<String>): Set<CalculatorId> =
+    CalculatorId.entries.filterTo(LinkedHashSet()) { it.storageKey in stored }

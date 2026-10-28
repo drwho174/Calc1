@@ -19,6 +19,23 @@
     <string name="name_settings">Настройки</string>
     <string name="name_about">О программе</string>
     <string name="calculate">Рассчитать</string>
+    <!--Main menu: tabs, card subtitles, empty favorites-->
+    <string name="tab_favorites">Избранное</string>
+    <string name="tab_all">Все</string>
+    <string name="action_add_favorite">Добавить в избранное</string>
+    <string name="action_remove_favorite">Убрать из избранного</string>
+    <string name="favorites_empty_title">В избранном пока пусто</string>
+    <string name="favorites_empty_hint">Отметьте звездой карточку калькулятора — он появится здесь.</string>
+    <string name="favorites_show_all">Показать все калькуляторы</string>
+    <string name="subtitle_euroscore_2">Риск летального исхода при кардиохирургии</string>
+    <string name="subtitle_hb_on_perfusion">Hb и Hct на искусственном кровообращении</string>
+    <string name="subtitle_perfusion_calculator">Скорость перфузии и индекс массы</string>
+    <string name="subtitle_oxygen_delivery">DO₂, VO₂ и CaO₂</string>
+    <string name="subtitle_glomerular_filtration_rate">CKD-EPI и клиренс креатинина</string>
+    <string name="subtitle_ideal_body_mass">Формулы Devine, Robinson, Miller</string>
+    <string name="subtitle_body_surface_area">BSA по Mosteller и Du Bois</string>
+    <string name="subtitle_oxygenation_params">PaO₂/FiO₂ и индекс оксигенации</string>
+    <string name="subtitle_mehran_score">Риск контраст-индуцированной нефропатии</string>
     <!--PerfusiologistCalculator Names-->
     <string name="name_Height">Рост</string>
     <string name="name_Weight">Вес</string>

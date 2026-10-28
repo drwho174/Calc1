@@ -7,6 +7,11 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -22,6 +27,7 @@ import com.drwho174.calc1.navigation.CalculatorId
 import com.drwho174.calc1.navigation.CalculatorRoute
 import com.drwho174.calc1.navigation.MainMenuRoute
 import com.drwho174.calc1.navigation.SettingsRoute
+import com.drwho174.calc1.navigation.calculatorDestinations
 import com.drwho174.calc1.navigation.destination
 import com.drwho174.calc1.ui.about.AboutAppScreen
 import com.drwho174.calc1.ui.about.AboutScreen
@@ -39,6 +45,8 @@ import com.drwho174.calc1.ui.calc.respiratory.RespiratoryScreen
 import com.drwho174.calc1.ui.components.CalcScaffold
 import com.drwho174.calc1.ui.components.InfoAction
 import com.drwho174.calc1.ui.menu.MainMenuScreen
+import com.drwho174.calc1.ui.menu.MenuTab
+import com.drwho174.calc1.ui.menu.defaultMenuTab
 import com.drwho174.calc1.ui.settings.SettingsScreen
 
 /**
@@ -51,11 +59,25 @@ import com.drwho174.calc1.ui.settings.SettingsScreen
 fun Calc1App(
     themeMode: ThemeMode,
     onThemeModeChange: (ThemeMode) -> Unit,
+    favoriteIds: Set<CalculatorId>?,
+    onToggleFavorite: (CalculatorId) -> Unit,
 ) {
     val backStack = rememberNavBackStack(MainMenuRoute)
     val context = LocalContext.current
     val email = stringResource(R.string.authors_email)
     val telegram = stringResource(R.string.authors_telegram)
+
+    // Вкладка выбирается один раз — когда впервые становится известно избранное
+    // или когда пользователь нажал сегмент — и дальше сама не меняется. Иначе
+    // отметка звездой переключала бы вкладку прямо под пальцем.
+    var menuTab by rememberSaveable { mutableStateOf(MenuTab.ALL) }
+    var menuTabResolved by rememberSaveable { mutableStateOf(false) }
+    LaunchedEffect(favoriteIds) {
+        if (!menuTabResolved && favoriteIds != null) {
+            menuTab = defaultMenuTab(favoriteIds)
+            menuTabResolved = true
+        }
+    }
 
     NavDisplay(
         backStack = backStack,
@@ -75,33 +97,15 @@ fun Calc1App(
                     },
                 ) { padding ->
                     MainMenuScreen(
-                        onEuroScore = {
-                            backStack.add(CalculatorRoute(CalculatorId.EUROSCORE))
+                        calculators = calculatorDestinations,
+                        favoriteIds = favoriteIds.orEmpty(),
+                        selectedTab = menuTab,
+                        onTabSelected = { tab ->
+                            menuTab = tab
+                            menuTabResolved = true
                         },
-                        onHbPerfusion = {
-                            backStack.add(CalculatorRoute(CalculatorId.HB_PERFUSION))
-                        },
-                        onPerfusiologist = {
-                            backStack.add(CalculatorRoute(CalculatorId.PERFUSIOLOGIST))
-                        },
-                        onOxygenDelivery = {
-                            backStack.add(CalculatorRoute(CalculatorId.OXYGEN))
-                        },
-                        onGfr = {
-                            backStack.add(CalculatorRoute(CalculatorId.GFR))
-                        },
-                        onIdealBodyMass = {
-                            backStack.add(CalculatorRoute(CalculatorId.IDEAL_BODY_MASS))
-                        },
-                        onBsa = {
-                            backStack.add(CalculatorRoute(CalculatorId.BSA))
-                        },
-                        onRespiratory = {
-                            backStack.add(CalculatorRoute(CalculatorId.RESPIRATORY))
-                        },
-                        onMehranScore = {
-                            backStack.add(CalculatorRoute(CalculatorId.MEHRAN))
-                        },
+                        onToggleFavorite = onToggleFavorite,
+                        onCalculatorClick = { id -> backStack.add(CalculatorRoute(id)) },
                         modifier = Modifier.padding(padding).imePadding(),
                     )
                 }

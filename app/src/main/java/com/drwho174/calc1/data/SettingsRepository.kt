@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import java.io.IOException
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +33,7 @@ class SettingsRepository(context: Context) {
     private val modeKey = stringPreferencesKey(KEY_MODE)
     private val legacyDataStoreKey = booleanPreferencesKey(LEGACY_KEY)
     private val perfusionRateKey = floatPreferencesKey(KEY_PERFUSION_RATE)
+    private val favoritesKey = stringSetPreferencesKey(KEY_FAVORITES)
 
     val themeMode: Flow<ThemeMode> = appContext.settingsDataStore.data
         .catch { error ->
@@ -46,6 +48,18 @@ class SettingsRepository(context: Context) {
         }
         .map { preferences -> preferences[perfusionRateKey] ?: DEFAULT_PERFUSION_RATE }
 
+    /**
+     * Избранные калькуляторы: ключи — имена `CalculatorId`.
+     *
+     * Набор хранится как есть: DataStore не сохраняет порядок, поэтому
+     * главный экран сортирует избранное по общему списку калькуляторов.
+     */
+    val favoriteCalculators: Flow<Set<String>> = appContext.settingsDataStore.data
+        .catch { error ->
+            if (error is IOException) emit(emptyPreferences()) else throw error
+        }
+        .map { preferences -> preferences[favoritesKey].orEmpty() }
+
     suspend fun setThemeMode(mode: ThemeMode) {
         appContext.settingsDataStore.edit { preferences ->
             preferences[modeKey] = mode.name
@@ -57,6 +71,18 @@ class SettingsRepository(context: Context) {
     suspend fun setPerfusionRate(rate: Float) {
         appContext.settingsDataStore.edit { preferences ->
             preferences[perfusionRateKey] = rate
+        }
+    }
+
+    /** Переключает калькулятор в избранном; значение читается и пишется атомарно. */
+    suspend fun toggleFavorite(calculatorId: String) {
+        appContext.settingsDataStore.edit { preferences ->
+            val current = preferences[favoritesKey].orEmpty()
+            preferences[favoritesKey] = if (calculatorId in current) {
+                current - calculatorId
+            } else {
+                current + calculatorId
+            }
         }
     }
 
@@ -84,6 +110,7 @@ class SettingsRepository(context: Context) {
     private companion object {
         const val KEY_MODE = "THEME_MODE"
         const val KEY_PERFUSION_RATE = "PERFUSION_RATE"
+        const val KEY_FAVORITES = "FAVORITE_CALCULATORS"
         const val LEGACY_KEY = "THEME_SET"
         const val LEGACY_STORE = "settings"
         const val DEFAULT_PERFUSION_RATE = 2.4f

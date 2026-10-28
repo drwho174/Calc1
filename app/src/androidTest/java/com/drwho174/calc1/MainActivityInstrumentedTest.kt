@@ -9,7 +9,16 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.drwho174.calc1.data.SettingsRepository
+import com.drwho174.calc1.navigation.CalculatorId
+import com.drwho174.calc1.navigation.storageKey
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -59,5 +68,33 @@ class MainActivityInstrumentedTest {
         compose.waitForIdle()
 
         compose.onNodeWithText("0.66").assertIsDisplayed()
+    }
+
+    /**
+     * Звезда должна реально доезжать до DataStore: именно по этому значению
+     * следующий запуск приложения выбирает стартовую вкладку.
+     *
+     * Activity пересоздавать нельзя: `scenario.recreate()` возвращает
+     * сохранённое состояние (вкладка восстанавливается), а не холодный старт.
+     */
+    @Test
+    fun favoriteIsPersistedInDataStore() {
+        val repository = SettingsRepository(ApplicationProvider.getApplicationContext())
+        val key = CalculatorId.OXYGEN.storageKey
+
+        runBlocking {
+            repository.toggleFavorite(key)
+            val stored = withTimeout(5_000) {
+                repository.favoriteCalculators.first { key in it }
+            }
+            assertTrue("избранное не сохранилось: $stored", key in stored)
+
+            // Возвращаем состояние, чтобы не влиять на остальные тесты.
+            repository.toggleFavorite(key)
+            val cleared = withTimeout(5_000) {
+                repository.favoriteCalculators.first { key !in it }
+            }
+            assertFalse("избранное не очистилось: $cleared", key in cleared)
+        }
     }
 }
