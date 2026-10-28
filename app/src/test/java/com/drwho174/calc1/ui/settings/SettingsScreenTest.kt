@@ -31,7 +31,7 @@ class SettingsScreenTest {
             }
         }
 
-        compose.onNodeWithText("Как на устройстве").assertExists()
+        compose.onNodeWithText("Как на устройстве (по умолчанию)").assertExists()
         compose.onNodeWithText("Светлая").assertExists()
         compose.onNodeWithText("Тёмная").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/settings_system.png")
@@ -73,7 +73,7 @@ class SettingsScreenTest {
             }
         }
 
-        compose.onNodeWithText("Как на устройстве").performClick()
+        compose.onNodeWithText("Как на устройстве (по умолчанию)").performClick()
         assertEquals(ThemeMode.SYSTEM, selected)
     }
 

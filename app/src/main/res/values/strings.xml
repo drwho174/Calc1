@@ -162,7 +162,7 @@
     <string name="predicted_mortality">Прогнозируемая летальность</string>
     <string name="settings_theme">Тема оформления</string>
     <string name="settings_theme_hint">Применяется сразу ко всем экранам</string>
-    <string name="settings_theme_system">Как на устройстве</string>
+    <string name="settings_theme_system">Как на устройстве (по умолчанию)</string>
     <string name="settings_theme_light">Светлая</string>
     <string name="settings_theme_dark">Тёмная</string>
     <string name="percent_reset_hint">Двойное нажатие по ползунку — вернуть 100 %</string>
