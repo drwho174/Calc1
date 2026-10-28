@@ -27,18 +27,27 @@ fun <T> ChoiceGroup(
     options: List<T>,
     selected: T?,
     onSelect: (T) -> Unit,
-    label: (T) -> String,
+    label: @Composable (T) -> String,
     modifier: Modifier = Modifier,
     title: String? = null,
+    explanation: String? = null,
     horizontal: Boolean = false,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         if (title != null) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 4.dp),
-            )
+            if (explanation != null) {
+                ExplainedGroupTitle(
+                    title = title,
+                    explanation = explanation,
+                    modifier = Modifier.padding(bottom = 4.dp),
+                )
+            } else {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(bottom = 4.dp),
+                )
+            }
         }
 
         if (horizontal) {

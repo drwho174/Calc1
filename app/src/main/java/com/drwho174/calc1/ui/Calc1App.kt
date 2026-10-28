@@ -34,14 +34,19 @@ import com.drwho174.calc1.ui.about.AboutScreen
 import com.drwho174.calc1.ui.about.openAuthorEmail
 import com.drwho174.calc1.ui.about.openAuthorTelegram
 import com.drwho174.calc1.ui.calc.bsa.BsaScreen
+import com.drwho174.calc1.ui.calc.ariscat.AriscatScreen
+import com.drwho174.calc1.ui.calc.charlson.CharlsonScreen
+import com.drwho174.calc1.ui.calc.egri.ElGanzouriScreen
 import com.drwho174.calc1.ui.calc.euroscore.EuroScoreScreen
 import com.drwho174.calc1.ui.calc.gfr.GfrScreen
 import com.drwho174.calc1.ui.calc.hb.HbPerfusionScreen
 import com.drwho174.calc1.ui.calc.ibm.IdealBodyMassScreen
+import com.drwho174.calc1.ui.calc.lee.LeeRiskScreen
 import com.drwho174.calc1.ui.calc.mehran.MehranScoreScreen
 import com.drwho174.calc1.ui.calc.oxygen.OxygenDeliveryScreen
 import com.drwho174.calc1.ui.calc.perfusiologist.PerfusiologistScreen
 import com.drwho174.calc1.ui.calc.respiratory.RespiratoryScreen
+import com.drwho174.calc1.ui.calc.sofa.SofaScreen
 import com.drwho174.calc1.ui.components.CalcScaffold
 import com.drwho174.calc1.ui.components.InfoAction
 import com.drwho174.calc1.ui.menu.MainMenuScreen
@@ -131,6 +136,11 @@ fun Calc1App(
                         CalculatorId.BSA -> BsaScreen(screenModifier)
                         CalculatorId.RESPIRATORY -> RespiratoryScreen(screenModifier)
                         CalculatorId.MEHRAN -> MehranScoreScreen(screenModifier)
+                        CalculatorId.CHARLSON -> CharlsonScreen(screenModifier)
+                        CalculatorId.SOFA -> SofaScreen(screenModifier)
+                        CalculatorId.EL_GANZOURI -> ElGanzouriScreen(screenModifier)
+                        CalculatorId.ARISCAT -> AriscatScreen(screenModifier)
+                        CalculatorId.LEE_RCRI -> LeeRiskScreen(screenModifier)
                     }
                 }
             }

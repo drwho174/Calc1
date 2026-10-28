@@ -41,6 +41,11 @@ enum class CalculatorId {
     BSA,
     RESPIRATORY,
     MEHRAN,
+    CHARLSON,
+    SOFA,
+    EL_GANZOURI,
+    ARISCAT,
+    LEE_RCRI,
 }
 
 data class CalculatorDestination(
@@ -111,6 +116,36 @@ val calculatorDestinations: List<CalculatorDestination> = listOf(
         R.string.name_mehran_score,
         R.string.subtitle_mehran_score,
         "MehraneScore.md",
+    ),
+    CalculatorDestination(
+        CalculatorId.CHARLSON,
+        R.string.name_charlson_score,
+        R.string.subtitle_charlson_score,
+        "Charlson_Comorbidity_Index.md",
+    ),
+    CalculatorDestination(
+        CalculatorId.SOFA,
+        R.string.name_sofa_score,
+        R.string.subtitle_sofa_score,
+        "SOFA.md",
+    ),
+    CalculatorDestination(
+        CalculatorId.EL_GANZOURI,
+        R.string.name_el_ganzouri,
+        R.string.subtitle_el_ganzouri,
+        "El_Ganzouri.md",
+    ),
+    CalculatorDestination(
+        CalculatorId.ARISCAT,
+        R.string.name_ariscat,
+        R.string.subtitle_ariscat,
+        "ARISCAT.md",
+    ),
+    CalculatorDestination(
+        CalculatorId.LEE_RCRI,
+        R.string.name_lee_rcri,
+        R.string.subtitle_lee_rcri,
+        "Lee_RCRI.md",
     ),
 )
 
