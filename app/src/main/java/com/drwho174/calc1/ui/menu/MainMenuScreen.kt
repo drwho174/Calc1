@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,6 +34,7 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -46,7 +49,7 @@ import com.drwho174.calc1.navigation.CalculatorId
 import com.drwho174.calc1.navigation.calculatorDestinations
 import com.drwho174.calc1.ui.theme.Calc1Theme
 
-/** Вкладки главного экрана. Порядок задаёт порядок сегментов. */
+/** Вкладки главного экрана. Порядок задаёт порядок сегментов и страниц. */
 enum class MenuTab(
     @StringRes val labelRes: Int,
     @DrawableRes val iconRes: Int,
@@ -54,6 +57,9 @@ enum class MenuTab(
     FAVORITES(R.string.tab_favorites, R.drawable.ic_star_filled),
     ALL(R.string.tab_all, R.drawable.ic_list),
 }
+
+/** Номер страницы пейджера: порядок объявления вкладок совпадает с порядком страниц. */
+private val MenuTab.page: Int get() = ordinal
 
 /**
  * Вкладка, которую нужно показать, пока пользователь не выбрал другую сам:
@@ -66,8 +72,12 @@ fun defaultMenuTab(favoriteIds: Set<CalculatorId>): MenuTab =
 /**
  * Главное меню: переключатель разделов и ленивый список карточек.
  *
+ * Разделы живут в [HorizontalPager], поэтому переключение сегмента анимируется
+ * слайдом, а сами страницы листаются свайпом — как у обычных табов.
+ *
  * Экран без собственного состояния — выбранная вкладка и избранное приходят
- * снаружи, поэтому его удобно проверять в тестах и превью.
+ * снаружи, поэтому его удобно проверять в тестах и превью; пейджер лишь
+ * отражает [selectedTab] и сообщает наружу о свайпе.
  *
  * [calculators] — полный список; порядок карточек на обеих вкладках один и тот же.
  */
@@ -81,10 +91,19 @@ fun MainMenuScreen(
     onCalculatorClick: (CalculatorId) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val visibleCalculators = if (selectedTab == MenuTab.FAVORITES) {
-        calculators.filter { it.id in favoriteIds }
-    } else {
-        calculators
+    val pagerState = rememberPagerState(initialPage = selectedTab.page) { MenuTab.entries.size }
+
+    // Сегмент → страница: тот же плавный слайд, что и у табов.
+    LaunchedEffect(selectedTab) {
+        if (pagerState.currentPage != selectedTab.page) {
+            pagerState.animateScrollToPage(selectedTab.page)
+        }
+    }
+
+    // Страница → сегмент: после свайпа отдаём выбранную вкладку наружу.
+    LaunchedEffect(pagerState.settledPage) {
+        val settled = MenuTab.entries[pagerState.settledPage]
+        if (settled != selectedTab) onTabSelected(settled)
     }
 
     Column(
@@ -98,19 +117,34 @@ fun MainMenuScreen(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 12.dp),
         )
 
-        if (visibleCalculators.isEmpty() && selectedTab == MenuTab.FAVORITES) {
-            EmptyFavorites(
-                onShowAll = { onTabSelected(MenuTab.ALL) },
-                modifier = Modifier.weight(1f),
-            )
-        } else {
-            CalculatorList(
-                calculators = visibleCalculators,
-                favoriteIds = favoriteIds,
-                onCalculatorClick = onCalculatorClick,
-                onToggleFavorite = onToggleFavorite,
-                modifier = Modifier.weight(1f),
-            )
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
+            key = { page -> MenuTab.entries[page] },
+        ) { page ->
+            val tab = MenuTab.entries[page]
+            val pageCalculators = if (tab == MenuTab.FAVORITES) {
+                calculators.filter { it.id in favoriteIds }
+            } else {
+                calculators
+            }
+
+            if (tab == MenuTab.FAVORITES && pageCalculators.isEmpty()) {
+                EmptyFavorites(
+                    onShowAll = { onTabSelected(MenuTab.ALL) },
+                    modifier = Modifier.fillMaxSize(),
+                )
+            } else {
+                CalculatorList(
+                    calculators = pageCalculators,
+                    favoriteIds = favoriteIds,
+                    onCalculatorClick = onCalculatorClick,
+                    onToggleFavorite = onToggleFavorite,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
         }
     }
 }

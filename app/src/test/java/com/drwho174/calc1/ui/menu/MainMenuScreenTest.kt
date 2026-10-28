@@ -1,5 +1,8 @@
 package com.drwho174.calc1.ui.menu
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -7,6 +10,8 @@ import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeLeft
 import com.drwho174.calc1.navigation.CalculatorId
 import com.drwho174.calc1.navigation.calculatorDestinations
 import com.drwho174.calc1.ui.theme.Calc1Theme
@@ -142,6 +147,33 @@ class MainMenuScreenTest {
         compose.onNodeWithText("EuroSCORE 2").assertIsDisplayed()
         compose.onAllNodesWithContentDescription("Добавить в избранное")[0].performClick()
         assertEquals(CalculatorId.EUROSCORE, lastToggled)
+    }
+
+    @Test
+    fun swipeSwitchesPagesAndReportsTab() {
+        var tab by mutableStateOf(MenuTab.FAVORITES)
+        compose.setContent {
+            Calc1Theme(darkTheme = false) {
+                MainMenuScreen(
+                    calculators = calculatorDestinations,
+                    favoriteIds = favorites,
+                    selectedTab = tab,
+                    onTabSelected = { tab = it },
+                    onToggleFavorite = {},
+                    onCalculatorClick = {},
+                )
+            }
+        }
+
+        compose.onNodeWithText("Калькулятор перфузиолога").assertIsDisplayed()
+
+        // Свайп влево по странице: «Избранное» → «Все».
+        compose.onRoot().performTouchInput { swipeLeft() }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+
+        compose.onNodeWithText("EuroSCORE 2").assertIsDisplayed()
+        assertEquals(MenuTab.ALL, tab)
     }
 
     @Test
