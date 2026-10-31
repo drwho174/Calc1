@@ -31,6 +31,7 @@ class SettingsRepository(context: Context) {
 
     private val appContext = context.applicationContext
     private val modeKey = stringPreferencesKey(KEY_MODE)
+    private val languageKey = stringPreferencesKey(KEY_LANGUAGE)
     private val legacyDataStoreKey = booleanPreferencesKey(LEGACY_KEY)
     private val perfusionRateKey = floatPreferencesKey(KEY_PERFUSION_RATE)
     private val favoritesKey = stringSetPreferencesKey(KEY_FAVORITES)
@@ -40,6 +41,16 @@ class SettingsRepository(context: Context) {
             if (error is IOException) emit(emptyPreferences()) else throw error
         }
         .map { preferences -> resolveMode(preferences) }
+
+    /**
+     * Язык интерфейса. Читается синхронно в [com.drwho174.calc1.MainActivity.attachBaseContext],
+     * чтобы ресурсы создавались уже на нужном языке.
+     */
+    val languageMode: Flow<LanguageMode> = appContext.settingsDataStore.data
+        .catch { error ->
+            if (error is IOException) emit(emptyPreferences()) else throw error
+        }
+        .map { preferences -> resolveLanguage(preferences) }
 
     /** Последний выбранный индекс перфузии (скорость на м²). */
     val perfusionRate: Flow<Float> = appContext.settingsDataStore.data
@@ -66,6 +77,12 @@ class SettingsRepository(context: Context) {
             preferences.remove(legacyDataStoreKey)
         }
         legacyPreferences().edit().remove(LEGACY_KEY).apply()
+    }
+
+    suspend fun setLanguageMode(mode: LanguageMode) {
+        appContext.settingsDataStore.edit { preferences ->
+            preferences[languageKey] = mode.name
+        }
     }
 
     suspend fun setPerfusionRate(rate: Float) {
@@ -104,11 +121,19 @@ class SettingsRepository(context: Context) {
         return ThemeMode.SYSTEM
     }
 
+    private fun resolveLanguage(preferences: Preferences): LanguageMode {
+        preferences[languageKey]?.let { stored ->
+            runCatching { LanguageMode.valueOf(stored) }.getOrNull()?.let { return it }
+        }
+        return LanguageMode.SYSTEM
+    }
+
     private fun legacyPreferences() =
         appContext.getSharedPreferences(LEGACY_STORE, Context.MODE_PRIVATE)
 
     private companion object {
         const val KEY_MODE = "THEME_MODE"
+        const val KEY_LANGUAGE = "LANGUAGE_MODE"
         const val KEY_PERFUSION_RATE = "PERFUSION_RATE"
         const val KEY_FAVORITES = "FAVORITE_CALCULATORS"
         const val LEGACY_KEY = "THEME_SET"

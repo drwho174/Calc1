@@ -4,6 +4,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import com.drwho174.calc1.data.LanguageMode
 import com.drwho174.calc1.data.ThemeMode
 import com.drwho174.calc1.ui.theme.Calc1Theme
 import com.github.takahirom.roborazzi.captureRoboImage
@@ -17,7 +18,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(sdk = [35], qualifiers = "w411dp-h891dp-xhdpi")
+@Config(sdk = [35], qualifiers = "ru-w411dp-h891dp-xhdpi")
 class SettingsScreenTest {
 
     @get:Rule
@@ -31,6 +32,12 @@ class SettingsScreenTest {
             }
         }
 
+        compose.onNodeWithText("Язык").assertExists()
+        compose.onNodeWithText("Системный (по умолчанию)").assertExists()
+        compose.onNodeWithText("English").assertExists()
+        compose.onNodeWithText("Русский").assertExists()
+        compose.onNodeWithText("中文").assertExists()
+        compose.onNodeWithText("Тема оформления").assertExists()
         compose.onNodeWithText("Как на устройстве (по умолчанию)").assertExists()
         compose.onNodeWithText("Светлая").assertExists()
         compose.onNodeWithText("Тёмная").assertExists()
@@ -91,5 +98,23 @@ class SettingsScreenTest {
 
         compose.onNodeWithText("Тёмная").performClick()
         assertEquals(ThemeMode.DARK, selected)
+    }
+
+    @Test
+    fun tappingChineseOptionInvokesCallbackWithChineseMode() {
+        var selected: LanguageMode? = null
+        compose.setContent {
+            Calc1Theme {
+                SettingsScreen(
+                    themeMode = ThemeMode.SYSTEM,
+                    onThemeModeChange = {},
+                    languageMode = LanguageMode.SYSTEM,
+                    onLanguageModeChange = { selected = it },
+                )
+            }
+        }
+
+        compose.onNodeWithText("中文").performClick()
+        assertEquals(LanguageMode.CHINESE, selected)
     }
 }

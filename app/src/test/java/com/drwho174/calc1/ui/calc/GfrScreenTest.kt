@@ -18,7 +18,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(sdk = [35], qualifiers = "w411dp-h891dp-xhdpi")
+@Config(sdk = [35], qualifiers = "ru-w411dp-h891dp-xhdpi")
 class GfrScreenTest {
 
     @get:Rule
@@ -35,7 +35,7 @@ class GfrScreenTest {
         compose.onAllNodes(hasSetTextAction())[1].performTextInput("88.4055")
         compose.waitForIdle()
 
-        compose.onNodeWithText("86.16").assertExists()
+        compose.onNodeWithText("86,16").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_gfr.png")
     }
 
@@ -50,6 +50,6 @@ class GfrScreenTest {
         compose.onAllNodes(hasSetTextAction())[1].performTextInput("70")
         compose.waitForIdle()
 
-        compose.onNodeWithText("80.20").assertExists()
+        compose.onNodeWithText("80,20").assertExists()
     }
 }

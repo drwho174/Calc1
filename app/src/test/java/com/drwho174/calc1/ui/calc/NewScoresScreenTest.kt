@@ -26,7 +26,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(sdk = [35], qualifiers = "w411dp-h891dp-xhdpi")
+@Config(sdk = [35], qualifiers = "ru-w411dp-h891dp-xhdpi")
 class NewScoresScreenTest {
 
     @get:Rule
@@ -37,7 +37,7 @@ class NewScoresScreenTest {
         compose.setContent { Calc1Theme { LeeRiskScreen() } }
 
         compose.onNodeWithText("0 баллов").assertExists()
-        compose.onNodeWithText("MACE · 0.4 %").assertExists()
+        compose.onNodeWithText("MACE · 0,4 %").assertExists()
         compose.onNodeWithText("Риск: низкий").assertExists()
 
         compose.onAllNodes(hasSetTextAction()).assertCountEquals(0)
@@ -54,7 +54,7 @@ class NewScoresScreenTest {
 
         // Два предиктора: 7 % и высокий риск.
         compose.onNodeWithText("2 балла").assertExists()
-        compose.onNodeWithText("MACE · 7.0 %").assertExists()
+        compose.onNodeWithText("MACE · 7,0 %").assertExists()
         compose.onNodeWithText("Риск: высокий").assertExists()
     }
 

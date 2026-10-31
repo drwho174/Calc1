@@ -12,13 +12,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.drwho174.calc1.data.AppLocale
 import com.drwho174.calc1.ui.components.MarkdownText
 
 /**
- * Справка по калькулятору: markdown-файл из `assets/about/`.
+ * Справка по калькулятору: markdown-файл из `assets/about/<язык>/`.
  *
- * Один экран заменил девять почти одинаковых фрагментов с девятью layout'ами
- * и девятью копиями настройки Markwon.
+ * Если перевода нет, берётся английский вариант — он же служит запасным
+ * для остального интерфейса.
  */
 @Composable
 fun AboutScreen(
@@ -26,13 +27,21 @@ fun AboutScreen(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val language = AppLocale.assetLanguage(context)
 
     // Файлы справки — несколько килобайт, поэтому читаем синхронно в remember:
     // это детерминированно для скриншот-тестов и не требует состояния загрузки.
-    val markdown = remember(assetPath) {
-        runCatching {
-            context.assets.open("about/$assetPath").bufferedReader().use { it.readText() }
-        }.getOrElse { "" }
+    val markdown = remember(assetPath, language) {
+        val candidates = listOf(
+            "about/$language/$assetPath",
+            "about/en/$assetPath",
+            "about/$assetPath",
+        )
+        candidates.firstNotNullOfOrNull { path ->
+            runCatching {
+                context.assets.open(path).bufferedReader().use { it.readText() }
+            }.getOrNull()
+        }.orEmpty()
     }
 
     Column(

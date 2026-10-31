@@ -22,7 +22,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(sdk = [35], qualifiers = "w411dp-h891dp-xhdpi")
+@Config(sdk = [35], qualifiers = "ru-w411dp-h891dp-xhdpi")
 class SimpleCalculatorsTest {
 
     @get:Rule
@@ -39,7 +39,7 @@ class SimpleCalculatorsTest {
         compose.waitForIdle()
 
         // 1.8217 / 1.8097 / 1.8257 — все три округляются до 1.8 (м² теперь в подписи).
-        compose.onAllNodesWithText("1.8").assertCountEquals(3)
+        compose.onAllNodesWithText("1,8").assertCountEquals(3)
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_bsa.png")
     }
 
@@ -53,7 +53,7 @@ class SimpleCalculatorsTest {
         compose.onNodeWithText("Женщина").performClick()
         compose.waitForIdle()
 
-        compose.onNodeWithText("70.6").assertExists()
+        compose.onNodeWithText("70,6").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_ibm.png")
     }
 
@@ -71,9 +71,9 @@ class SimpleCalculatorsTest {
         compose.waitForIdle()
 
         compose.onNodeWithText("167").assertExists()
-        compose.onNodeWithText("163.3").assertExists()
-        compose.onNodeWithText("277.8").assertExists()
-        compose.onNodeWithText("2.8").assertExists()
+        compose.onNodeWithText("163,3").assertExists()
+        compose.onNodeWithText("277,8").assertExists()
+        compose.onNodeWithText("2,8").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_respiratory.png")
     }
 

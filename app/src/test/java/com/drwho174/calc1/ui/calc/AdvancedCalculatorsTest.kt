@@ -36,7 +36,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(sdk = [35], qualifiers = "w411dp-h891dp-xhdpi")
+@Config(sdk = [35], qualifiers = "ru-w411dp-h891dp-xhdpi")
 class AdvancedCalculatorsTest {
 
     @get:Rule
@@ -54,9 +54,9 @@ class AdvancedCalculatorsTest {
         }
         compose.waitForIdle()
 
-        compose.onNodeWithText("14.0").assertExists()
-        compose.onNodeWithText("355.3").assertExists()
-        compose.onNodeWithText("2.1").assertExists()
+        compose.onNodeWithText("14,0").assertExists()
+        compose.onNodeWithText("355,3").assertExists()
+        compose.onNodeWithText("2,1").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_oxygen.png")
     }
 
@@ -72,8 +72,8 @@ class AdvancedCalculatorsTest {
             }
         compose.waitForIdle()
 
-        compose.onNodeWithText("108.39").assertExists()
-        compose.onNodeWithText("82.86").assertExists()
+        compose.onNodeWithText("108,39").assertExists()
+        compose.onNodeWithText("82,86").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_hb.png")
     }
 
@@ -94,9 +94,9 @@ class AdvancedCalculatorsTest {
         compose.onAllNodes(hasSetTextAction())[1].performTextInput("70")
         compose.waitForIdle()
 
-        compose.onNodeWithText("1.810").assertExists()
+        compose.onNodeWithText("1,810").assertExists()
         // Скорость видна дважды: в карточке результата и в подписи слайдера.
-        compose.onAllNodesWithText("4.34").assertCountEquals(2)
+        compose.onAllNodesWithText("4,34").assertCountEquals(2)
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_perfusiologist.png")
     }
 
@@ -128,7 +128,7 @@ class AdvancedCalculatorsTest {
             }
             compose.waitForIdle()
 
-            compose.onNodeWithText("2.6").assertExists()
+            compose.onNodeWithText("2,6").assertExists()
         } finally {
             setSavedRate(2.4f)
         }
@@ -146,8 +146,8 @@ class AdvancedCalculatorsTest {
         compose.waitForIdle()
 
         // 3 балла контраста + 5 за СН + 4 за СКФ = 12 → 26.1 % и 1.09 %.
-        compose.onNodeWithText("26.1 %").assertExists()
-        compose.onNodeWithText("Риск диализа · 1.1 %").assertExists()
+        compose.onNodeWithText("26,1 %").assertExists()
+        compose.onNodeWithText("Риск диализа · 1,1 %").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_mehran.png")
     }
 
@@ -167,14 +167,14 @@ class AdvancedCalculatorsTest {
         compose.onAllNodes(hasSetTextAction())[8].performTextInput("70")
         compose.waitForIdle()
 
-        compose.onNodeWithText("1.81").assertExists()
+        compose.onNodeWithText("1,81").assertExists()
         compose.onNodeWithText("Применить").performClick()
         compose.waitForIdle()
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
 
         // Значение подставлено в поле «ППТ».
-        compose.onNodeWithText("1.81").assertExists()
+        compose.onNodeWithText("1,81").assertExists()
     }
 
     @Test
@@ -186,7 +186,7 @@ class AdvancedCalculatorsTest {
         compose.onAllNodes(hasSetTextAction())[0].performTextInput("70")
         compose.waitForIdle()
 
-        compose.onNodeWithText("0.66").assertExists()
+        compose.onNodeWithText("0,66").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_euroscore.png")
     }
 
@@ -199,7 +199,7 @@ class AdvancedCalculatorsTest {
         compose.onAllNodes(hasSetTextAction())[0].performTextInput("70")
         compose.waitForIdle()
 
-        compose.onNodeWithText("0.66").assertExists()
+        compose.onNodeWithText("0,66").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_euroscore_dark.png")
     }
 
@@ -216,7 +216,7 @@ class AdvancedCalculatorsTest {
         compose.onNodeWithText("Вмешательство на грудной аорте").performScrollTo()
         compose.waitForIdle()
 
-        compose.onNodeWithText("0.66").assertExists()
+        compose.onNodeWithText("0,66").assertExists()
         compose.onRoot().captureRoboImage("src/test/screenshots/calc_euroscore_scrolled.png")
     }
 

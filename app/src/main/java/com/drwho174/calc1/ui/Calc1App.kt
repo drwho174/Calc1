@@ -20,6 +20,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.drwho174.calc1.BuildConfig
 import com.drwho174.calc1.R
+import com.drwho174.calc1.data.LanguageMode
 import com.drwho174.calc1.data.ThemeMode
 import com.drwho174.calc1.navigation.AboutRoute
 import com.drwho174.calc1.navigation.AppAboutRoute
@@ -66,6 +67,8 @@ fun Calc1App(
     onThemeModeChange: (ThemeMode) -> Unit,
     favoriteIds: Set<CalculatorId>?,
     onToggleFavorite: (CalculatorId) -> Unit,
+    languageMode: LanguageMode = LanguageMode.SYSTEM,
+    onLanguageModeChange: (LanguageMode) -> Unit = {},
 ) {
     val backStack = rememberNavBackStack(MainMenuRoute)
     val context = LocalContext.current
@@ -181,6 +184,8 @@ fun Calc1App(
                     SettingsScreen(
                         themeMode = themeMode,
                         onThemeModeChange = onThemeModeChange,
+                        languageMode = languageMode,
+                        onLanguageModeChange = onLanguageModeChange,
                         modifier = Modifier.padding(padding).imePadding(),
                     )
                 }
